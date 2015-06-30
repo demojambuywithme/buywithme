@@ -1,2 +1,2 @@
 # buywithme
-buy with me
+Demojam: buy with me
