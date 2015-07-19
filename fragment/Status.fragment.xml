@@ -4,5 +4,19 @@
     xmlns:core="sap.ui.core"
     xmlns="sap.m">
 
-
+    <VBox>
+        <items>
+            <HBox>
+                <items>
+                    <core:Icon src="sap-icon://time-entry-request"/>
+                    <Label text="45 Minutes Left"/>
+                </items>
+            </HBox>
+            <ProgressIndicator class="sapUiSmallMarginBottom" 
+                                percentValue="80"
+                                displayValue="4/5"
+                                showValue="true"
+                                state="None"/>
+        </items>
+    </VBox>
 </core:FragmentDefinition>   
