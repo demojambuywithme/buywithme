@@ -7,6 +7,18 @@
         <content>
             <Button text="to invitations"
                     press="toInvitations"/>
+            <Button text="to invitations map"
+                    press="toInvitationsMap"/>
+            <Button text="to invitation detail"
+                    press="toInvitationDetail"/>
+            <Button text="to invitation detail map"
+                    press="toInvitationDetailMap"/>
+            <Button text="to new invitation"
+                    press="toNewInvitation"/>
+            <Button text="to chat"
+                    press="toChat"/>
+            <Button text="to mine"
+                    press="toMine"/>
         </content>
     </Page>
 </core:View>

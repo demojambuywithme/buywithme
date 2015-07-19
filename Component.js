@@ -44,12 +44,36 @@ sap.ui.core.UIComponent.extend("bwm.Component", {
                 view: "InvitationsMap",
                 targetAggregation: "pages",
                 targetControl: "idAppControl"
-                    // ,
-                    // subroutes: [{
-                    //     pattern: ":all*:",
-                    //     name: "catchallDetail",
-                    //     view: "NotFound"
-                    // }]
+            }, {
+                pattern: "invitationDetail",
+                name: "invitationDetail",
+                view: "InvitationDetail",
+                targetAggregation: "pages",
+                targetControl: "idAppControl"
+            }, {
+                pattern: "invitationDetailMap",
+                name: "invitationDetailMap",
+                view: "InvitationDetailMap",
+                targetAggregation: "pages",
+                targetControl: "idAppControl"
+            }, {
+                pattern: "newInvitation",
+                name: "newInvitation",
+                view: "NewInvitation",
+                targetAggregation: "pages",
+                targetControl: "idAppControl"
+            }, {
+                pattern: "chat",
+                name: "chat",
+                view: "Chat",
+                targetAggregation: "pages",
+                targetControl: "idAppControl"
+            }, {
+                pattern: "mine",
+                name: "mine",
+                view: "Mine",
+                targetAggregation: "pages",
+                targetControl: "idAppControl"
             }]
         }
     },

@@ -13,7 +13,7 @@
                         }">
                 <items>
                     <StandardListItem title="{id}" 
-                                      description="{title}"/>
+                                      description="{discount}"/>
                 </items>
 
             </GrowingList>
