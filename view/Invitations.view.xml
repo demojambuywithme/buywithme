@@ -1,0 +1,23 @@
+<mvc:View controllerName="bwm.view.Invitations"
+          xmlns:mvc="sap.ui.core.mvc"
+          xmlns="sap.m">
+    <Page title="{i18n&gt;invitationsTitle}"
+          showNavButton="true"
+          navButtonPress="onNavButtonPressed">
+          <content>
+            <GrowingList threshold="10"
+                        triggerText="more"
+                        scrollToLoad="true"
+                        items="{
+                            path: '/InvitationSet'
+                        }">
+                <items>
+                    <StandardListItem title="{id}" 
+                                      description="{title}"/>
+                </items>
+
+            </GrowingList>
+          </content>
+    </Page>
+</mvc:View>
+
