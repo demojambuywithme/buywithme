@@ -1,9 +1,12 @@
 <mvc:View controllerName="bwm.view.Invitations" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m">
-    <Page title="New Invitations" showNavButton="true" navButtonPress="onNavButtonPressed" enableScrolling="true">
+    <Page title="New Invitation" showNavButton="true" navButtonPress="onNavButtonPressed" enableScrolling="true">
         <headerContent>
-            <Button icon="sap-icon://hello-world" press="onOpenDialog" />
+            <Button icon="sap-icon://globe" text="OnlyTest" press="onNavToMap" />
         </headerContent>
-        <content>
-        </content>
+
+            <content>
+                <Input id="productInput" type="Text" placeholder="What do you want to say ...">
+                </Input>
+            </content>
     </Page>
 </mvc:View>
