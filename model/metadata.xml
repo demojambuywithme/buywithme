@@ -19,11 +19,14 @@
                 <Property Name="address" Type="Edm.String"/>
                 <Property Name="status" Type="Edm.String"/>
                 <Property Name="userQuery" Type="Edm.String"/>
-                <NavigationProperty FromRole="From_Invitation" Name="creator" Relationship="bwm.InvitationUser" ToRole="To_User"/>
-                <NavigationProperty FromRole="From_Invitation" Name="pictures" Relationship="bwm.InvitationPicture" ToRole="To_Picture"/>
-                <NavigationProperty FromRole="From_Invitation" Name="category" Relationship="bwm.InvitationCategory" ToRole="To_Category"/>
-                <NavigationProperty FromRole="From_Invitation" Name="discountType" Relationship="bwm.InvitationDiscountType" ToRole="To_DiscountType"/>
-                <NavigationProperty FromRole="From_Invitation" Name="InvitationItemSet" Relationship="bwm.InvitationInvitationItem" ToRole="To_Participation"/>
+                <Property Name="categoryId" Type="Edm.Guid"/>
+                <Property Name="creatorId" Type="Edm.Guid"/>
+                <Property Name="discountTypeId" Type="Edm.Guid"/>
+                <NavigationProperty FromRole="From_Invitation" Name="PictureSet" Relationship="bwm.InvitationPicture" ToRole="To_Picture"/>
+                <NavigationProperty FromRole="From_Invitation" Name="InvitationItemSet" Relationship="bwm.InvitationInvitationItem" ToRole="To_InvitationItem"/>
+                <NavigationProperty FromRole="To_Invitation" Name="Category" Relationship="bwm.CategoryInvitation" ToRole="From_Category"/>
+                <NavigationProperty FromRole="To_Invitation" Name="DiscountType" Relationship="bwm.DiscountTypeInvitation" ToRole="From_DiscountType"/>
+                <NavigationProperty FromRole="To_Invitation" Name="Creator" Relationship="bwm.UserInvitation" ToRole="From_User"/>
             </EntityType>
             <EntityType Name="User">
                 <Key>
@@ -34,14 +37,17 @@
                 <Property Name="password" Type="Edm.String"/>
                 <Property Name="phone" Type="Edm.String"/>
                 <Property Name="rate" Type="Edm.String"/>
-                <NavigationProperty FromRole="From_User" Name="avatar" Relationship="bwm.UserPicture" ToRole="To_Picture"/>
+                <NavigationProperty FromRole="From_User" Name="InvitationSet" Relationship="bwm.UserInvitation" ToRole="To_Invitation"/>
+                <NavigationProperty FromRole="From_User" Name="Avatar" Relationship="bwm.UserPicture" ToRole="To_Picture"/>
+                <NavigationProperty FromRole="From_User" Name="InvitationItemSet" Relationship="bwm.UserInvitationItem" ToRole="To_InvitationItem"/>
             </EntityType>
             <EntityType Name="Picture">
                 <Key>
                     <PropertyRef Name="id"/>
                 </Key>
                 <Property Name="id" Nullable="false" Type="Edm.Guid"/>
-                <Property Name="content" Type="Edm.Binary"/>
+                <Property Name="src" Type="Edm.String"/>
+                <Property Name="hostId" Type="Edm.Guid"/>
             </EntityType>
             <EntityType Name="Category">
                 <Key>
@@ -49,8 +55,9 @@
                 </Key>
                 <Property Name="id" Nullable="false" Type="Edm.Guid"/>
                 <Property Name="description" Type="Edm.String"/>
-                <NavigationProperty FromRole="From_Category" Name="subCategories" Relationship="bwm.CategoryCategory" ToRole="To_Category"/>
-                <NavigationProperty FromRole="From_Category" Name="parentCategory" Relationship="bwm.CategoryCategory2" ToRole="To_Category"/>
+                <Property Name="parentId" Type="Edm.Guid"/>
+                <NavigationProperty FromRole="From_Category" Name="InvitationSet" Relationship="bwm.CategoryInvitation" ToRole="To_Invitation"/>
+                <NavigationProperty FromRole="From_Category" Name="SubCategorySet" Relationship="bwm.CategoryCategory" ToRole="To_Category"/>
             </EntityType>
             <EntityType Name="DiscountType">
                 <Key>
@@ -58,6 +65,7 @@
                 </Key>
                 <Property Name="id" Nullable="false" Type="Edm.Guid"/>
                 <Property Name="description" Type="Edm.String"/>
+                <NavigationProperty FromRole="From_DiscountType" Name="InvitationSet" Relationship="bwm.DiscountTypeInvitation" ToRole="To_Invitation"/>
             </EntityType>
             <EntityType Name="InvitationItem">
                 <Key>
@@ -67,43 +75,106 @@
                 <Property Name="quantity" Type="Edm.Decimal"/>
                 <Property Name="money" Type="Edm.Decimal"/>
                 <Property Name="dicountedMoney" Type="Edm.Decimal"/>
-                <NavigationProperty FromRole="From_Participation" Name="participant" Relationship="bwm.InvitationItemUser" ToRole="To_User"/>
+                <Property Name="parentId" Type="Edm.Guid"/>
+                <Property Name="participantId" Type="Edm.Guid"/>
+                <NavigationProperty FromRole="To_InvitationItem" Name="Invitation" Relationship="bwm.InvitationInvitationItem" ToRole="From_Invitation"/>
+                <NavigationProperty FromRole="To_InvitationItem" Name="Participant" Relationship="bwm.UserInvitationItem" ToRole="From_User"/>
             </EntityType>
-            <Association Name="UserPicture">
-                <End Multiplicity="1" Role="From_User" Type="bwm.User"/>
-                <End Multiplicity="0..1" Role="To_Picture" Type="bwm.Picture"/>
-            </Association>
-            <Association Name="InvitationUser">
-                <End Multiplicity="1" Role="From_Invitation" Type="bwm.Invitation"/>
-                <End Multiplicity="1" Role="To_User" Type="bwm.User"/>
-            </Association>
             <Association Name="InvitationPicture">
                 <End Multiplicity="1" Role="From_Invitation" Type="bwm.Invitation"/>
                 <End Multiplicity="*" Role="To_Picture" Type="bwm.Picture"/>
+                <ReferentialConstraint>
+                    <Principal Role="From_Invitation">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="To_Picture">
+                        <PropertyRef Name="hostId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="CategoryInvitation">
+                <End Multiplicity="1" Role="From_Category" Type="bwm.Category"/>
+                <End Multiplicity="*" Role="To_Invitation" Type="bwm.Invitation"/>
+                <ReferentialConstraint>
+                    <Principal Role="From_Category">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="To_Invitation">
+                        <PropertyRef Name="categoryId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="UserInvitation">
+                <End Multiplicity="1" Role="From_User" Type="bwm.User"/>
+                <End Multiplicity="*" Role="To_Invitation" Type="bwm.Invitation"/>
+                <ReferentialConstraint>
+                    <Principal Role="From_User">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="To_Invitation">
+                        <PropertyRef Name="creatorId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="DiscountTypeInvitation">
+                <End Multiplicity="1" Role="From_DiscountType" Type="bwm.DiscountType"/>
+                <End Multiplicity="*" Role="To_Invitation" Type="bwm.Invitation"/>
+                <ReferentialConstraint>
+                    <Principal Role="From_DiscountType">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="To_Invitation">
+                        <PropertyRef Name="discountTypeId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="InvitationInvitationItem">
+                <End Multiplicity="1" Role="From_Invitation" Type="bwm.Invitation"/>
+                <End Multiplicity="*" Role="To_InvitationItem" Type="bwm.InvitationItem"/>
+                <ReferentialConstraint>
+                    <Principal Role="From_Invitation">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="To_InvitationItem">
+                        <PropertyRef Name="parentId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="UserPicture">
+                <End Multiplicity="1" Role="From_User" Type="bwm.User"/>
+                <End Multiplicity="0..1" Role="To_Picture" Type="bwm.Picture"/>
+                <ReferentialConstraint>
+                    <Principal Role="From_User">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="To_Picture">
+                        <PropertyRef Name="hostId"/>
+                    </Dependent>
+                </ReferentialConstraint>
             </Association>
             <Association Name="CategoryCategory">
                 <End Multiplicity="1" Role="From_Category" Type="bwm.Category"/>
                 <End Multiplicity="*" Role="To_Category" Type="bwm.Category"/>
+                <ReferentialConstraint>
+                    <Principal Role="From_Category">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="To_Category">
+                        <PropertyRef Name="parentId"/>
+                    </Dependent>
+                </ReferentialConstraint>
             </Association>
-            <Association Name="CategoryCategory2">
-                <End Multiplicity="1" Role="From_Category" Type="bwm.Category"/>
-                <End Multiplicity="0..1" Role="To_Category" Type="bwm.Category"/>
-            </Association>
-            <Association Name="InvitationCategory">
-                <End Multiplicity="1" Role="From_Invitation" Type="bwm.Invitation"/>
-                <End Multiplicity="1" Role="To_Category" Type="bwm.Category"/>
-            </Association>
-            <Association Name="InvitationDiscountType">
-                <End Multiplicity="1" Role="From_Invitation" Type="bwm.Invitation"/>
-                <End Multiplicity="1" Role="To_DiscountType" Type="bwm.DiscountType"/>
-            </Association>
-            <Association Name="InvitationItemUser">
-                <End Multiplicity="1" Role="From_Participation" Type="bwm.InvitationItem"/>
-                <End Multiplicity="1" Role="To_User" Type="bwm.User"/>
-            </Association>
-            <Association Name="InvitationInvitationItem">
-                <End Multiplicity="1" Role="From_Invitation" Type="bwm.Invitation"/>
-                <End Multiplicity="*" Role="To_Participation" Type="bwm.InvitationItem"/>
+            <Association Name="UserInvitationItem">
+                <End Multiplicity="1" Role="From_User" Type="bwm.User"/>
+                <End Multiplicity="*" Role="To_InvitationItem" Type="bwm.InvitationItem"/>
+                <ReferentialConstraint>
+                    <Principal Role="From_User">
+                        <PropertyRef Name="id"/>
+                    </Principal>
+                    <Dependent Role="To_InvitationItem">
+                        <PropertyRef Name="participantId"/>
+                    </Dependent>
+                </ReferentialConstraint>
             </Association>
             <EntityContainer Name="default" m:IsDefaultEntityContainer="true">
                 <EntitySet EntityType="bwm.Invitation" Name="InvitationSet"/>
@@ -112,41 +183,37 @@
                 <EntitySet EntityType="bwm.Category" Name="CategorySet"/>
                 <EntitySet EntityType="bwm.DiscountType" Name="DiscountTypeSet"/>
                 <EntitySet EntityType="bwm.InvitationItem" Name="InvitationItemSet"/>
-                <AssociationSet Association="bwm.UserPicture" Name="UserPictureSet">
-                    <End EntitySet="UserSet" Role="From_User"/>
-                    <End EntitySet="PictureSet" Role="To_Picture"/>
-                </AssociationSet>
-                <AssociationSet Association="bwm.InvitationUser" Name="InvitationUserSet">
-                    <End EntitySet="InvitationSet" Role="From_Invitation"/>
-                    <End EntitySet="UserSet" Role="To_User"/>
-                </AssociationSet>
                 <AssociationSet Association="bwm.InvitationPicture" Name="InvitationPictureSet">
                     <End EntitySet="InvitationSet" Role="From_Invitation"/>
+                    <End EntitySet="PictureSet" Role="To_Picture"/>
+                </AssociationSet>
+                <AssociationSet Association="bwm.CategoryInvitation" Name="CategoryInvitationSet">
+                    <End EntitySet="CategorySet" Role="From_Category"/>
+                    <End EntitySet="InvitationSet" Role="To_Invitation"/>
+                </AssociationSet>
+                <AssociationSet Association="bwm.UserInvitation" Name="UserInvitationSet">
+                    <End EntitySet="UserSet" Role="From_User"/>
+                    <End EntitySet="InvitationSet" Role="To_Invitation"/>
+                </AssociationSet>
+                <AssociationSet Association="bwm.DiscountTypeInvitation" Name="DiscountTypeInvitationSet">
+                    <End EntitySet="DiscountTypeSet" Role="From_DiscountType"/>
+                    <End EntitySet="InvitationSet" Role="To_Invitation"/>
+                </AssociationSet>
+                <AssociationSet Association="bwm.InvitationInvitationItem" Name="InvitationInvitationItemSet">
+                    <End EntitySet="InvitationSet" Role="From_Invitation"/>
+                    <End EntitySet="InvitationItemSet" Role="To_InvitationItem"/>
+                </AssociationSet>
+                <AssociationSet Association="bwm.UserPicture" Name="UserPictureSet">
+                    <End EntitySet="UserSet" Role="From_User"/>
                     <End EntitySet="PictureSet" Role="To_Picture"/>
                 </AssociationSet>
                 <AssociationSet Association="bwm.CategoryCategory" Name="CategoryCategorySet">
                     <End EntitySet="CategorySet" Role="From_Category"/>
                     <End EntitySet="CategorySet" Role="To_Category"/>
                 </AssociationSet>
-                <AssociationSet Association="bwm.CategoryCategory2" Name="CategoryCategory2Set">
-                    <End EntitySet="CategorySet" Role="From_Category"/>
-                    <End EntitySet="CategorySet" Role="To_Category"/>
-                </AssociationSet>
-                <AssociationSet Association="bwm.InvitationCategory" Name="InvitationCategorySet">
-                    <End EntitySet="InvitationSet" Role="From_Invitation"/>
-                    <End EntitySet="CategorySet" Role="To_Category"/>
-                </AssociationSet>
-                <AssociationSet Association="bwm.InvitationDiscountType" Name="InvitationDiscountTypeSet">
-                    <End EntitySet="InvitationSet" Role="From_Invitation"/>
-                    <End EntitySet="DiscountTypeSet" Role="To_DiscountType"/>
-                </AssociationSet>
-                <AssociationSet Association="bwm.InvitationItemUser" Name="InvitationItemUserSet">
-                    <End EntitySet="InvitationItemSet" Role="From_Participation"/>
-                    <End EntitySet="UserSet" Role="To_User"/>
-                </AssociationSet>
-                <AssociationSet Association="bwm.InvitationInvitationItem" Name="InvitationInvitationItemSet">
-                    <End EntitySet="InvitationSet" Role="From_Invitation"/>
-                    <End EntitySet="InvitationItemSet" Role="To_Participation"/>
+                <AssociationSet Association="bwm.UserInvitationItem" Name="UserInvitationItemSet">
+                    <End EntitySet="UserSet" Role="From_User"/>
+                    <End EntitySet="InvitationItemSet" Role="To_InvitationItem"/>
                 </AssociationSet>
             </EntityContainer>
         </Schema>
