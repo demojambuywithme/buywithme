@@ -11,8 +11,8 @@
                     height="50px"/>
             <VBox>
                 <items>
-                    <RatingIndicator value="4"/>
-                    <Label text="Xu, Chunyang"/>
+                    <RatingIndicator value="{rate}"/>
+                    <Label text="{name}"/>
                 </items>
             </VBox>
         </items>

@@ -1,36 +1,34 @@
 <mvc:View controllerName="bwm.view.Invitations"
           xmlns:mvc="sap.ui.core.mvc"
           xmlns:core="sap.ui.core"
+          xmlns:l="sap.ui.layout"
           xmlns="sap.m">
     <Page title="{i18n&gt;invitationsTitle}"
           showNavButton="true"
           navButtonPress="onNavButtonPressed">
-          <content>
+        <content>
             <GrowingList threshold="10"
-                        triggerText="more"
-                        scrollToLoad="true"
-                        items="{
-                            path: '/InvitationSet'
-                        }">
+                         triggerText="more"
+                         scrollToLoad="true"
+                         items="{ path: '/InvitationSet' }">
                 <items>
-                    <CustomListItem >
+                    <CustomListItem>
                         <content>
                             <HBox>
                                 <items>
-                                    <core:Fragment fragmentName="bwm.fragment.Buyer" type="XML"/>
-                                    <core:Fragment fragmentName="bwm.fragment.Status" type="XML"/>
+                                    <HBox binding="{path: 'Creator'}">
+                                        <core:Fragment fragmentName="bwm.fragment.Buyer"
+                                                       type="XML" />
+                                    </HBox>
+                                    <core:Fragment fragmentName="bwm.fragment.Status"
+                                                   type="XML" />
                                 </items>
                             </HBox>
-                            
                         </content>
-                    </CustomListItem >
-
-<!--                     <StandardListItem title="{id}" 
-                                      description="{discount}"/> -->
+                    </CustomListItem>
                 </items>
-
             </GrowingList>
-          </content>
+        </content>
     </Page>
 </mvc:View>
 
