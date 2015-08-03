@@ -1,36 +1,24 @@
-<mvc:View controllerName="bwm.view.Invitations"
-          xmlns:mvc="sap.ui.core.mvc"
-          xmlns:core="sap.ui.core"
-          xmlns="sap.m">
-    <Page title="{i18n&gt;invitationsTitle}"
-          showNavButton="true"
-          navButtonPress="onNavButtonPressed">
-          <content>
-            <GrowingList threshold="10"
-                        triggerText="more"
-                        scrollToLoad="true"
-                        items="{
+<mvc:View controllerName="bwm.view.Invitations" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m">
+    <Page title="{i18n&gt;invitationsTitle}" showNavButton="true" navButtonPress="onNavButtonPressed">
+        <content>
+            <GrowingList threshold="10" triggerText="more" scrollToLoad="true" items="{
                             path: '/InvitationSet'
                         }">
                 <items>
-                    <CustomListItem >
+                    <CustomListItem>
                         <content>
                             <HBox>
                                 <items>
-                                    <core:Fragment fragmentName="bwm.fragment.Buyer" type="XML"/>
-                                    <core:Fragment fragmentName="bwm.fragment.Status" type="XML"/>
+                                    <core:Fragment fragmentName="bwm.fragment.Buyer" type="XML" />
+                                    <core:Fragment fragmentName="bwm.fragment.Status" type="XML" />
                                 </items>
                             </HBox>
-                            
                         </content>
-                    </CustomListItem >
-
-<!--                     <StandardListItem title="{id}" 
+                    </CustomListItem>
+                    <!--                     <StandardListItem title="{id}" 
                                       description="{discount}"/> -->
                 </items>
-
             </GrowingList>
-          </content>
+        </content>
     </Page>
 </mvc:View>
-

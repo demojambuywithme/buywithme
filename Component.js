@@ -77,7 +77,7 @@ sap.ui.core.UIComponent.extend("bwm.Component", {
             }]
         }
     },
-    init: function () {
+    init: function() {
 
         sap.ui.core.UIComponent.prototype.init.apply(this, arguments);
 
