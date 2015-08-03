@@ -1,4 +1,4 @@
-<mvc:View controllerName="bwm.view.Invitations" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns="sap.m">
+<mvc:View controllerName="bwm.view.Invitations" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:v="sap.ui.comp.variants">
     <Page title="New Come&amp;Buy" showNavButton="true" navButtonPress="onNavButtonPressed" enableScrolling="true">
         <headerContent>
             <Button icon="sap-icon://globe" text="OnlyTest" press="onNavToMap" />
@@ -8,9 +8,27 @@
                 <Input id="titleInput" type="Text" placeholder="What do you want to say ..." textAlign="sap.ui.core.TextAlign.Right">
                 </Input>
             </content>
+            <Bar>
+                <contentLeft>
+                    <core:Icon src="sap-icon://shelf" class="size2" color="#64E4CE">
+                    </core:Icon>
+                </contentLeft>
+                <contentMiddle>
+                    <!-- -->
+                    <v:VariantManagement select="onSelect" save="onSave" enabled="true" manage="onManage" showExecuteOnSelection="true" showShare="true">
+                        <v:variantItems>
+                            <v:VariantItem text="Accounts by Name" key="ABN" global="true" readOnly="true" lifecyclePackage="/UIF/LREP_HOME_CONTENT" accessOptions="R" />
+                            <v:VariantItem text="Accounts by ID" key="ABI" global="true" readOnly="false" lifecyclePackage="/UIF/LREP_HOME_CONTENT" accessOptions="RWD" />
+                            <v:VariantItem text="My Global Variant" key="MGV" global="true" readOnly="false" lifecyclePackage="$TMP" accessOptions="RWD" />
+                            <v:VariantItem text="My Better Variant" key="MBV" global="false" readOnly="false" lifecyclePackage="$TMP" accessOptions="RWD" />
+                        </v:variantItems>
+                    </v:VariantManagement>
+                </contentMiddle>
+            </Bar>
         </Panel>
+        <!-- -->
         <l:HorizontalLayout class="sapUiSmallMargin">
-            <Panel width="auto" class="sapUiSmallMargin">
+            <Panel width="100%" class="sapUiSmallMargin">
                 <core:Icon src="sap-icon://shelf" class="size2" color="#64E4CE">
                 </core:Icon>
             </Panel>
