@@ -8,31 +8,41 @@
                 <Input id="titleInput" type="Text" placeholder="What do you want to say ..." textAlign="sap.ui.core.TextAlign.Right">
                 </Input>
             </content>
-            <Bar>
-                <contentLeft>
-                    <core:Icon src="sap-icon://shelf" class="size2" color="#64E4CE">
-                    </core:Icon>
-                </contentLeft>
-                <contentMiddle>
-                    <!-- -->
-                    <v:VariantManagement select="onSelect" save="onSave" enabled="true" manage="onManage" showExecuteOnSelection="true" showShare="true">
-                        <v:variantItems>
-                            <v:VariantItem text="Accounts by Name" key="ABN" global="true" readOnly="true" lifecyclePackage="/UIF/LREP_HOME_CONTENT" accessOptions="R" />
-                            <v:VariantItem text="Accounts by ID" key="ABI" global="true" readOnly="false" lifecyclePackage="/UIF/LREP_HOME_CONTENT" accessOptions="RWD" />
-                            <v:VariantItem text="My Global Variant" key="MGV" global="true" readOnly="false" lifecyclePackage="$TMP" accessOptions="RWD" />
-                            <v:VariantItem text="My Better Variant" key="MBV" global="false" readOnly="false" lifecyclePackage="$TMP" accessOptions="RWD" />
-                        </v:variantItems>
-                    </v:VariantManagement>
-                </contentMiddle>
-            </Bar>
         </Panel>
         <!-- -->
-        <l:HorizontalLayout class="sapUiSmallMargin">
-            <Panel width="100%" class="sapUiSmallMargin">
-                <core:Icon src="sap-icon://shelf" class="size2" color="#64E4CE">
+        <Panel width="auto" class="sapUiSmallMargin">
+            <l:HorizontalLayout class="sapUiSmallMargin">
+                <core:Icon src="sap-icon://shelf" color="#64E4CE">
                 </core:Icon>
-            </Panel>
-        </l:HorizontalLayout>
+                <Select Width="160px">
+                    <core:Item key="CG" text="Clothing" />
+                    <core:Item key="FD" text="Food" />
+                    <core:Item key="HL" text="Hotel" />
+                    <core:Item key="TI" text="Taxi" />
+                </Select>
+            </l:HorizontalLayout>
+            <l:HorizontalLayout class="sapUiSmallMargin">
+                <core:Icon src="sap-icon://money-bills" color="#64E4CE">
+                </core:Icon>
+                <Select Width="160px">
+                    <core:Item key="CG" text="Buy X PC Y Discount" />
+                    <core:Item key="FD" text="Buy X Return Y" />
+                </Select>
+            </l:HorizontalLayout>
+        </Panel>
+        <!-- -->
+        <Panel width="auto" class="sapUiSmallMargin">
+            <l:HorizontalLayout>
+                <text text="I Want" />
+                <Input value="10" description="PC" width="70px" fieldWidth="60%" class="sapUiSmallMarginBottom" />
+                <Input value="100.00" description="RMB" width="160px" fieldWidth="60%" class="sapUiSmallMarginBottom" />
+            </l:HorizontalLayout>
+            <l:HorizontalLayout>
+                <text text="My Cost is:" />
+                <ObjectNumber class="sapUiSmallMarginBottom" number="100" unit="RMB" />
+            </l:HorizontalLayout>
+        </Panel>
+        <!-- -->
         <l:Grid defaultSpan="L3 M4 S6" class="sapUiSmallMarginTop">
             <l:content>
                 <StandardListItem title="My Cost is:" />
