@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 [{
     "id": "7129692d-b8b1-4482-a739-cf166c98c0c4",
     "totalQuantity": 20,
@@ -2201,4 +2200,3 @@
 {"id":"ed8189fe-320b-4fef-952f-9216e5c463bd","totalQuantity":54,"discount":35,"totalMoney":58,"returnMoney":23,"title":"mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum","longitude":"-75.16417","latitude":"5.88778","address":"4767 Old Shore Place","creatorId":"199dffa6-5a90-4dd0-9fbf-6ade8af3071d"},
 {"id":"17193eb5-e13d-4aed-bb73-bfb8fa624f78","totalQuantity":34,"discount":39,"totalMoney":74,"returnMoney":10,"title":"dui vel sem sed sagittis nam congue risus semper porta volutpat quam","longitude":"114.78333","latitude":"24.9","address":"88635 Thierer Avenue","creatorId":"e2e2a91b-c416-4355-b1ed-202da4abf22e"},
 {"id":"1379a90e-5f19-4909-8296-6b732029cd9b","totalQuantity":63,"discount":16,"totalMoney":76,"returnMoney":98,"title":"nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis","longitude":"16.3041","latitude":"46.55794","address":"34 Texas Alley","creatorId":"0ac7a297-3515-4301-bb82-5d3ea2e768a0"}]
->>>>>>> ea379456ff9a5699eb9c3a553e16965a3102bcf9
