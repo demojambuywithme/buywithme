@@ -6,7 +6,122 @@
         showNavButton="true"
           navButtonPress="onNavButtonPressed">
         <content>
-        
-        </content>
+			<!-- <com:TabStrip> <com:Tab title="Tab1" text="Tab1"> <com:TextArea value="123"> 
+				</com:TextArea> </com:Tab> <com:Tab title="Tab2" text="Tab2"> <com:TextArea 
+				value="234"> </com:TextArea> </com:Tab> </com:TabStrip> -->
+			<ux3:CollectionInspector>
+				<ux3:collections>
+					<ux3:Collection title="Invitation Status">
+						<ux3:items>
+							<core:Item text="Open">
+							</core:Item>
+							<core:Item text="Closed">
+							</core:Item>
+							<core:Item text="Finished">
+							</core:Item>
+							<core:Item text="Invalid">
+							</core:Item>
+						</ux3:items>
+					</ux3:Collection>
+				</ux3:collections>
+				<ux3:content>
+					<!-- <ux3:ThingViewer type="Account" firstTitle="Mine Test"> </ux3:ThingViewer> -->
+					<List headerText="Invitation List">
+						<!-- <CustomListItem type="Inactive"> <Label text="A first custom list 
+							item ..." class="content" /> <Button text="Press me!" class="content" /> 
+							</CustomListItem> <CustomListItem type="Navigation"> <core:Icon src="sap-icon://lab" 
+							size="2em" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" /> <Label 
+							text="... and another one ..." class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" 
+							/> <core:Icon src="sap-icon://competitor" size="2em" class="sapUiSmallMarginBegin 
+							sapUiSmallMarginTopBottom" /> </CustomListItem> <CustomListItem type="Navigation"> 
+							<Switch state="true" class="content" /> <Switch state="false" class="content" 
+							/> <Label text="... followed by the very last." class="content" /> </CustomListItem> -->
+						<CustomListItem>
+							<VBox>
+								<items>
+									<l:HorizontalLayout class="sapUiSmallMargin">
+										<Image src="image\pic.jpg" width="50px" height="50px" />
+										<VBox>
+											<items>
+												<RatingIndicator value="4" />
+												<Label text="F, Lastname" />
+											</items>
+										</VBox>
+										<VBox> <!-- -->
+											<items>
+												<HBox>
+													<items>
+														<core:Icon src="sap-icon://time-entry-request" />
+														<Label text="45 Minutes Left" />
+													</items>
+												</HBox>
+												<ProgressIndicator class="sapUiSmallMarginBottom"
+													percentValue="80" displayValue="4/5" showValue="true"
+													state="None" height="20px" />
+											</items>
+										</VBox>
+									</l:HorizontalLayout>
+									<Carousel class="sapUiContentPadding" loop="true"
+										width="100%" height="150px">
+										<pages>
+											<Image src="image\pic1.jpg" densityAware="true" height="100px">
+											</Image>
+											<Image src="image\pic2.jpg" densityAware="true" height="100px">
+											</Image>
+										</pages>
+									</Carousel>
+									<Text
+										text="Come and join me! GAP shop on huaihai road. Good discount!!"
+										wrapping="true" maxLines="2" width="100%" />
+									<Bar>
+										<contentLeft>
+											<core:Icon src="sap-icon://map" class="size1"
+												color="#031E48">
+											</core:Icon>
+											<Label text="Huaihai Road, GAP" textAlign="Left"></Label><!-- -->
+										</contentLeft>
+									</Bar>
+									<!-- <Bar>
+										<contentLeft>
+											<core:Icon src="sap-icon://grid" class="size1"
+												color="#031E48">
+												<core:layoutData>
+													<FlexItemData growFactor="1" />
+												</core:layoutData>
+											</core:Icon>
+										</contentLeft>
+										<contentMiddle>
+											<Label text="Clothing -> T-shirt"></Label>
+										</contentMiddle>
+									</Bar>
+									<Bar>
+										<contentLeft>
+											<core:Icon src="sap-icon://simple-payment" class="size1"
+												color="#031E48">
+												<core:layoutData>
+													<FlexItemData growFactor="1" />
+												</core:layoutData>
+											</core:Icon>
+										</contentLeft>
+										<contentMiddle>
+											<Label text="Buy 5 PC 40% Discount"></Label>
+										</contentMiddle>
+									</Bar> -->
+									<Toolbar class="sapUiMediumMarginTop">
+										<Button text="Accept" type="Accept" />
+										<ToolbarSpacer />
+										<Button icon="sap-icon://favorite" />
+										<ToolbarSpacer />
+										<Button icon="sap-icon://globe" />
+										<ToolbarSpacer />
+										<Button icon="sap-icon://share-2" />
+									</Toolbar>
+								</items>
+							</VBox>
+						</CustomListItem>
+					</List>
+				</ux3:content>
+			</ux3:CollectionInspector>
+		</content>
     </Page>
 </core:View>
