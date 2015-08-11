@@ -9,7 +9,7 @@
             <HBox>
                 <items>
                     <core:Icon src="sap-icon://time-entry-request"/>
-                    <Label text="45 Minutes Left"/>
+                    <Label text="{valid_in} Minutes Left"/>
                 </items>
             </HBox>
             <ProgressIndicator class="sapUiSmallMarginBottom" 
