@@ -14,10 +14,9 @@
                                 <FlexItemData alignSelf="Center" growFactor="" />
                             </core:layoutData>
                         </core:Icon>
-                       <Select maxWidth="300%" width="230px" autoAdjustWidth="false"
-							items="{path: '/Category', sorter: { path: 'description' } 	}">
-							<core:Item key="{id}" text="{description}" />
-						</Select>
+                        <Select maxWidth="300%" width="230px" autoAdjustWidth="false" items="{path: '/Category', sorter: { path: 'description' } 	}">
+                            <core:Item key="{id}" text="{description}" />
+                        </Select>
                     </HBox>
                     <HBox>
                         <core:Icon src="sap-icon://loan" size="150%" width="30px" color="#64E4CE" class="sapUiSmallMarginEnd">
@@ -25,9 +24,9 @@
                                 <FlexItemData alignSelf="Center" growFactor="" />
                             </core:layoutData>
                         </core:Icon>
-                       <Select width="230px" items="{path: '/DiscountType', sorter: { path: 'description' }}">	
-							<core:Item key="{id}" text="{description}" />
-						</Select>
+                        <Select width="230px" items="{path: '/DiscountType', sorter: { path: 'description' }}">
+                            <core:Item key="{id}" text="{description}" />
+                        </Select>
                     </HBox>
                 </VBox>
                 <!-- -->
@@ -58,24 +57,21 @@
                 <Link text="Where are you" class="sapUiTinyMarginTop" press="handleLinkPress" />
             </HBox>
             <!-- -->
-            <HBox alignItems="Stretch" class="sapUiExploredNoMarginInfo" >
-                <Image class="sapUiSmallMarginEnd" src="./pictures_cy/123.png" densityAware="true" width="100%">
-                    <layoutData>
-                        <l:GridData span="L3 M3 S8" linebreakL="true" linebreakM="true" linebreakS="true" />
-                    </layoutData>
-                </Image>
-                <Image class="sapUiSmallMarginEnd" src="./pictures_cy/discount.png" densityAware="true" width="100%">
-                    <layoutData>
-                        <l:GridData span="L3 M3 S8" linebreakL="true" linebreakM="true" linebreakS="true" />
-                    </layoutData>
-                </Image>
+            <HBox alignItems="Stretch" class="sapUiExploredNoMarginInfo">
+                <Carousel class="sapUiContentPadding">
+                    <pages>
+                        <Image class="sapUiSmallMarginEnd" src="./pictures_cy/123.png" densityAware="true" width="100%">
+                        </Image>
+                        <Image class="sapUiSmallMarginEnd" src="./pictures_cy/discount.png" densityAware="true" width="100%">
+                        </Image>
+                    </pages>
+                </Carousel>
                 <core:Icon src="sap-icon://sys-add" size="100px" color="#64E4CE" press="handleAddpicPress">
                     <core:layoutData>
                         <FlexItemData alignSelf="Center" />
                     </core:layoutData>
                 </core:Icon>
             </HBox>
-            <!-- -->
         </VBox>
         <footer>
             <Toolbar>
