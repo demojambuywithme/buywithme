@@ -1,0 +1,21 @@
+[    {
+        "id": "0550223232fd488db699a7ea9a9fdde0",
+        "description": "Sports",
+        "level": 1,
+        "parent_categor.id": null
+      },
+      
+      {
+        "id": "a8d3fea970754d6fa8a4aeb8bf3dbaed",
+        "description": "Clothes",
+        "level": 1,
+        "parent_categor.id": null
+      },
+      
+      {
+        "id": "cfe2733e8cbd408db39a5371ab6137ce",
+        "description": "Food",
+        "level": 1,
+        "parent_categor.id": null
+        }
+]

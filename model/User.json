@@ -1,20 +1,172 @@
-[{"id":"e49cfe1f-126b-4f73-a837-4bccf7f14c06","name":"Nancy Hall","phone":"0-(161)415-1955","rate":2},
-{"id":"2c2b7aba-1ff7-4801-acd2-47af75672fe7","name":"Todd Hansen","phone":"6-(198)729-4265","rate":3},
-{"id":"75aa1fc7-5ff3-4db0-a1be-ba0eec35aaf4","name":"Alice Barnes","phone":"9-(949)434-6720","rate":4},
-{"id":"3e03f53b-24d0-47b2-9e1f-5420d1782c7f","name":"Bruce Gutierrez","phone":"7-(372)606-9513","rate":4},
-{"id":"8d6bd71f-22ec-4b6e-8721-d72b80164dae","name":"Sarah Arnold","phone":"1-(716)495-5834","rate":5},
-{"id":"7b4052a9-a30a-4d65-9d0f-9a1f54be7970","name":"Carl Hicks","phone":"7-(195)872-6851","rate":4},
-{"id":"ba09e11b-9c74-40c7-8d89-d560fd228a91","name":"Cheryl Tucker","phone":"2-(327)384-5501","rate":2},
-{"id":"0ac7a297-3515-4301-bb82-5d3ea2e768a0","name":"William Ferguson","phone":"0-(198)599-5272","rate":4},
-{"id":"91be2839-72f3-42b8-ba6a-d66a18586d37","name":"Jerry Olson","phone":"7-(394)739-0485","rate":4},
-{"id":"b32d3f99-6d91-429b-bd0d-60101d52b7c1","name":"Marilyn Carr","phone":"9-(025)315-2297","rate":2},
-{"id":"82b705b7-2c27-4a37-8994-c6ad9e52be45","name":"Rose Nelson","phone":"3-(174)753-5282","rate":3},
-{"id":"963266e4-df9a-49b6-ba87-03c2d1b6f487","name":"Steve Hughes","phone":"9-(441)088-8894","rate":4},
-{"id":"856bf7b2-6a02-4bf2-8b99-575ef81152b4","name":"Denise Olson","phone":"4-(433)617-8066","rate":4},
-{"id":"013853c5-edda-41cf-b436-8e976e191020","name":"Christine Ryan","phone":"3-(895)372-7270","rate":3},
-{"id":"e2e2a91b-c416-4355-b1ed-202da4abf22e","name":"Joseph Stephens","phone":"1-(153)714-8433","rate":4},
-{"id":"c9f60181-89cd-4922-930c-cf4fb16e22db","name":"Christopher Hudson","phone":"3-(396)285-6476","rate":5},
-{"id":"f228222f-100d-4f38-80b8-6b5ceae1b6d2","name":"Elizabeth Knight","phone":"5-(544)131-2940","rate":3},
-{"id":"199dffa6-5a90-4dd0-9fbf-6ade8af3071d","name":"Dennis Lane","phone":"0-(330)688-5530","rate":2},
-{"id":"5f5b7d18-6913-4404-8071-68e9585809a6","name":"Ernest Olson","phone":"3-(323)673-2516","rate":3},
-{"id":"b37b043d-b699-4cf7-8398-89fd9b869a4f","name":"George Olson","phone":"9-(760)941-4218","rate":4}]
+[
+      
+      {
+        "__metadata": 
+        {
+          "type": "bwm.UserType",
+          "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('311c0ab7fed848c7857f8f5204faf111')"
+        },
+        "id": "311c0ab7fed848c7857f8f5204faf111",
+        "name": "Zhao Jay",
+        "phone": "18729738764",
+        "rate": 5,
+        "pic.id": "843ee3545a224611a34379283680e7b8",
+        "MyAvatar": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('311c0ab7fed848c7857f8f5204faf111')/MyAvatar"
+          }
+        },
+        "MyInvitations": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('311c0ab7fed848c7857f8f5204faf111')/MyInvitations"
+          }
+        },
+        "MyInvitationItems": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('311c0ab7fed848c7857f8f5204faf111')/MyInvitationItems"
+          }
+        }
+      },
+      
+      {
+        "__metadata": 
+        {
+          "type": "bwm.UserType",
+          "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('4defa41b7b934dab9f36627b32fb7bb7')"
+        },
+        "id": "4defa41b7b934dab9f36627b32fb7bb7",
+        "name": "Xu Chunyang",
+        "phone": "18721349853",
+        "rate": 5,
+        "pic.id": "eef32964e0534497803ce203cea3a171",
+        "MyAvatar": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('4defa41b7b934dab9f36627b32fb7bb7')/MyAvatar"
+          }
+        },
+        "MyInvitations": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('4defa41b7b934dab9f36627b32fb7bb7')/MyInvitations"
+          }
+        },
+        "MyInvitationItems": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('4defa41b7b934dab9f36627b32fb7bb7')/MyInvitationItems"
+          }
+        }
+      },
+      
+      {
+        "__metadata": 
+        {
+          "type": "bwm.UserType",
+          "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('6273876ccd96464cae261fd8c390267f')"
+        },
+        "id": "6273876ccd96464cae261fd8c390267f",
+        "name": "Wu Loring",
+        "phone": "18739233245",
+        "rate": 5,
+        "pic.id": "2c5364c9a31c4d41a8a9ad83acc97d0e",
+        "MyAvatar": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('6273876ccd96464cae261fd8c390267f')/MyAvatar"
+          }
+        },
+        "MyInvitations": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('6273876ccd96464cae261fd8c390267f')/MyInvitations"
+          }
+        },
+        "MyInvitationItems": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('6273876ccd96464cae261fd8c390267f')/MyInvitationItems"
+          }
+        }
+      },
+      
+      {
+        "__metadata": 
+        {
+          "type": "bwm.UserType",
+          "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('81794267dc2e4e5e9619e51e37bfb1de')"
+        },
+        "id": "81794267dc2e4e5e9619e51e37bfb1de",
+        "name": "Shen Aaron",
+        "phone": "18812369873",
+        "rate": 5,
+        "pic.id": "0aef1884132640a49d502152f9c5e68a",
+        "MyAvatar": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('81794267dc2e4e5e9619e51e37bfb1de')/MyAvatar"
+          }
+        },
+        "MyInvitations": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('81794267dc2e4e5e9619e51e37bfb1de')/MyInvitations"
+          }
+        },
+        "MyInvitationItems": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('81794267dc2e4e5e9619e51e37bfb1de')/MyInvitationItems"
+          }
+        }
+      },
+      
+      {
+        "__metadata": 
+        {
+          "type": "bwm.UserType",
+          "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('877da535455a47b893b19e9ab8a1f2c2')"
+        },
+        "id": "877da535455a47b893b19e9ab8a1f2c2",
+        "name": "Jiang Xin",
+        "phone": "18717765877",
+        "rate": 5,
+        "pic.id": "853fbcd4be444c9a94b2043b28ed46ff",
+        "MyAvatar": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('877da535455a47b893b19e9ab8a1f2c2')/MyAvatar"
+          }
+        },
+        "MyInvitations": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('877da535455a47b893b19e9ab8a1f2c2')/MyInvitations"
+          }
+        },
+        "MyInvitationItems": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('877da535455a47b893b19e9ab8a1f2c2')/MyInvitationItems"
+          }
+        }
+      }
+    ]
