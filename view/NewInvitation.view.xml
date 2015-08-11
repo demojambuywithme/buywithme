@@ -2,13 +2,13 @@
     <Page title="New Come&amp;Buy" class="sapUiContentPadding" showNavButton="true" navButtonPress="onNavButtonPressed" enableScrolling="true">
         <headerContent>
         </headerContent>
-        <Vbox>
-            <Input id="titleInput1" type="Text" placeholder="What do you want to say ..." textAlign="sap.ui.core.TextAlign.Right" class="sapUiExploredNoMarginInfo">
+        <VBox>
+            <Input id="titleInput1" type="Text" placeholder="What do you want to say ..." textAlign="Right" class="sapUiExploredNoMarginInfo">
             </Input>
             <Panel width="auto">
                 <!-- -->
-                <Vbox class="sapUiSmallMarginBottom">
-                    <Hbox alignItems="Stretch">
+                <VBox class="sapUiSmallMarginBottom">
+                    <HBox alignItems="Stretch">
                         <core:Icon src="sap-icon://grid" size="150%" width="30px" color="#64E4CE" class="sapUiSmallMarginEnd">
                             <core:layoutData>
                                 <FlexItemData alignSelf="Center" growFactor="" />
@@ -20,8 +20,8 @@
                             <core:Item key="HL" text="Hotel" />
                             <core:Item key="TI" text="Taxi" />
                         </Select>
-                    </Hbox>
-                    <Hbox>
+                    </HBox>
+                    <HBox>
                         <core:Icon src="sap-icon://loan" size="150%" width="30px" color="#64E4CE" class="sapUiSmallMarginEnd">
                             <core:layoutData>
                                 <FlexItemData alignSelf="Center" growFactor="" />
@@ -31,10 +31,10 @@
                             <core:Item key="CG" text="Buy X PC Y Discount" />
                             <core:Item key="FD" text="Buy X Return Y" />
                         </Select>
-                    </Hbox>
-                </Vbox>
+                    </HBox>
+                </VBox>
                 <!-- -->
-                <Vbox>
+                <VBox>
                     <Toolbar>
                         <Text text="I Want"></Text>
                         <Input value="10" width="70px" textAlign="Center" fieldWidth="60%" />
@@ -43,25 +43,25 @@
                         <Text text="RMB"></Text>
                     </Toolbar>
                     <Toolbar>
-                        <text text="My Cost is:" />
+                        <Text text="My Cost is:" />
                         <ObjectNumber number="100.5" unit="RMB" />
                         <ObjectNumber number="50.5" unit="RMB" class="sapUiTinyMarginBegin" />
                     </Toolbar>
                     <Toolbar>
-                        <text text="Auto Close in"> </text>
+                        <Text text="Auto Close in"> </Text>
                         <Input value="2" width="40px" textAlign="Center" fieldWidth="60%" />
-                        <text text="Hours"> </text>
+                        <Text text="Hours"> </Text>
                     </Toolbar>
-                </Vbox>
+                </VBox>
             </Panel>
             <!-- -->
-            <Hbox alignItems="Stretch" class="sapUiExploredNoMarginInfo">
+            <HBox alignItems="Stretch" class="sapUiExploredNoMarginInfo">
                 <core:Icon src="sap-icon://map" size="150%" color="#64E4CE">
                 </core:Icon>
                 <Link text="Where are you" class="sapUiTinyMarginTop" press="handleLinkPress" />
-            </Hbox>
+            </HBox>
             <!-- -->
-            <Hbox alignItems="Stretch" class="sapUiExploredNoMarginInfo" >
+            <HBox alignItems="Stretch" class="sapUiExploredNoMarginInfo" >
                 <Image class="sapUiSmallMarginEnd" src="./pictures_cy/123.png" densityAware="true" width="100%">
                     <layoutData>
                         <l:GridData span="L3 M3 S8" linebreakL="true" linebreakM="true" linebreakS="true" />
@@ -77,9 +77,9 @@
                         <FlexItemData alignSelf="Center" />
                     </core:layoutData>
                 </core:Icon>
-            </Hbox>
+            </HBox>
             <!-- -->
-        </Vbox>
+        </VBox>
         <footer>
             <Toolbar>
                 <ToolbarSpacer/>
