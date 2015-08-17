@@ -1,4 +1,4 @@
-<core:View xmlns:core="sap.ui.core" 
+<!-- <core:View xmlns:core="sap.ui.core" 
     xmlns:mvc="sap.ui.core.mvc" 
     xmlns="sap.m" controllerName="bwm.view.InvitationDetail" 
     xmlns:html="http://www.w3.org/1999/xhtml">
@@ -8,5 +8,197 @@
         <content>
         
         </content>
+    </Page>
+</core:View> -->
+
+<core:View xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:l="sap.ui.layout" 
+    xmlns="sap.m" controllerName="bwm.view.InvitationDetail" 
+    xmlns:html="http://www.w3.org/1999/xhtml">
+    <Page title="Invitation Detail"
+            showNavButton="true"
+			navButtonPress="onNavButtonPressed">
+                <headerContent>
+            <Button icon="sap-icon://discussion"  press="onNavToChat" />
+        </headerContent>
+        <l:HorizontalLayout class="sapUiSmallMargin">
+                <!-- <Image
+                    class="sapUiSmallMarginEnd"
+                    src="image\pic.jpg"
+					densityAware="true"
+					height = "5em"
+					>
+			    </Image>
+			    <l:VerticalLayout class="sapUiSmallMargin" >
+			        <RatingIndicator maxValue="5" class="sapUiSmallMarginBottom" value="2.5" />
+			        <Label text="F, Lastname" class="sapUiSmallMarginBottom" />
+			    </l:VerticalLayout>
+			    <l:VerticalLayout class="sapUiSmallMargin" 
+				                  height="5em">
+			        <l:HorizontalLayout class="sapUiSmallMargin">
+			             <core:Icon
+      						src="sap-icon://future"
+      						class="size1"
+    				        color="#031E48" >
+      					    <core:layoutData>
+        						<FlexItemData growFactor="1" />
+      						</core:layoutData>
+   						 </core:Icon>
+   						 <Label text="55 Minutes Left" class="sapUiSmallMarginBottom" />
+			        </l:HorizontalLayout>
+     			    <ProgressIndicator
+        			    class="sapUiSmallMarginBottom" 
+        				percentValue="30"
+        				displayValue="3"
+        				showValue="true"
+        				state="None" />	
+			    </l:VerticalLayout> -->
+				<Image src="image\pic.jpg"
+                    width="50px"
+                    height="50px"/>
+				<VBox>
+                <items>
+                    <RatingIndicator value="4"/>
+                    <Label text="F, Lastname"/>
+                </items>
+				</VBox>
+				<VBox
+				alignItems = "right">
+					<items>
+						<HBox>
+							<items>
+								<core:Icon src="sap-icon://time-entry-request"/>
+								<Label text="45 Minutes Left"/>
+							</items>
+						</HBox>
+						<ProgressIndicator class="sapUiSmallMarginBottom" 
+                                percentValue="80"
+                                displayValue="4/5"
+                                showValue="true"
+                                state="None"
+								height="20px"/>
+					</items>
+				</VBox>
+            </l:HorizontalLayout>
+        <Carousel class="sapUiContentPadding"
+                  loop="true" 
+				  width= "100%"
+				  height="20em">
+           <pages>
+        	<Image src="image\IMG_2218.JPG" 
+			        densityAware="true"
+                     height = "20em"
+					 width ="100%">
+			</Image>
+        	<Image src="image\IMG_2220.JPG" 			        
+			       densityAware="true"
+                   height = "20em"
+				   width ="100%">
+                <layoutData>
+					<FlexItemData growFactor="1" />
+				</layoutData>
+				</Image>
+      	   </pages>
+        </Carousel>
+		<Text text="Come and join me! GAP shop on huaihai road. Good discount!!"
+				  wrapping="true"
+				  maxLines="2" 
+				  width="100%"/>
+        <Bar>
+            <contentLeft>
+                 <core:Icon
+      				src="sap-icon://map"
+      				class="size1"
+      				color="#031E48" >
+      				<core:layoutData>
+       			    	<FlexItemData growFactor="1" />
+      				</core:layoutData>
+   				 </core:Icon>
+				 <Label text="Huaihai Road, GAP"
+				        textAlign="left"></Label>
+            </contentLeft>
+        </Bar>
+        <Bar>
+            <contentLeft>
+                 <core:Icon
+      				src="sap-icon://grid"
+      				class="size1"
+      				color="#031E48" >
+      				<core:layoutData>
+       			    	<FlexItemData growFactor="1" />
+      				</core:layoutData>
+   				 </core:Icon>
+            </contentLeft>
+            <contentMiddle>
+          		 <Label text="Clothing -> T-shirt"></Label>
+        	</contentMiddle>
+        </Bar>
+        <Bar>
+            <contentLeft>
+                 <core:Icon
+      				src="sap-icon://simple-payment"
+      				class="size1"
+      				color="#031E48" >
+      				<core:layoutData>
+       			    	<FlexItemData growFactor="1" />
+      				</core:layoutData>
+   				 </core:Icon>
+            </contentLeft>
+            <contentMiddle>
+          		 <Label text="Buy 5 PC 40% Discount"></Label>
+        	</contentMiddle>
+        </Bar>
+ <GrowingList threshold="10"
+                         triggerText="more"
+                         scrollToLoad="true"
+                         >
+                <items>
+                    <CustomListItem>
+                        <content>
+                            <HBox>
+                                <items>
+                                    <Image src="image\pic.jpg"
+                    width="50px"
+                    height="50px"/>
+				<VBox>
+                <items>
+                    <RatingIndicator value="4"/>
+                    <Label text="F, Lastname"/>
+                </items>
+				</VBox>
+				<VBox>
+					<items>
+						<HBox>
+							<items>
+								<core:Icon src="sap-icon://time-entry-request"/>
+								<Label text="45 Minutes Left"/>
+							</items>
+						</HBox>
+						<ProgressIndicator class="sapUiSmallMarginBottom" 
+                                percentValue="80"
+                                displayValue="4/5"
+                                showValue="true"
+                                state="None"
+								height="20px"/>
+					</items>
+				</VBox>
+                                </items>
+                            </HBox>
+                        </content>
+                    </CustomListItem>
+                </items>
+            </GrowingList>
+  <footer>
+      <Toolbar class="sapUiMediumMarginTop">
+            <Button text="Accept" type="Accept"/>
+            <ToolbarSpacer/>
+      		<Button icon="sap-icon://favorite" />
+      		<ToolbarSpacer/>
+      		<Button icon="sap-icon://globe" />
+      		<ToolbarSpacer/>
+      		<Button icon="sap-icon://share-2" />
+      </Toolbar>
+  </footer>
     </Page>
 </core:View>
