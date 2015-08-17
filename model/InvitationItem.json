@@ -1,212 +1,272 @@
 [
-{
-__metadata: {
-type: "bwm.InvitationItemType",
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='3cfef88a868a42a4a35d6eb6d4f60376',inv_head.id='32794e82ff744ce89ac88642e241cf87')"
-},
-inv_id: "3cfef88a868a42a4a35d6eb6d4f60376",
-inv_head.id: "32794e82ff744ce89ac88642e241cf87",
-joiner.id: "4defa41b7b934dab9f36627b32fb7bb7",
-quantity: "1",
-money: "159",
-InvitationHead: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='3cfef88a868a42a4a35d6eb6d4f60376',inv_head.id='32794e82ff744ce89ac88642e241cf87')/InvitationHead"
-}
-},
-ItemParticipator: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='3cfef88a868a42a4a35d6eb6d4f60376',inv_head.id='32794e82ff744ce89ac88642e241cf87')/ItemParticipator"
-}
-}
-},
-{
-__metadata: {
-type: "bwm.InvitationItemType",
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='557d3eff0fef483cb7803a706f1b8a68',inv_head.id='d5841523f86446fdb4020b2479f090ab')"
-},
-inv_id: "557d3eff0fef483cb7803a706f1b8a68",
-inv_head.id: "d5841523f86446fdb4020b2479f090ab",
-joiner.id: "6273876ccd96464cae261fd8c390267f",
-quantity: "1",
-money: "259",
-InvitationHead: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='557d3eff0fef483cb7803a706f1b8a68',inv_head.id='d5841523f86446fdb4020b2479f090ab')/InvitationHead"
-}
-},
-ItemParticipator: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='557d3eff0fef483cb7803a706f1b8a68',inv_head.id='d5841523f86446fdb4020b2479f090ab')/ItemParticipator"
-}
-}
-},
-{
-__metadata: {
-type: "bwm.InvitationItemType",
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='67866525b5a6450eaa15c6403af32985',inv_head.id='b4cdcd5b3eff45faa324d75bffaef1d7')"
-},
-inv_id: "67866525b5a6450eaa15c6403af32985",
-inv_head.id: "b4cdcd5b3eff45faa324d75bffaef1d7",
-joiner.id: "877da535455a47b893b19e9ab8a1f2c2",
-quantity: "2",
-money: "600",
-InvitationHead: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='67866525b5a6450eaa15c6403af32985',inv_head.id='b4cdcd5b3eff45faa324d75bffaef1d7')/InvitationHead"
-}
-},
-ItemParticipator: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='67866525b5a6450eaa15c6403af32985',inv_head.id='b4cdcd5b3eff45faa324d75bffaef1d7')/ItemParticipator"
-}
-}
-},
-{
-__metadata: {
-type: "bwm.InvitationItemType",
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='95a0adeacd8240d6b8668701b0ab0aef',inv_head.id='87bd027c365d458d9c134f31accf5a57')"
-},
-inv_id: "95a0adeacd8240d6b8668701b0ab0aef",
-inv_head.id: "87bd027c365d458d9c134f31accf5a57",
-joiner.id: "311c0ab7fed848c7857f8f5204faf111",
-quantity: "1",
-money: "299",
-InvitationHead: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='95a0adeacd8240d6b8668701b0ab0aef',inv_head.id='87bd027c365d458d9c134f31accf5a57')/InvitationHead"
-}
-},
-ItemParticipator: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='95a0adeacd8240d6b8668701b0ab0aef',inv_head.id='87bd027c365d458d9c134f31accf5a57')/ItemParticipator"
-}
-}
-},
-{
-__metadata: {
-type: "bwm.InvitationItemType",
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='98e546e29966413aaf6ac60693df4d04',inv_head.id='34cff2eb2cc54a548539dffbffe2056e')"
-},
-inv_id: "98e546e29966413aaf6ac60693df4d04",
-inv_head.id: "34cff2eb2cc54a548539dffbffe2056e",
-joiner.id: "877da535455a47b893b19e9ab8a1f2c2",
-quantity: "1",
-money: "300",
-InvitationHead: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='98e546e29966413aaf6ac60693df4d04',inv_head.id='34cff2eb2cc54a548539dffbffe2056e')/InvitationHead"
-}
-},
-ItemParticipator: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='98e546e29966413aaf6ac60693df4d04',inv_head.id='34cff2eb2cc54a548539dffbffe2056e')/ItemParticipator"
-}
-}
-},
-{
-__metadata: {
-type: "bwm.InvitationItemType",
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='adcb4872c88241d08ee7a604a2b2be51',inv_head.id='602b4dcf5339472b96786217e3955953')"
-},
-inv_id: "adcb4872c88241d08ee7a604a2b2be51",
-inv_head.id: "602b4dcf5339472b96786217e3955953",
-joiner.id: "81794267dc2e4e5e9619e51e37bfb1de",
-quantity: "1",
-money: "299",
-InvitationHead: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='adcb4872c88241d08ee7a604a2b2be51',inv_head.id='602b4dcf5339472b96786217e3955953')/InvitationHead"
-}
-},
-ItemParticipator: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='adcb4872c88241d08ee7a604a2b2be51',inv_head.id='602b4dcf5339472b96786217e3955953')/ItemParticipator"
-}
-}
-},
-{
-__metadata: {
-type: "bwm.InvitationItemType",
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='cbc2122593064e1b977147181349f46e',inv_head.id='ff81562b50ad4902a9156e3c6eee5080')"
-},
-inv_id: "cbc2122593064e1b977147181349f46e",
-inv_head.id: "ff81562b50ad4902a9156e3c6eee5080",
-joiner.id: "81794267dc2e4e5e9619e51e37bfb1de",
-quantity: "2",
-money: "599",
-InvitationHead: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='cbc2122593064e1b977147181349f46e',inv_head.id='ff81562b50ad4902a9156e3c6eee5080')/InvitationHead"
-}
-},
-ItemParticipator: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='cbc2122593064e1b977147181349f46e',inv_head.id='ff81562b50ad4902a9156e3c6eee5080')/ItemParticipator"
-}
-}
-},
-{
-__metadata: {
-type: "bwm.InvitationItemType",
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='d6100e9649414f8e8016e6b745ce62f4',inv_head.id='2319409ba6ff4f2dbb903225d689301a')"
-},
-inv_id: "d6100e9649414f8e8016e6b745ce62f4",
-inv_head.id: "2319409ba6ff4f2dbb903225d689301a",
-joiner.id: "4defa41b7b934dab9f36627b32fb7bb7",
-quantity: "1",
-money: "199",
-InvitationHead: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='d6100e9649414f8e8016e6b745ce62f4',inv_head.id='2319409ba6ff4f2dbb903225d689301a')/InvitationHead"
-}
-},
-ItemParticipator: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='d6100e9649414f8e8016e6b745ce62f4',inv_head.id='2319409ba6ff4f2dbb903225d689301a')/ItemParticipator"
-}
-}
-},
-{
-__metadata: {
-type: "bwm.InvitationItemType",
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='eb38f015e96b4bbca66e9394234e09e0',inv_head.id='727a967e139745bf8dcbe8ca3ef7aeb8')"
-},
-inv_id: "eb38f015e96b4bbca66e9394234e09e0",
-inv_head.id: "727a967e139745bf8dcbe8ca3ef7aeb8",
-joiner.id: "6273876ccd96464cae261fd8c390267f",
-quantity: "1",
-money: "199",
-InvitationHead: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='eb38f015e96b4bbca66e9394234e09e0',inv_head.id='727a967e139745bf8dcbe8ca3ef7aeb8')/InvitationHead"
-}
-},
-ItemParticipator: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='eb38f015e96b4bbca66e9394234e09e0',inv_head.id='727a967e139745bf8dcbe8ca3ef7aeb8')/ItemParticipator"
-}
-}
-},
-{
-__metadata: {
-type: "bwm.InvitationItemType",
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='f37df46f4d4b417091c5bc1895e7f7b9',inv_head.id='cce6af62bed94c8492bddc8d9da82e9d')"
-},
-inv_id: "f37df46f4d4b417091c5bc1895e7f7b9",
-inv_head.id: "cce6af62bed94c8492bddc8d9da82e9d",
-joiner.id: "311c0ab7fed848c7857f8f5204faf111",
-quantity: "1",
-money: "199",
-InvitationHead: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='f37df46f4d4b417091c5bc1895e7f7b9',inv_head.id='cce6af62bed94c8492bddc8d9da82e9d')/InvitationHead"
-}
-},
-ItemParticipator: {
-__deferred: {
-uri: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='f37df46f4d4b417091c5bc1895e7f7b9',inv_head.id='cce6af62bed94c8492bddc8d9da82e9d')/ItemParticipator"
-}
-}
-}
-]
+      
+      {
+        "__metadata": 
+        {
+          "type": "bwm.InvitationItemType",
+          "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='3cfef88a868a42a4a35d6eb6d4f60376',inv_head.id='32794e82ff744ce89ac88642e241cf87')"
+        },
+        "inv_id": "3cfef88a868a42a4a35d6eb6d4f60376",
+        "inv_head.id": "32794e82ff744ce89ac88642e241cf87",
+        "joiner.id": "4defa41b7b934dab9f36627b32fb7bb7",
+        "quantity": "1",
+        "money": "159",
+        "InvitationHead": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='3cfef88a868a42a4a35d6eb6d4f60376',inv_head.id='32794e82ff744ce89ac88642e241cf87')/InvitationHead"
+          }
+        },
+        "ItemParticipator": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='3cfef88a868a42a4a35d6eb6d4f60376',inv_head.id='32794e82ff744ce89ac88642e241cf87')/ItemParticipator"
+          }
+        }
+      },
+      
+      {
+        "__metadata": 
+        {
+          "type": "bwm.InvitationItemType",
+          "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='557d3eff0fef483cb7803a706f1b8a68',inv_head.id='d5841523f86446fdb4020b2479f090ab')"
+        },
+        "inv_id": "557d3eff0fef483cb7803a706f1b8a68",
+        "inv_head.id": "d5841523f86446fdb4020b2479f090ab",
+        "joiner.id": "6273876ccd96464cae261fd8c390267f",
+        "quantity": "1",
+        "money": "259",
+        "InvitationHead": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='557d3eff0fef483cb7803a706f1b8a68',inv_head.id='d5841523f86446fdb4020b2479f090ab')/InvitationHead"
+          }
+        },
+        "ItemParticipator": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='557d3eff0fef483cb7803a706f1b8a68',inv_head.id='d5841523f86446fdb4020b2479f090ab')/ItemParticipator"
+          }
+        }
+      },
+      
+      {
+        "__metadata": 
+        {
+          "type": "bwm.InvitationItemType",
+          "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='67866525b5a6450eaa15c6403af32985',inv_head.id='b4cdcd5b3eff45faa324d75bffaef1d7')"
+        },
+        "inv_id": "67866525b5a6450eaa15c6403af32985",
+        "inv_head.id": "b4cdcd5b3eff45faa324d75bffaef1d7",
+        "joiner.id": "877da535455a47b893b19e9ab8a1f2c2",
+        "quantity": "2",
+        "money": "600",
+        "InvitationHead": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='67866525b5a6450eaa15c6403af32985',inv_head.id='b4cdcd5b3eff45faa324d75bffaef1d7')/InvitationHead"
+          }
+        },
+        "ItemParticipator": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='67866525b5a6450eaa15c6403af32985',inv_head.id='b4cdcd5b3eff45faa324d75bffaef1d7')/ItemParticipator"
+          }
+        }
+      },
+      
+      {
+        "__metadata": 
+        {
+          "type": "bwm.InvitationItemType",
+          "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='95a0adeacd8240d6b8668701b0ab0aef',inv_head.id='87bd027c365d458d9c134f31accf5a57')"
+        },
+        "inv_id": "95a0adeacd8240d6b8668701b0ab0aef",
+        "inv_head.id": "87bd027c365d458d9c134f31accf5a57",
+        "joiner.id": "311c0ab7fed848c7857f8f5204faf111",
+        "quantity": "1",
+        "money": "299",
+        "InvitationHead": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='95a0adeacd8240d6b8668701b0ab0aef',inv_head.id='87bd027c365d458d9c134f31accf5a57')/InvitationHead"
+          }
+        },
+        "ItemParticipator": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='95a0adeacd8240d6b8668701b0ab0aef',inv_head.id='87bd027c365d458d9c134f31accf5a57')/ItemParticipator"
+          }
+        }
+      },
+      
+      {
+        "__metadata": 
+        {
+          "type": "bwm.InvitationItemType",
+          "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='98e546e29966413aaf6ac60693df4d04',inv_head.id='34cff2eb2cc54a548539dffbffe2056e')"
+        },
+        "inv_id": "98e546e29966413aaf6ac60693df4d04",
+        "inv_head.id": "34cff2eb2cc54a548539dffbffe2056e",
+        "joiner.id": "877da535455a47b893b19e9ab8a1f2c2",
+        "quantity": "1",
+        "money": "300",
+        "InvitationHead": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='98e546e29966413aaf6ac60693df4d04',inv_head.id='34cff2eb2cc54a548539dffbffe2056e')/InvitationHead"
+          }
+        },
+        "ItemParticipator": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='98e546e29966413aaf6ac60693df4d04',inv_head.id='34cff2eb2cc54a548539dffbffe2056e')/ItemParticipator"
+          }
+        }
+      },
+      
+      {
+        "__metadata": 
+        {
+          "type": "bwm.InvitationItemType",
+          "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='adcb4872c88241d08ee7a604a2b2be51',inv_head.id='602b4dcf5339472b96786217e3955953')"
+        },
+        "inv_id": "adcb4872c88241d08ee7a604a2b2be51",
+        "inv_head.id": "602b4dcf5339472b96786217e3955953",
+        "joiner.id": "81794267dc2e4e5e9619e51e37bfb1de",
+        "quantity": "1",
+        "money": "299",
+        "InvitationHead": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='adcb4872c88241d08ee7a604a2b2be51',inv_head.id='602b4dcf5339472b96786217e3955953')/InvitationHead"
+          }
+        },
+        "ItemParticipator": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='adcb4872c88241d08ee7a604a2b2be51',inv_head.id='602b4dcf5339472b96786217e3955953')/ItemParticipator"
+          }
+        }
+      },
+      
+      {
+        "__metadata": 
+        {
+          "type": "bwm.InvitationItemType",
+          "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='cbc2122593064e1b977147181349f46e',inv_head.id='ff81562b50ad4902a9156e3c6eee5080')"
+        },
+        "inv_id": "cbc2122593064e1b977147181349f46e",
+        "inv_head.id": "ff81562b50ad4902a9156e3c6eee5080",
+        "joiner.id": "81794267dc2e4e5e9619e51e37bfb1de",
+        "quantity": "2",
+        "money": "599",
+        "InvitationHead": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='cbc2122593064e1b977147181349f46e',inv_head.id='ff81562b50ad4902a9156e3c6eee5080')/InvitationHead"
+          }
+        },
+        "ItemParticipator": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='cbc2122593064e1b977147181349f46e',inv_head.id='ff81562b50ad4902a9156e3c6eee5080')/ItemParticipator"
+          }
+        }
+      },
+      
+      {
+        "__metadata": 
+        {
+          "type": "bwm.InvitationItemType",
+          "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='d6100e9649414f8e8016e6b745ce62f4',inv_head.id='2319409ba6ff4f2dbb903225d689301a')"
+        },
+        "inv_id": "d6100e9649414f8e8016e6b745ce62f4",
+        "inv_head.id": "2319409ba6ff4f2dbb903225d689301a",
+        "joiner.id": "4defa41b7b934dab9f36627b32fb7bb7",
+        "quantity": "1",
+        "money": "199",
+        "InvitationHead": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='d6100e9649414f8e8016e6b745ce62f4',inv_head.id='2319409ba6ff4f2dbb903225d689301a')/InvitationHead"
+          }
+        },
+        "ItemParticipator": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='d6100e9649414f8e8016e6b745ce62f4',inv_head.id='2319409ba6ff4f2dbb903225d689301a')/ItemParticipator"
+          }
+        }
+      },
+      
+      {
+        "__metadata": 
+        {
+          "type": "bwm.InvitationItemType",
+          "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='eb38f015e96b4bbca66e9394234e09e0',inv_head.id='727a967e139745bf8dcbe8ca3ef7aeb8')"
+        },
+        "inv_id": "eb38f015e96b4bbca66e9394234e09e0",
+        "inv_head.id": "727a967e139745bf8dcbe8ca3ef7aeb8",
+        "joiner.id": "6273876ccd96464cae261fd8c390267f",
+        "quantity": "1",
+        "money": "199",
+        "InvitationHead": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='eb38f015e96b4bbca66e9394234e09e0',inv_head.id='727a967e139745bf8dcbe8ca3ef7aeb8')/InvitationHead"
+          }
+        },
+        "ItemParticipator": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='eb38f015e96b4bbca66e9394234e09e0',inv_head.id='727a967e139745bf8dcbe8ca3ef7aeb8')/ItemParticipator"
+          }
+        }
+      },
+      
+      {
+        "__metadata": 
+        {
+          "type": "bwm.InvitationItemType",
+          "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='f37df46f4d4b417091c5bc1895e7f7b9',inv_head.id='cce6af62bed94c8492bddc8d9da82e9d')"
+        },
+        "inv_id": "f37df46f4d4b417091c5bc1895e7f7b9",
+        "inv_head.id": "cce6af62bed94c8492bddc8d9da82e9d",
+        "joiner.id": "311c0ab7fed848c7857f8f5204faf111",
+        "quantity": "1",
+        "money": "199",
+        "InvitationHead": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='f37df46f4d4b417091c5bc1895e7f7b9',inv_head.id='cce6af62bed94c8492bddc8d9da82e9d')/InvitationHead"
+          }
+        },
+        "ItemParticipator": 
+        {
+          "__deferred": 
+          {
+            "uri": "http://10.58.132.213:8000/BWM/services/bwm.xsodata/InvitationItem(inv_id='f37df46f4d4b417091c5bc1895e7f7b9',inv_head.id='cce6af62bed94c8492bddc8d9da82e9d')/ItemParticipator"
+          }
+        }
+      }
+    ]
