@@ -1,9 +1,9 @@
-<mvc:View controllerName="bwm.view.Invitations" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:v="sap.ui.comp.variants" xmlns:form="sap.ui.layout.form">
+<mvc:View id="view1234" controllerName="bwm.view.NewInvitation" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:v="sap.ui.comp.variants" xmlns:form="sap.ui.layout.form">
     <Page title="New Come&amp;Buy" class="sapUiContentPadding" showNavButton="true" navButtonPress="onNavButtonPressed" enableScrolling="true">
         <headerContent>
         </headerContent>
         <VBox>
-            <Input id="titleInput1" type="Text" placeholder="What do you want to say ..." textAlign="Right" class="sapUiExploredNoMarginInfo">
+            <Input id="titleInput1" type="Text" placeholder="What do you want to say ..." textAlign="Left" class="sapUiExploredNoMarginInfo">
             </Input>
             <Panel width="auto">
                 <!-- -->
@@ -25,7 +25,7 @@
                             </core:layoutData>
                         </core:Icon>
                         <Select width="230px" items="{path: '/DiscountType', sorter: { path: 'description' }}">
-                            <core:Item key="{id}" text="{description}" />
+                            <core:Item key="{id}" text="{description}" press="onNavToDisType"/>
                         </Select>
                     </HBox>
                 </VBox>
@@ -54,7 +54,7 @@
             <HBox alignItems="Stretch" class="sapUiExploredNoMarginInfo">
                 <core:Icon src="sap-icon://map" size="150%" color="#64E4CE">
                 </core:Icon>
-                <Link text="Where are you" class="sapUiTinyMarginTop" press="handleLinkPress" />
+                <Link id="link01" text="Where are you" class="sapUiTinyMarginTop" press="handleLocation" />
             </HBox>
             <!-- -->
             <HBox alignItems="Stretch" class="sapUiExploredNoMarginInfo">
@@ -66,7 +66,7 @@
                         </Image>
                     </pages>
                 </Carousel>
-                <core:Icon src="sap-icon://sys-add" size="100px" color="#64E4CE" press="handleAddpicPress">
+                <core:Icon src="sap-icon://sys-add" size="100px" color="#64E4CE" press="onDialogPress">
                     <core:layoutData>
                         <FlexItemData alignSelf="Center" />
                     </core:layoutData>
@@ -76,7 +76,7 @@
         <footer>
             <Toolbar>
                 <ToolbarSpacer/>
-                <Button text="PUBLISH" width="180px" type="Accept" press="handlePublishPress" />
+                <Button text="PUBLISH" width="180px" type="Accept" press="onSave" />
                 <ToolbarSpacer/>
             </Toolbar>
         </footer>
