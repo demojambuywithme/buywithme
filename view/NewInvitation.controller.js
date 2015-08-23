@@ -2,12 +2,13 @@ jQuery.sap.declare("bwm.view.NewInvitation");
 jQuery.sap.require("bwm.view.BaseController");
 
 bwm.view.BaseController.extend("bwm.view.NewInvitation", {
+    //CY01
     //When click "Where are you", system will automatically populate the link with current location
     handleLocation: function(oEvent) {
         "use strict";
         var testLink = new sap.m.Link({
             id: "link02", // sap.ui.core.ID
-            text: "Test Link", // string
+            text: "Test Link" // string
         });
         var olink2 = sap.ui.getCore().byId("link02");
 
@@ -29,7 +30,16 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         });
     },
 
-
+    //CY03
+    //Create a json model for new invitation data
+    initializeNewInvitationData : function() {
+        this.getView().getModel("newInvitation").setData({
+            Invitation: {
+                valid_in: "ab",
+                title: "xcy"
+            }
+        });
+    },
     /**
      * Called when a controller is instantiated and its View controls (if available) are already created.
      * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
@@ -40,25 +50,72 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         if (this._oPopover) {
             this._oPopover.destroy();
         }
-
+        this.getView().setModel(new sap.ui.model.json.JSONModel(), "newInvitation");
+        this.initializeNewInvitationData();
     },
 
+    //CY02
+    //When click "Add picture", popup a dialog for user to select the way to add pictures
+    //There will be two options: <1>Taking a photo <2>Picking from gallery
+    onPhotoDataSuccess: function(imageData) {
+            var oView = {};
+        oView = this.getView();
+        var myImage = oView.byId("myImage");
+        myImage.setSrc("data:image/jpeg;base64," + imageData);
+    },
+
+    onPhotoURISuccess: function(imageURI) {
+                    var oView = {};
+        oView = this.getView();
+        var myImage = oView.byId("myImage");
+        myImage.setSrc(imageURI);
+    },
+    onFail: function(message) {
+        console.log("Failed because: " + message);
+    },
     onDialogPress: function(oEvent) {
         var dialog = new sap.m.Dialog({
             title: 'Add picture by...',
-            content: new sap.m.Button({
-                id: "buttonNI001", // sap.ui.core.ID
-                busyIndicatorDelay: 1000, // int
-                text: "Taking a photo", // string
-                type: sap.m.ButtonType.Default, // sap.m.ButtonType
-                width: "200px", // sap.ui.core.CSSSize
-                enabled: true, // boolean
-                //icon : undefined, // sap.ui.core.URI
-                press: [function(oEvent) {
-                    var control = oEvent.getSource();
-                }, this]
-            }),
-
+            content: [new sap.m.Button({
+                    id: "buttonNI001", // sap.ui.core.ID
+                    busyIndicatorDelay: 1000, // int
+                    text: "Taking a photo", // string
+                    type: sap.m.ButtonType.Default, // sap.m.ButtonType
+                    width: "200px", // sap.ui.core.CSSSize
+                    enabled: true,
+                    //icon : undefined, // sap.ui.core.URI
+                    press: [
+                        function(oEvent) {
+                            var control = oEvent.getSource();
+                            var oNav = navigator.camera;
+                            oNav.getPicture(this.onPhotoDataSuccess, this.onFail, {
+                                quality: 10,
+                                destinationType: oNav.DestinationType.DATA_URL
+                            });
+                    },
+                        this]
+                }),
+                new sap.m.Button({
+                    id: "buttonNI002", // sap.ui.core.ID
+                    busyIndicatorDelay: 1000, // int
+                    text: "Picking from gallery", // string
+                    type: sap.m.ButtonType.Default, // sap.m.ButtonType
+                    width: "200px", // sap.ui.core.CSSSize
+                    enabled: true, // boolean
+                    //icon : undefined, // sap.ui.core.URI
+                    press: [
+                        function(oEvent) {
+                            var control = oEvent.getSource();
+                            var oNav = navigator.camera;
+                            oNav.getPicture(this.onPhotoURISuccess, this.onFail, {
+                                quality: 50,
+                                destinationType: oNav.DestinationType.FILE_URI,
+                                sourceType: oNav.PictureSourceType.PHOTOLIBRARY
+                            });
+                    },
+                        this]
+                })
+            ],
             beginButton: new sap.m.Button({
                 text: 'Close',
                 press: function() {
@@ -118,12 +175,12 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         return sap.ui.core.UIComponent.getRouterFor(this);
     },
 
-
     onSave: function(oEvent) {
         "use strict";
         jQuery.sap.require("sap.m.MessageToast");
         var params = oEvent.getParameters();
-        var sMessage = "New Name: " + params.name + "\nDefault: " + params.def + "\nOverwrite:" + params.overwrite + "\nSelected Item Key: " + params.key;
+        var sMessage = "New Name: " + params.name + "\nDefault: " + params.def + "\nOverwrite:" + params.overwrite + "\nSelected Item Key: " +
+            params.key;
         sap.m.MessageToast.show(sMessage);
     },
     onManage: function(oEvent) {
@@ -143,13 +200,107 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
 
         sap.m.MessageToast.show(sMessage);
     },
+
+/*
+        saveInvitation : function(nID) {
+        var mNewInvitation = this.getView().getModel("newInvitation").getData().Invitation;
+        // Basic payload data
+        var mNewInvitation = {
+            ID: nID,
+            Name: mNewProduct.Name,
+            Description: mNewProduct.Description,
+            ReleaseDate: this.dateFromString(mNewProduct.ReleaseDate),
+            Price: mNewProduct.Price.toString(),
+            Rating: mNewProduct.Rating
+        };
+
+        if (mNewProduct.DiscontinuedDate) {
+            mPayload.DiscontinuedDate = this.dateFromString(mNewProduct.DiscontinuedDate);
+        };
+        ["Supplier", "Category"].forEach(function(sRelation) {
+            var oSelect = this.getView().byId("idSelect" + sRelation);
+            var sPath = oSelect.getSelectedItem().getBindingContext().getPath();
+            mPayload[sRelation] = {
+                __metadata: {
+                    uri: sPath
+                }
+            };
+        }, this);
+        console.log(mPayload);
+        // Send OData Create request
+        var oModel = this.getView().getModel();
+        oModel.create("/Products", mPayload, {
+            success : jQuery.proxy(function(mResponse) {
+                this.initializeNewProductData();            
+                sap.ui.core.UIComponent.getRouterFor(this).navTo("product", {
+                    from: "master",
+                    product: "Products(" + mResponse.ID + ")",
+                    tab: "supplier"
+                }, false);
+                jQuery.sap.require("sap.m.MessageToast");
+                // ID of newly inserted product is available in mResponse.ID
+                this.oBusyDialog.close();
+                sap.m.MessageToast.show("Product '" + mPayload.Name + "' added");
+            }, this),
+            error : jQuery.proxy(function() {
+                this.oBusyDialog.close();
+                this.showErrorAlert("Problem creating new product");
+            }, this)
+        });
+
+    },
+*/
+
+    /*
+    onSave : function() {
+        // Show message if no product name has been entered
+        // Otherwise, get highest existing ID, and invoke create for new product
+        if (!this.getView().getModel("newProduct").getProperty("/Detail/Name")) {
+            if (!this.oAlertDialog) {
+                this.oAlertDialog = sap.ui.xmlfragment("com.ui5.start.view.NameRequiredDialog", this);
+                this.getView().addDependent(this.oAlertDialog);
+            }
+            this.oAlertDialog.open();
+        } else {
+            if (!this.oBusyDialog) {
+                this.oBusyDialog = new sap.m.BusyDialog();
+            }
+            this.oBusyDialog.open();
+            this.getView().getModel().read("/Products", {
+                urlParameters : {
+                    "$top" : 1,
+                    "$orderby" : "ID desc",
+                    "$select" : "ID"
+                },
+                async : false,
+                success : jQuery.proxy(function(oData) {
+                    this.saveProduct(oData.results[0].ID + 1);
+                }, this),
+                error : jQuery.proxy(function() {
+                    this.oBusyDialog.close();
+                    this.showErrorAlert("Cannot determine next ID for new product");
+                }, this)
+            });
+
+        }
+    },
+    */
+
+    /*
+    onCancel : function() {
+        sap.ui.core.UIComponent.getRouterFor(this).backWithoutHash(this.getView());
+    },
+    */
+    onNavButtonPressed: function () {
+        this.getRouter().backWithoutHash(this.getView());
+        sap.ui.core.UIComponent.getRouterFor(this).backWithoutHash(this.getView());
+    },
+
     onSelect: function(oEvent) {
         "use strict";
         var params = oEvent.getParameters();
         var sMessage = "New Variant Selected: " + params.key;
         sap.m.MessageToast.show(sMessage);
     }
-
-
 
 });

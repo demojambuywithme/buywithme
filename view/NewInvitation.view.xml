@@ -3,7 +3,7 @@
         <headerContent>
         </headerContent>
         <VBox>
-            <Input id="titleInput1" type="Text" placeholder="What do you want to say ..." textAlign="Left" class="sapUiExploredNoMarginInfo">
+            <Input id="titleInput1" type="Text" placeholder="What do you want to say ..." value="{newInvitation>/Invitation/title}" textAlign="Left" class="sapUiExploredNoMarginInfo">
             </Input>
             <Panel width="auto">
                 <!-- -->
@@ -25,7 +25,7 @@
                             </core:layoutData>
                         </core:Icon>
                         <Select width="230px" items="{path: '/DiscountType', sorter: { path: 'description' }}">
-                            <core:Item key="{id}" text="{description}" press="onNavToDisType"/>
+                            <core:Item key="{id}" text="{description}" press="onNavToDisType" />
                         </Select>
                     </HBox>
                 </VBox>
@@ -33,9 +33,9 @@
                 <VBox>
                     <Toolbar>
                         <Text text="I Want"></Text>
-                        <Input value="10" width="70px" textAlign="Center" fieldWidth="60%" />
+                        <Input id="piece01" value="10" width="70px" textAlign="Center" fieldWidth="60%" />
                         <Text text="PC"></Text>
-                        <Input value="100.00" width="70px" textAlign="Center" fieldWidth="60%" />
+                        <Input id="amout01" value="100.00" width="70px" textAlign="Center" fieldWidth="60%" />
                         <Text text="RMB"></Text>
                     </Toolbar>
                     <Toolbar>
@@ -45,7 +45,7 @@
                     </Toolbar>
                     <Toolbar>
                         <Text text="Auto Close in"> </Text>
-                        <Input value="2" width="40px" textAlign="Center" fieldWidth="60%" />
+                        <Input id="validIn" value="{newInvitation>/Invitation/valid_in}" width="40px" textAlign="Center" fieldWidth="60%" />
                         <Text text="Hours"> </Text>
                     </Toolbar>
                 </VBox>
@@ -76,7 +76,7 @@
         <footer>
             <Toolbar>
                 <ToolbarSpacer/>
-                <Button text="PUBLISH" width="180px" type="Accept" press="onSave" />
+                <Button text="PUBLISH" width="180px" type="Accept" press="saveInvitation" />
                 <ToolbarSpacer/>
             </Toolbar>
         </footer>
