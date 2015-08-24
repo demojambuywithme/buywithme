@@ -1,12 +1,37 @@
-<core:View xmlns:core="sap.ui.core" 
-    xmlns:mvc="sap.ui.core.mvc" 
-    xmlns="sap.m" controllerName="bwm.view.InvitationsMap" 
-    xmlns:html="http://www.w3.org/1999/xhtml">
-    <Page title="Invitations Map"
-        showNavButton="true"
-          navButtonPress="onNavButtonPressed">
-        <content>
-        
-        </content>
-    </Page>
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:layout="sap.ui.layout" xmlns="sap.m" controllerName="bwm.view.InvitationsMap"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Invitations Map" showNavButton="true" navButtonPress="onNavButtonPressed">
+		<subHeader>
+			<Bar>
+				<contentLeft>
+					<Label text="Distance">
+					</Label>
+					<Select id="dist" change="selChange">
+						<core:Item text="500米" key="500" />
+						<core:Item text="1000米" key="1000" />
+						<core:Item text="1500米" key="1500" />
+						<core:Item text="2000米" key="2000" />
+					</Select>
+				</contentLeft>
+				<contentMiddle>
+					<Label text="Category">
+					</Label>
+					<Select id="cate" items="{path: '/'}" change="selChange">
+						<core:Item text="{description}" key="{id}" />
+					</Select>
+				</contentMiddle>
+				<contentRight>
+					<Label text="Discount Type">
+					</Label>
+					<Select id="disc" items="{path: '/'}"  change="selChange">
+						<core:Item text="{description}" key="{id}" />
+					</Select>
+				</contentRight>
+			</Bar>
+		</subHeader>
+		<content>
+
+		</content>
+	</Page>
 </core:View>
