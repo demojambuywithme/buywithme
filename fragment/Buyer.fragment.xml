@@ -11,7 +11,9 @@
                     height="50px"/>
             <VBox>
                 <items>
-                    <RatingIndicator value="{rate}"/>
+                    <RatingIndicator value="{rate}" 
+                    				maxValue="5"
+                    			 	enabled = "false"	/>
                     <Label text="{name}"/>
                 </items>
             </VBox>
