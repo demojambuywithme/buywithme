@@ -15,7 +15,7 @@ sap.ui.core.UIComponent.extend("bwm.Component", {
             resourceBundle: "i18n/i18n.properties",
             serviceConfig: {
                 name: "bwm",
-                serviceUrl: "/buywithme_svc/"
+                serviceUrl: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/"
             }
         },
         routing: {
