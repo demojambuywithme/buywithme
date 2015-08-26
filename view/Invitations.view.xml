@@ -17,12 +17,15 @@
                                 <items>
                                     <core:Fragment fragmentName="bwm.fragment.InvitationOverview"
                                                    type="XML" />
-                                    <HBox>
-                                        <items>
-                                            <Button text="Join"/>
-                                            <Button text="Favorite"/>
-                                        </items>
-                                    </HBox>
+                                    <Toolbar class="sapUiMediumMarginTop">
+										<Button text="Join" type="Accept" />
+										<ToolbarSpacer />
+										<Button icon="sap-icon://favorite" />
+										<ToolbarSpacer />
+										<Button icon="sap-icon://globe" />
+										<ToolbarSpacer />
+										<Button icon="sap-icon://share-2" />
+									</Toolbar>
                                 </items>
                             </VBox>
                         </content>

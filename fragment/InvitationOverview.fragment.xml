@@ -3,7 +3,7 @@
 	<VBox>
 		<HBox>
 			<items>
-				<HBox binding="{path: 'Creator'}">
+				<HBox >
 					<items>
 						<core:Fragment fragmentName="bwm.fragment.Buyer"
 							type="XML" />
