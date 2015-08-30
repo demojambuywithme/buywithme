@@ -5,6 +5,7 @@ var selDist;
 var selCate;
 var selDisc;
 var circle;
+var markers;
 
 bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 	
@@ -89,7 +90,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 				mk.setLabel(new BMap.Label("My Position"));
 				map.addOverlay(mk);
 				map.panTo(r.point);
-				//alert('您的位置：'+r.point.lng+','+r.point.lat);
+				alert('您的位置：'+r.point.lng+','+r.point.lat);
 				var keyDist = selDist.getSelectedKey();
 				var keyCate = selCate.getSelectedKey();
 				var keyDisc = selDisc.getSelectedKey();
@@ -113,6 +114,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 						var marker = new BMap.Marker( invPoint );
 						marker.setLabel(new BMap.Label(invitation.oData[i].title));
 						map.addOverlay(marker);
+						//markers.push(marker);
 					}
 				};
 		    	circle = new BMap.Circle(currentPoint, keyDist);
@@ -127,8 +129,13 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
       },
 
     selChange: function(e){
-    	map.removeOverlay();
+    	map.clearOverlays();
     	circle.remove();
+    	
+    	var mk = new BMap.Marker(currentPoint);
+		mk.setLabel(new BMap.Label("My Position"));
+		map.addOverlay(mk);
+		
     	var keyDist = selDist.getSelectedKey();
 		var keyCate = selCate.getSelectedKey();
 		var keyDisc = selDisc.getSelectedKey();
