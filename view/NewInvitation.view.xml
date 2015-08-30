@@ -24,12 +24,12 @@
                                 <FlexItemData alignSelf="Center" growFactor="" />
                             </core:layoutData>
                         </core:Icon>
-                        <Select width="230px" items="{path: '/DiscountType', sorter: { path: 'description' }}">
-                            <core:Item key="{id}" text="{description}" press="onNavToDisType" />
+                        <Select width="230px" items="{path: '/DiscountType', sorter: { path: 'description' }}" change="onNavToDisType" >
+                            <core:Item key="{id}" text="{description}" press="onNavToDisType1" />
                         </Select>
                     </HBox>
                 </VBox>
-                <!-- -->
+                <!-- @TODO: Data binding for invitation item -->
                 <VBox>
                     <Toolbar>
                         <Text text="I Want"></Text>
@@ -56,7 +56,7 @@
                 </core:Icon>
                 <Link id="link01" text="Where are you" class="sapUiTinyMarginTop" press="handleLocation" />
             </HBox>
-            <!-- -->
+            <!-- @TODO Picture part needs to be reworked to use data binding, and cordova plugin! -->
             <HBox alignItems="Stretch" class="sapUiExploredNoMarginInfo">
                 <Carousel class="sapUiContentPadding">
                     <pages>
@@ -66,7 +66,7 @@
                         </Image>
                     </pages>
                 </Carousel>
-                <core:Icon src="sap-icon://sys-add" size="100px" color="#64E4CE" press="onDialogPress">
+                <core:Icon src="sap-icon://sys-add" size="100px" color="#64E4CE" press="onPhotoDialogPress">
                     <core:layoutData>
                         <FlexItemData alignSelf="Center" />
                     </core:layoutData>
@@ -76,7 +76,7 @@
         <footer>
             <Toolbar>
                 <ToolbarSpacer/>
-                <Button text="PUBLISH" width="180px" type="Accept" press="saveInvitation" />
+                <Button text="PUBLISH" width="180px" type="Accept" press="onPublish" />
                 <ToolbarSpacer/>
             </Toolbar>
         </footer>
