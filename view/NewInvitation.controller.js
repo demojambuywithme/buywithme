@@ -97,6 +97,16 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         });
         sap.m.MessageToast.show(sMessage);
     },
+    //Dialog with a selection list to select a accurate location
+    handleLocation1: function(oEvent) {
+        if (this.oCurLocDialog) {
+            this.oCurLocDialog.destroy();
+        }
+        this.oCurLocDialog = sap.ui.xmlfragment("bwm.fragment.CurrentLocSel", this);
+        this.getView().addDependent(this.oCurLocDialog);
+        this.oCurLocDialog.open();
+    },
+
 
     //CY03
     //Create a json model for new invitation data
@@ -317,6 +327,9 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
 
     //For discount details, to maintain value X and Y
     onNavToDisType: function() {
+        if (this.oDiscDetailDialog) {
+            this.oDiscDetailDialog.destroy();
+        }
         this.oDiscDetailDialog = sap.ui.xmlfragment("bwm.fragment.DiscountTypeDetail", this);
         this.getView().addDependent(this.oDiscDetailDialog);
         this.oDiscDetailDialog.open();
