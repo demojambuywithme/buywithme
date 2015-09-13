@@ -9,23 +9,29 @@
             <GrowingList threshold="10"
                          triggerText="more"
                          scrollToLoad="true"
+                         showSeparators="sap.m.ListSeparators.None"
                          items="{ path: '/Invitation' }">
                 <items>
-                    <CustomListItem>
+                    <CustomListItem class="sapUiTinyMarginBottom">
                         <content>
                             <VBox>
                                 <items>
                                     <core:Fragment fragmentName="bwm.fragment.InvitationOverview"
                                                    type="XML" />
-                                    <Toolbar class="sapUiMediumMarginTop">
-										<Button text="Join" type="Accept" />
-										<ToolbarSpacer />
-										<Button icon="sap-icon://favorite" />
-										<ToolbarSpacer />
-										<Button icon="sap-icon://globe" />
-										<ToolbarSpacer />
-										<Button icon="sap-icon://share-2" />
-									</Toolbar>
+                                    <Toolbar>
+                                        <Button text="Join"
+                                                type="Accept"
+                                                width="25%" />
+                                        <!-- <ToolbarSpacer /> -->
+                                        <Button icon="sap-icon://favorite"
+                                                width="25%" />
+                                        <!-- <ToolbarSpacer /> -->
+                                        <Button icon="sap-icon://globe"
+                                                width="25%" />
+                                        <!-- <ToolbarSpacer /> -->
+                                        <Button icon="sap-icon://share-2"
+                                                width="25%" />
+                                    </Toolbar>
                                 </items>
                             </VBox>
                         </content>
@@ -35,4 +41,3 @@
         </content>
     </Page>
 </mvc:View>
-
