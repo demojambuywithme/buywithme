@@ -4,6 +4,7 @@
           xmlns="sap.m">
     <Page title="{i18n&gt;invitationsTitle}"
           showNavButton="true"
+          showFooter="true"
           navButtonPress="onNavButtonPressed">
         <content>
             <GrowingList threshold="10"
@@ -39,5 +40,16 @@
                 </items>
             </GrowingList>
         </content>
+        <footer>
+            <Toolbar>
+                <content>
+                    <Button type="Emphasized" width="25%" iconFirst="true" icon="sap-icon://list"/>
+                    <Button width="25%" iconFirst="true" icon="sap-icon://map"/>
+                    <Button width="25%" iconFirst="true" icon="sap-icon://person-placeholder"/>
+                    <Button width="25%" iconFirst="true" icon="sap-icon://list"/>
+                </content>
+            
+            </Toolbar>
+        </footer>
     </Page>
 </mvc:View>
