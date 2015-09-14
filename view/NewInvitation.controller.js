@@ -3,7 +3,7 @@ jQuery.sap.require("bwm.view.BaseController");
 
 bwm.view.BaseController.extend("bwm.view.NewInvitation", {
 
-
+	 oView : null,
     /**
      * Called when a controller is instantiated and its View controls (if available) are already created.
      * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
@@ -16,6 +16,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         }
         this.getView().setModel(new sap.ui.model.json.JSONModel(), "newInvitation");
         this.initializeNewInvitationData();
+        oView = this.getView();
     },
 
     /**
@@ -136,17 +137,21 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     //When click "Add picture", popup a dialog for user to select the way to add pictures
     //There will be two options: <1>Taking a photo <2>Picking from gallery
     onPhotoDataSuccess: function(imageData) {
-        var oView = {};
-        oView = this.getView();
-        var myImage = oView.byId("myImage");
-        myImage.setSrc("data:image/jpeg;base64," + imageData);
+        var myCarousel = oView.byId("myImage");
+        var newImage = new sap.m.Image();
+        newImage.setWidth("200px");
+        newImage.setHeight("200px");
+        newImage.setSrc("data:image/jpeg;base64," + imageData);
+        myCarousel.addPage(newImage);
     },
 
     onPhotoURISuccess: function(imageURI) {
-        var oView = {};
-        oView = this.getView();
-        var myImage = oView.byId("myImage");
-        myImage.setSrc(imageURI);
+    	var myCarousel = oView.byId("myImage");
+        var newImage = new sap.m.Image();
+        newImage.setWidth("200px");
+    	newImage.setHeight("200px");
+        newImage.setSrc(imageURI);
+        myCarousel.addPage(newImage);
     },
     onPhotoFail: function(message) {
         console.log("Failed because: " + message);
