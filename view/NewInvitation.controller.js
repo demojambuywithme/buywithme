@@ -1,9 +1,9 @@
 jQuery.sap.declare("bwm.view.NewInvitation");
 jQuery.sap.require("bwm.view.BaseController");
+jQuery.sap.require("bwm.util.UtilMethod");
 
 bwm.view.BaseController.extend("bwm.view.NewInvitation", {
 
-	 oView : null,
     /**
      * Called when a controller is instantiated and its View controls (if available) are already created.
      * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
@@ -16,7 +16,6 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         }
         this.getView().setModel(new sap.ui.model.json.JSONModel(), "newInvitation");
         this.initializeNewInvitationData();
-        oView = this.getView();
     },
 
     /**
@@ -112,14 +111,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     //CY03
     //Create a json model for new invitation data
     initializeNewInvitationData: function() {
-        //Function to generate GUID for new invitation, but not sure whether it should be done by frontend or backend
-        function guid() {
-            function S4() {
-                return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-            }
-            return (S4() + S4() + S4() + S4() + S4() + S4() + S4() + S4());
-        }
-        var invGuid = guid();
+        var invGuid = bwm.util.UtilMethod.guid();
         this.getView().getModel("newInvitation").setData({
             Invitation: {
                 valid_in: "2",
@@ -137,20 +129,28 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     //When click "Add picture", popup a dialog for user to select the way to add pictures
     //There will be two options: <1>Taking a photo <2>Picking from gallery
     onPhotoDataSuccess: function(imageData) {
-        var myCarousel = oView.byId("myImage");
-        var newImage = new sap.m.Image();
-        newImage.setWidth("200px");
-        newImage.setHeight("200px");
+        var myCarousel = this.getView().byId("myImage");
+        var newImage = new sap.m.Image("insertImage");
+        var layoutData = new sap.m.FlexItemData("itemlayout",{
+        		alignSelf: sap.m.FlexAlignSelf.Stretch
+        	});
+        //newImage.setWidth("200px");
+        //newImage.setHeight("200px");
         newImage.setSrc("data:image/jpeg;base64," + imageData);
+        newImage.setLayoutData(layoutData);
         myCarousel.addPage(newImage);
+       
     },
 
     onPhotoURISuccess: function(imageURI) {
-    	var myCarousel = oView.byId("myImage");
-        var newImage = new sap.m.Image();
-        newImage.setWidth("200px");
-    	newImage.setHeight("200px");
+    	var myCarousel = this.getView().byId("myImage");
+        var newImage = new sap.m.Image("insertImage");
+        var layoutData = new sap.m.FlexItemData("itemlayout",{
+    		alignSelf: sap.m.FlexAlignSelf.Stretch
+    	});
+        
         newImage.setSrc(imageURI);
+        newImage.setLayoutData(layoutData);
         myCarousel.addPage(newImage);
     },
     onPhotoFail: function(message) {
@@ -235,65 +235,95 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     },
 
     saveInvitation: function(nID) {
+    	
+    	var batchChanges = [];
+    	var oModel = this.getView().getModel();
         var mNewInvitation = this.getView().getModel("newInvitation").getData().Invitation;
+        var discountTypeId = this.getView().byId("discountType_select").getSelectedKey();
+        var categortid = this.getView().byId("catrogry_select").getSelectedKey();
         // Basic payload data
         var mNewInv = {
             //替换
-            id: nID,
+        	id: nID,
             title: mNewInvitation.title,
-            status: mNewInvitation.Description,
-            "creator.id": "mNewInvitation.creator.id",
-            "category.id": "mNewInvitation.category.id",
-            "discountType.id": "mNewInvitation.discountType.id",
+            status: 1,
+            "creator.id": "877da535455a47b893b19e9ab8a1f2c2",
+            "category.id": categortid,
+            "discountType.id": discountTypeId,
             total_quantity: mNewInvitation.total_quantity,
-            discount: mNewInvitation.discount,
+           // discount: mNewInvitation.discount,
             total_money: mNewInvitation.total_money,
             return_money: mNewInvitation.return_money,
-            create_time: mNewInvitation.create_time,
-            valid_in: mNewInvitation.valid_in,
-            end_time: mNewInvitation.end_time,
+            //create_time: mNewInvitation.create_time,
+            //valid_in: mNewInvitation.valid_in,
+            //end_time: mNewInvitation.end_time,
             longitude: mNewInvitation.longitude,
             latitude: mNewInvitation.latitude,
             address: mNewInvitation.address
         };
 
         if (mNewInv.valid_in) {
-            mNewInv.end_time = 1;
+            //mNewInv.end_time = 1;
         }
-        /* //@TODO, save to oData
-        ["Supplier", "Category"].forEach(function(sRelation) {
-            var oSelect = this.getView().byId("idSelect" + sRelation);
-            var sPath = oSelect.getSelectedItem().getBindingContext().getPath();
-            mPayload[sRelation] = {
-                __metadata: {
-                    uri: sPath
-                }
-            };
-        }, this);
-        console.log(mPayload);
-        // Send OData Create request
-        var oModel = this.getView().getModel();
-        oModel.create("/Products", mPayload, {
-            success: jQuery.proxy(function(mResponse) {
-                this.initializeNewProductData();
-                sap.ui.core.UIComponent.getRouterFor(this).navTo("product", {
-                    from: "master",
-                    product: "Products(" + mResponse.ID + ")",
-                    tab: "supplier"
-                }, false);
-                jQuery.sap.require("sap.m.MessageToast");
-                // ID of newly inserted product is available in mResponse.ID
-                this.oBusyDialog.close();
-                sap.m.MessageToast.show("Product '" + mPayload.Name + "' added");
-            }, this),
-            error: jQuery.proxy(function() {
-                this.oBusyDialog.close();
-                this.showErrorAlert("Problem creating new product");
-            }, this)
-        });
-        */
+        
+        batchChanges.push(oModel.createBatchOperation("/Invitation", "POST", mNewInv) );
+        
+        var invatationItem = {
+        		inv_id:  bwm.util.UtilMethod.guid(),
+        		"inv_head.id": nID,
+        		"joiner.id" : mNewInv['creator.id'],
+        		quantity: this.getView().byId("piece01").getValue(),
+        		money: this.getView().byId("dis_money").getNumber()	
+        };
+        
+        batchChanges.push(oModel.createBatchOperation("/InvitationItem", "POST", invatationItem) );
+        /*var invItems=[];
+        invItems.push(invatationItem);*/
+        
+        var myCarousel = this.getView().byId("myImage");
+        var images = myCarousel.getPages();
+        var invPics=[];
+        for(var i=0;i<images.length;i++){
+        	var image = {
+        		id: bwm.util.UtilMethod.guid(),
+        		"inv_head.id":nID,
+        		pic_data: images[i].getSrc().replace("data:image/png;base64,","")
+        	};
+        	invPics.push(image);
+        	batchChanges.push(oModel.createBatchOperation("/InvitationPicture", "POST", image) );
+        };
+        
+       //mNewInv.InvitationItems = invItems;
+      // mNewInv.InvitationPictures = invPics;
+        console.log(mNewInv);
+        oModel.addBatchChangeOperations(batchChanges);
+        oModel.setUseBatch(true);
+        oModel.submitBatch(function(data) {  
+            oModel.refresh();  
+            sap.m.MessageToast.show(data.__batchResponses[0].__changeResponses.length  
+              + " Invitation", sap.ui.commons.MessageBox.Icon.SUCCESS,  
+            "Batch Save", sap.ui.commons.MessageBox.Action.OK);  
+          }, 
+          function(err) {  
+            alert("Error occurred ");  
+          });  
+       /* oModel.create("/Invitation", mNewInv, {
+			success : jQuery.proxy(function(mResponse) {
+				sap.ui.core.UIComponent.getRouterFor(this).navTo("product", {
+					from: "master",
+					product: "Products(" + mResponse.ID + ")",
+					tab: "supplier"
+				}, false);
+				jQuery.sap.require("sap.m.MessageToast");
+				this.oBusyDialog.close();
+				sap.m.MessageToast.show("Invitation '" + mNewInv.titlle + "' added");
+			}, this),
+			error : jQuery.proxy(function() {
+				this.oBusyDialog.close();
+				this.showErrorAlert("Problem creating new Invitation");
+			}, this)
+		});*/
     },
-
     //@TODO: Check whether it is correct?
     onPublish: function() {
         // Show message if no product name has been entered
@@ -305,7 +335,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
             if (!this.oBusyDialog) {
                 this.oBusyDialog = new sap.m.BusyDialog();
             }
-            //this.saveInvitation(this.getView().getModel("newInvitation").getProperty("/Invitation/id"));
+            this.saveInvitation(this.getView().getModel("newInvitation").getProperty("/Invitation/id"));
             /*
             this.oBusyDialog.open();
             this.getView().getModel().read("/Invitation", {
@@ -329,7 +359,6 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
             sap.m.MessageToast.show("Data Saved!");
         }
     },
-
     //For discount details, to maintain value X and Y
     onNavToDisType: function() {
         if (this.oDiscDetailDialog) {
@@ -365,6 +394,9 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         var params = oEvent.getParameters();
         var sMessage = "New Variant Selected: " + params.key;
         sap.m.MessageToast.show(sMessage);
-    }
-
+    },
+    showErrorAlert : function(sMessage) {
+		jQuery.sap.require("sap.m.MessageBox");	
+		sap.m.MessageBox.alert(sMessage);				
+	}
 });
