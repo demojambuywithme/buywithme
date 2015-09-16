@@ -13,5 +13,12 @@ bwm.view.BaseController.extend("bwm.view.Invitations", {
     },
     getRouter: function () {
         return sap.ui.core.UIComponent.getRouterFor(this);
+    },
+    toInvitationsMap: function() {
+        this.getRouter().navTo("invitationsMap");
+    },
+    toMine: function() {
+        this.getRouter().navTo("mine");
     }
+
 });

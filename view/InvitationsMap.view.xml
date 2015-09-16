@@ -33,5 +33,15 @@
 		<content>
 
 		</content>
+
+        <footer>
+            <Toolbar>
+                <content>
+                    <Button width="33%" iconFirst="true" icon="sap-icon://list"/>
+                    <Button type="Emphasized" width="33%" iconFirst="true" icon="sap-icon://map"/>
+                    <Button width="34%" iconFirst="true" icon="sap-icon://person-placeholder"/>
+                </content>
+            </Toolbar>
+        </footer>
 	</Page>
 </core:View>
