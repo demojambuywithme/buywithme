@@ -1,7 +1,6 @@
 jQuery.sap.declare("bwm.view.Invitations");
 jQuery.sap.require("bwm.view.BaseController");
-
-
+jQuery.sap.require("bwm.util.Formatter");
 bwm.view.BaseController.extend("bwm.view.Invitations", {
     // controller logic goes here
     onInit: function () {

@@ -10,7 +10,6 @@
             <GrowingList threshold="10"
                          triggerText="more"
                          scrollToLoad="true"
-                         showSeparators="sap.m.ListSeparators.None"
                          items="{ path: '/Invitation' }">
                 <items>
                     <CustomListItem class="sapUiTinyMarginBottom">
