@@ -1,101 +1,91 @@
-<mvc:View id="view1234" controllerName="bwm.view.NewInvitation"
-	xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core"
-	xmlns="sap.m" xmlns:v="sap.ui.comp.variants" xmlns:form="sap.ui.layout.form">
-	<Page title="New Come&amp;Buy" class="sapUiContentPadding"
-		showNavButton="true" navButtonPress="onNavButtonPressed"
-		enableScrolling="true">
-		<headerContent>
-		</headerContent>
-		<VBox>
-			<Input id="titleInput1" type="Text" placeholder="What do you want to say ..."
-				value="{newInvitation>/Invitation/title}" textAlign="Left"
-				class="sapUiExploredNoMarginInfo">
-			</Input>
-			<Panel width="auto">
-				<!-- -->
-				<VBox class="sapUiSmallMarginBottom">
-					<HBox alignItems="Stretch">
-						<core:Icon src="sap-icon://grid" size="150%" width="30px"
-							color="#64E4CE" class="sapUiSmallMarginEnd">
-							<core:layoutData>
-								<FlexItemData alignSelf="Center" growFactor="" />
-							</core:layoutData>
-						</core:Icon>
-						<Select maxWidth="300%" width="230px" autoAdjustWidth="false"
-						    id = "catrogry_select"
-							items="{path: '/Category', sorter: { path: 'description' } 	}">
-							<core:Item key="{id}" text="{description}" />
-						</Select>
-					</HBox>
-					<HBox>
-						<core:Icon src="sap-icon://loan" size="150%" width="30px"
-							color="#64E4CE" class="sapUiSmallMarginEnd">
-							<core:layoutData>
-								<FlexItemData alignSelf="Center" growFactor="" />
-							</core:layoutData>
-						</core:Icon>
-						<Select width="230px" id = "discountType_select"
-							items="{path: '/DiscountType', sorter: { path: 'description' }}"
-							change="onNavToDisType">
-							<core:Item key="{id}" text="{description}" press="onNavToDisType1" />
-						</Select>
-					</HBox>
-				</VBox>
-				<!-- @TODO: Data binding for invitation item -->
-				<VBox>
-					<Toolbar>
-						<Text text="I Want"></Text>
-						<Input id="piece01" value="10" width="70px" textAlign="Center"
-							fieldWidth="60%" />
-						<Text text="PC"></Text>
-						<Input id="amout01" value="100.00" width="70px" textAlign="Center"
-							fieldWidth="60%" />
-						<Text text="RMB"></Text>
-					</Toolbar>
-					<Toolbar>
-						<Text text="My Cost is:" />
-						<ObjectNumber number="100.5" unit="RMB" />
-						<ObjectNumber number="50.5" unit="RMB" id = "dis_money"
-							class="sapUiTinyMarginBegin" />
-					</Toolbar>
-					<Toolbar>
-						<Text text="Auto Close in">
-						</Text>
-						<Input id="validIn" value="{newInvitation>/Invitation/valid_in}"
-							width="40px" textAlign="Center" fieldWidth="60%" />
-						<Text text="Hours">
-						</Text>
-					</Toolbar>
-				</VBox>
-			</Panel>
-			<!-- -->
-			<HBox alignItems="Stretch" class="sapUiExploredNoMarginInfo">
-				<core:Icon src="sap-icon://map" size="150%" color="#64E4CE">
-				</core:Icon>
-				<Link id="link01" text="Where are you" class="sapUiTinyMarginTop"
-					press="handleLocation" />
-			</HBox>
-			<!-- @TODO Picture part needs to be reworked to use data binding, and 
-				cordova plugin! -->
-			<HBox alignItems="Stretch" class="sapUiExploredNoMarginInfo">
-				 <Carousel class="sapUiContentPadding" id="myImage">
-					<pages>
-					</pages>
-				</Carousel>
-				<core:Icon src="sap-icon://sys-add" size="100px" color="#64E4CE"
-					press="onPhotoDialogPress">
-					<core:layoutData>
-						<FlexItemData alignSelf="Center" />
-					</core:layoutData>
-				</core:Icon>
-			</HBox>
-		</VBox>
-		<footer>
-			<Toolbar>
-				<ToolbarSpacer />
-				<Button text="PUBLISH" width="180px" type="Accept" press="onPublish" />
-				<ToolbarSpacer />
-			</Toolbar>
-		</footer>
-	</Page>
+<mvc:View id="view1234" controllerName="bwm.view.NewInvitation" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:v="sap.ui.comp.variants" xmlns:form="sap.ui.layout.form">
+    <Page title="New Come&amp;Buy" class="sapUiContentPadding" showNavButton="true" navButtonPress="onNavButtonPressed" enableScrolling="true">
+        <headerContent>
+        </headerContent>
+        <VBox>
+            <Input id="titleInput1" type="Text" placeholder="What do you want to say ..." value="{newInvitation>/Invitation/title}" textAlign="Left" class="sapUiExploredNoMarginInfo">
+            </Input>
+            <Panel width="auto">
+                <!-- -->
+                <VBox class="sapUiSmallMarginBottom">
+                    <HBox alignItems="Stretch">
+                        <core:Icon src="sap-icon://grid" size="150%" width="30px" color="#64E4CE" class="sapUiSmallMarginEnd">
+                            <core:layoutData>
+                                <FlexItemData alignSelf="Center" growFactor="" />
+                            </core:layoutData>
+                        </core:Icon>
+                        <Select maxWidth="300%" width="230px" autoAdjustWidth="false" id="catrogry_select" items="{path: '/Category', sorter: { path: 'description' } 	}">
+                            <core:Item key="{id}" text="{description}" />
+                        </Select>
+                    </HBox>
+                    <HBox>
+                        <core:Icon src="sap-icon://loan" size="150%" width="30px" color="#64E4CE" class="sapUiSmallMarginEnd">
+                            <core:layoutData>
+                                <FlexItemData alignSelf="Center" growFactor="" />
+                            </core:layoutData>
+                        </core:Icon>
+                        <Select width="230px" id="discountType_select" items="{path: '/DiscountType', sorter: { path: 'description' }}" change="onNavToDisType">
+                            <core:Item key="{id}" text="{description}" press="onNavToDisType1" />
+                        </Select>
+                    </HBox>
+                </VBox>
+                <!-- @TODO: Data binding for invitation item -->
+                <VBox>
+                    <Toolbar>
+                        <Text text="I Want"></Text>
+                        <Input id="piece01" value="10" width="70px" textAlign="Center" fieldWidth="60%" />
+                        <Text text="PC"></Text>
+                        <Input id="amout01" value="100.00" width="70px" textAlign="Center" fieldWidth="60%" />
+                        <Text text="RMB"></Text>
+                    </Toolbar>
+                    <Toolbar>
+                        <Text text="My Cost is:" />
+                        <ObjectNumber number="100.5" unit="RMB" />
+                        <ObjectNumber number="50.5" unit="RMB" id="dis_money" class="sapUiTinyMarginBegin" />
+                    </Toolbar>
+                    <Toolbar>
+                        <Text text="Auto Close in">
+                        </Text>
+                        <Input id="validIn" value="{newInvitation>/Invitation/valid_in}" width="40px" textAlign="Center" fieldWidth="60%" />
+                        <Text text="Hours">
+                        </Text>
+                    </Toolbar>
+                </VBox>
+            </Panel>
+            <!-- -->
+            <HBox alignItems="Stretch" class="sapUiExploredNoMarginInfo">
+                <core:Icon src="sap-icon://map" size="150%" color="#64E4CE">
+                </core:Icon>
+                <Link id="link01" text="Where are you" class="sapUiTinyMarginTop" press="handleLocation" />
+            </HBox>
+            <!-- @TODO Picture part needs to be reworked to use data binding, and 
+				cordova plugin! alignItems="Stretch"-->
+            <HBox  class="sapUiExploredNoMarginInfo">
+                <Carousel class="sapUiContentPadding" width="180px" id="myImage">
+                    <pages>
+                        <!-- Test -->
+                        <Image class="sapUiSmallMarginEnd" src="./pictures_cy/123.png" densityAware="true" width="113px">
+                        </Image>
+                        <Image class="sapUiSmallMarginEnd" src="./pictures_cy/123.png" densityAware="true" width="113px">
+                        </Image>
+                    </pages>
+                </Carousel>
+                <Image class="sapUiSmallMarginTop" src="./pictures_cy/plus.png" densityAware="true" width="100px" color="#64E4CE" press="onPhotoDialogPress">
+                </Image>
+                <!--<core:Icon src="sap-icon://sys-add" size="100px" color="#64E4CE" press="onPhotoDialogPress">
+                <core:Icon src="./pictures_cy/plus.ico" size="100px" color="#64E4CE" press="onPhotoDialogPress">
+                    <core:layoutData>
+                        <FlexItemData alignSelf="Center" />
+                    </core:layoutData>
+                </core:Icon>-->
+            </HBox>
+        </VBox>
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button text="PUBLISH" width="180px" type="Accept" press="onPublish" />
+                <ToolbarSpacer />
+            </Toolbar>
+        </footer>
+    </Page>
 </mvc:View>

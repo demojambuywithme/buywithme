@@ -3,9 +3,9 @@ jQuery.sap.require("bwm.view.BaseController");
 jQuery.sap.require("bwm.util.UtilMethod");
 
 bwm.view.BaseController.extend("bwm.view.NewInvitation", {
-	
-	 oView : null,
-	
+
+    oView: null,
+
     /**
      * Called when a controller is instantiated and its View controls (if available) are already created.
      * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
@@ -99,6 +99,23 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
             olink1.setText(locDetail);
         });
         sap.m.MessageToast.show(sMessage);
+        //http://api.map.baidu.com/place/v2/suggestion?query=%E5%A4%A9&region=%E4%B8%8A%E6%B5%B7%E5%B8%82&output=json&ak=CD70726d5902ec38d1e1a9e7d249d923
+        //http://api.map.baidu.com/geocoder/v2/?ak=CD70726d5902ec38d1e1a9e7d249d923&callback=renderReverse&location=39.983424,116.322987&output=json&pois=1
+        jQuery.ajax({
+            //type: "post",
+            url: "http://api.map.baidu.com/geocoder/v2/?ak=CD70726d5902ec38d1e1a9e7d249d923&callback=renderReverse&location=39.983424,116.322987&output=json&pois=1",
+            dataType: "jsonp",
+            async: false,
+            success: function(data, textStatus, jqXHR) {
+                currentLoc = new sap.ui.model.json.JSONModel();
+                currentLoc.setData(data);
+                //sap.ui.getCore().setModel(invitation);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("Oh no, an error occurred");
+            }
+        });
+        //var curLoc = this.getView().getModel("currentLoc").getData();
     },
     //Dialog with a selection list to select a accurate location
     handleLocation1: function(oEvent) {
@@ -135,21 +152,21 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         var myCarousel = oView.byId("myImage");
         var newImage = new sap.m.Image();
         var layoutData = new sap.m.FlexItemData();
-      	layoutData.setAlignSelf( sap.m.FlexAlignSelf.Stretch );
-      	newImage.setWidth("200px");
-      	newImage.setHeight("200px");
-      	newImage.setSrc("data:image/jpeg;base64," + imageData);
+        layoutData.setAlignSelf(sap.m.FlexAlignSelf.Stretch);
+        newImage.setWidth("200px");
+        newImage.setHeight("200px");
+        newImage.setSrc("data:image/jpeg;base64," + imageData);
         newImage.setLayoutData(layoutData);
         myCarousel.addPage(newImage);
     },
 
     onPhotoURISuccess: function(imageURI) {
-		var myCarousel = oView.byId("myImage");
+        var myCarousel = oView.byId("myImage");
         var newImage = new sap.m.Image();
         var layoutData = new sap.m.FlexItemData();
-    	layoutData.setAlignSelf( sap.m.FlexAlignSelf.Stretch );
+        layoutData.setAlignSelf(sap.m.FlexAlignSelf.Stretch);
         newImage.setWidth("200px");
-    	newImage.setHeight("200px");
+        newImage.setHeight("200px");
         newImage.setSrc(imageURI);
         newImage.setLayoutData(layoutData);
         myCarousel.addPage(newImage);
@@ -238,23 +255,23 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     },
 
     saveInvitation: function(nID) {
-    	
-    	var batchChanges = [];
-    	var oModel = this.getView().getModel();
+
+        var batchChanges = [];
+        var oModel = this.getView().getModel();
         var mNewInvitation = this.getView().getModel("newInvitation").getData().Invitation;
         var discountTypeId = this.getView().byId("discountType_select").getSelectedKey();
         var categortid = this.getView().byId("catrogry_select").getSelectedKey();
         // Basic payload data
         var mNewInv = {
             //替换
-        	id: nID,
+            id: nID,
             title: mNewInvitation.title,
             status: 1,
             "creator.id": "877da535455a47b893b19e9ab8a1f2c2",
             "category.id": categortid,
             "discountType.id": discountTypeId,
             total_quantity: mNewInvitation.total_quantity,
-           // discount: mNewInvitation.discount,
+            // discount: mNewInvitation.discount,
             total_money: mNewInvitation.total_money,
             return_money: mNewInvitation.return_money,
             //create_time: mNewInvitation.create_time,
@@ -268,65 +285,65 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         if (mNewInv.valid_in) {
             //mNewInv.end_time = 1;
         }
-        
-        batchChanges.push(oModel.createBatchOperation("/Invitation", "POST", mNewInv) );
-        
+
+        batchChanges.push(oModel.createBatchOperation("/Invitation", "POST", mNewInv));
+
         var invatationItem = {
-        		inv_id:  bwm.util.UtilMethod.guid(),
-        		"inv_head.id": nID,
-        		"joiner.id" : mNewInv['creator.id'],
-        		quantity: this.getView().byId("piece01").getValue(),
-        		money: this.getView().byId("dis_money").getNumber()	
+            inv_id: bwm.util.UtilMethod.guid(),
+            "inv_head.id": nID,
+            "joiner.id": mNewInv['creator.id'],
+            quantity: this.getView().byId("piece01").getValue(),
+            money: this.getView().byId("dis_money").getNumber()
         };
-        
-        batchChanges.push(oModel.createBatchOperation("/InvitationItem", "POST", invatationItem) );
-        
+
+        batchChanges.push(oModel.createBatchOperation("/InvitationItem", "POST", invatationItem));
+
         var myCarousel = this.getView().byId("myImage");
         var images = myCarousel.getPages();
-        var invPics=[];
-        for(var i=0;i<images.length;i++){
-        	if (images[i] instanceof sap.m.Image) {
-        		var imageData = '';
-        		if(images[i].getSrc().search('image/png')) {
-        			imageData = images[i].getSrc().replace("data:image/png;base64,","");
-        		}else if (images[i].getSrc().search('image/jpeg')) {
-        			imageData = images[i].getSrc().replace("data:image/jpeg;base64,","");
-        		}
-        		 
-		    	var image = {
-		    		id: bwm.util.UtilMethod.guid(),
-		    		"inv_head.id":nID,
-		    		pic_data: imageData
-		    	};
-		    	invPics.push(image);
-		    	batchChanges.push(oModel.createBatchOperation("/InvitationPicture", "POST", image) );
-        	}
+        var invPics = [];
+        for (var i = 0; i < images.length; i++) {
+            if (images[i] instanceof sap.m.Image) {
+                var imageData = '';
+                if (images[i].getSrc().search('image/png')) {
+                    imageData = images[i].getSrc().replace("data:image/png;base64,", "");
+                } else if (images[i].getSrc().search('image/jpeg')) {
+                    imageData = images[i].getSrc().replace("data:image/jpeg;base64,", "");
+                }
+
+                var image = {
+                    id: bwm.util.UtilMethod.guid(),
+                    "inv_head.id": nID,
+                    pic_data: imageData
+                };
+                invPics.push(image);
+                batchChanges.push(oModel.createBatchOperation("/InvitationPicture", "POST", image));
+            }
         };
-        
+
         oModel.addBatchChangeOperations(batchChanges);
         oModel.setUseBatch(true);
         oModel.submitBatch(
-    		jQuery.proxy(function(data) {
-    			console.log(data);
-        		oModel.refresh(); 
-				this.initializeNewInvitationData();	
-				//@TODO will navigation to the detail Invitation
-				//sap.ui.core.UIComponent.getRouterFor(this).navTo();
-				//currently, navigation to Main
-				this.onNavButtonPressed();
-				jQuery.sap.require("sap.m.MessageToast");
-				// ID of newly inserted product is available in mResponse.ID
-				this.oBusyDialog.close();
-				sap.m.MessageToast.show("Invitation '" + mNewInv.title + "' published");
-			}, this), 
-			
-			jQuery.proxy(function(err) { 
-	    		console.log(err);
-	    		this.oBusyDialog.close();
-				this.showErrorAlert("Problem publishing new invitation");  
-	          }, this)
-          );  
-      
+            jQuery.proxy(function(data) {
+                console.log(data);
+                oModel.refresh();
+                this.initializeNewInvitationData();
+                //@TODO will navigation to the detail Invitation
+                //sap.ui.core.UIComponent.getRouterFor(this).navTo();
+                //currently, navigation to Main
+                this.onNavButtonPressed();
+                jQuery.sap.require("sap.m.MessageToast");
+                // ID of newly inserted product is available in mResponse.ID
+                this.oBusyDialog.close();
+                sap.m.MessageToast.show("Invitation '" + mNewInv.title + "' published");
+            }, this),
+
+            jQuery.proxy(function(err) {
+                console.log(err);
+                this.oBusyDialog.close();
+                this.showErrorAlert("Problem publishing new invitation");
+            }, this)
+        );
+
     },
     //@TODO: Check whether it is correct?
     onPublish: function() {
@@ -340,9 +357,9 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                 this.oBusyDialog = new sap.m.BusyDialog();
             }
             this.saveInvitation(this.getView().getModel("newInvitation").getProperty("/Invitation/id"));
-/*            //@TODO: Later on this should navigate to invitation list
-            this.onNavButtonPressed();
-            sap.m.MessageToast.show("Data Saved!");*/
+            /*            //@TODO: Later on this should navigate to invitation list
+                        this.onNavButtonPressed();
+                        sap.m.MessageToast.show("Data Saved!");*/
         }
     },
     //For discount details, to maintain value X and Y
@@ -359,7 +376,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         var total_quantity = this.getView().getModel("newInvitation").getData().Invitation.total_quantity;
         var discount = this.getView().getModel("newInvitation").getData().Invitation.discount;
         var selectLable = "Buy" + " " + total_quantity + " " + "PC" + " " + discount + " " + "OFF";
-        var discLabel = sap.ui.getCore().byId("__select1");
+        var discLabel = sap.ui.getCore().byId("__xmlview2--discountType_select");
         discLabel.setValue(selectLable);
     },
     onDiscDialogClose: function() {
@@ -381,8 +398,8 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         var sMessage = "New Variant Selected: " + params.key;
         sap.m.MessageToast.show(sMessage);
     },
-    showErrorAlert : function(sMessage) {
-		jQuery.sap.require("sap.m.MessageBox");	
-		sap.m.MessageBox.alert(sMessage);				
-	}
+    showErrorAlert: function(sMessage) {
+        jQuery.sap.require("sap.m.MessageBox");
+        sap.m.MessageBox.alert(sMessage);
+    }
 });
