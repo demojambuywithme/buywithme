@@ -21,13 +21,15 @@
                                     <Toolbar>
                                         <Button text="Join"
                                                 type="Accept"
-                                                width="25%" />
+                                                width="25%"
+                                                press=".onJoin" />
                                         <!-- <ToolbarSpacer /> -->
                                         <Button icon="sap-icon://favorite"
                                                 width="25%" />
                                         <!-- <ToolbarSpacer /> -->
                                         <Button icon="sap-icon://globe"
-                                                width="25%" />
+                                                width="25%"
+                                                press=".onGlobe" />
                                         <!-- <ToolbarSpacer /> -->
                                         <Button icon="sap-icon://share-2"
                                                 width="25%" />
@@ -42,9 +44,18 @@
         <footer>
             <Toolbar>
                 <content>
-                    <Button type="Emphasized" width="33%" iconFirst="true" icon="sap-icon://list" />
-                    <Button width="33%" iconFirst="true" icon="sap-icon://map" press="toInvitationsMap"/>
-                    <Button width="34%" iconFirst="true" icon="sap-icon://person-placeholder" press="toMine"/>
+                    <Button type="Emphasized"
+                            width="33%"
+                            iconFirst="true"
+                            icon="sap-icon://list" />
+                    <Button width="33%"
+                            iconFirst="true"
+                            icon="sap-icon://map"
+                            press="toInvitationsMap" />
+                    <Button width="34%"
+                            iconFirst="true"
+                            icon="sap-icon://person-placeholder"
+                            press="toMine" />
                 </content>
             </Toolbar>
         </footer>

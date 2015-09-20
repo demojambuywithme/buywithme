@@ -57,5 +57,13 @@ bwm.view.BaseController.extend("bwm.view.Navigation", {
             targetViewType: "XML",
             transition: "slide"
         });
+    },
+    toLogon: function () {
+        this.getRouter().myNavToWithoutHash({
+            currentView: this.getView(),
+            targetViewName: "bwm.view.Logon",
+            targetViewType: "XML",
+            transition: "slide"
+        });
     }
 });

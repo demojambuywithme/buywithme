@@ -42,9 +42,13 @@ sap.ui.core.UIComponent
 								targetAggregation : "pages",
 								targetControl : "idAppControl",
 								subroutes : [ {
-									pattern : "{invitation}",
-									name : "invitation",
+									pattern : "invitationDetail/{invitation}",
+									name : "invitationDetail",
 									view : "InvitationDetail"
+								}, {
+									pattern : "invitationMap/{invitation}",
+									name : "invitationDetailMap",
+									view : "invitationDetailMap"
 								} ]
 							}, {
 								pattern : "invitationsMap",
@@ -54,13 +58,13 @@ sap.ui.core.UIComponent
 								targetControl : "idAppControl"
 							}, {
 								pattern : "invitationDetail",
-								name : "invitationDetail",
+								name : "jumpToInvitationDetail",
 								view : "InvitationDetail",
 								targetAggregation : "pages",
 								targetControl : "idAppControl"
 							}, {
 								pattern : "invitationDetailMap",
-								name : "invitationDetailMap",
+								name : "jumpToinvitationDetailMap",
 								view : "InvitationDetailMap",
 								targetAggregation : "pages",
 								targetControl : "idAppControl"
@@ -71,7 +75,7 @@ sap.ui.core.UIComponent
 								targetAggregation : "pages",
 								targetControl : "idAppControl"
 							}, {
-								pattern : "chat",
+								pattern : "chat/{invitation}",
 								name : "chat",
 								view : "Chat",
 								targetAggregation : "pages",
@@ -82,7 +86,13 @@ sap.ui.core.UIComponent
 								view : "Mine",
 								targetAggregation : "pages",
 								targetControl : "idAppControl"
-							} ]
+							},{
+								pattern : "logon",
+								name : "logon",
+								view : "Logon",
+								targetAggregation : "pages",
+								targetControl : "idAppControl"
+							}]
 						}
 					},
 					init : function() {

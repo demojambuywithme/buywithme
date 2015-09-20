@@ -19,6 +19,8 @@
                     press="toChat"/>
             <Button text="to mine"
                     press="toMine"/>
+            <Button text="to Logon"
+                    press="toLogon"/>
         </content>
     </Page>
 </core:View>
