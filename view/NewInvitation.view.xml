@@ -6,8 +6,9 @@
             <Input id="titleInput1" type="Text" placeholder="What do you want to say ..." value="{newInvitation>/Invitation/title}" textAlign="Left" class="sapUiExploredNoMarginInfo">
             </Input>
             <Panel width="auto">
-                <!-- -->
-                <VBox class="sapUiSmallMarginBottom">
+                <!-- <Image style="float" class="sapUiSmallMarginEnd" src="./pictures_cy/123.png" densityAware="true" width="113px">class="sapUiTinyMarginBottom"-->
+                
+                <VBox >
                     <HBox alignItems="Stretch">
                         <core:Icon src="sap-icon://grid" size="150%" width="30px" color="#64E4CE" class="sapUiSmallMarginEnd">
                             <core:layoutData>

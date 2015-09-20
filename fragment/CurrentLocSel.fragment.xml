@@ -1,19 +1,10 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
     <!-- <Dialog title="Select Your Location" type="Message" class="sapUiExploredNoMarginInfo"> -->
-        <SelectDialog noDataText="No Products Found" title="Select Your Location" search="handleSearch" confirm="handleClose" close="handleClose">
-            <!-- 
-    items="{
-      path: '/ProductCollection'
-    }" >
-    <StandardListItem
-      title="{Name}"
-      description="{ProductId}"
-      icon="{ProductPicUrl}" 
-      iconDensityAware="false"
-      iconInset="false"
-      type="Active" />
-  -->
-            <core:Item key="item1" text="name1" />
-            <core:Item key="item2" text="name2" />
-        </SelectDialog>
+    <SelectDialog noDataText="No Products Found" title="Select Your Location" search="handleSearch" confirm="handleClose" close="handleClose" items="{path: 'locListDialog>/'}">
+        <items>
+            <StandardListItem title="{locListDialog>locationName}" description="{locListDialog>locationName}" iconDensityAware="false" iconInset="false" type="Active"/>
+        </items>
+        <!--  items="{path: 'locListDialog>/'}" 
+                  <StandardListItem title="{locationName}" description="{locationName}" iconDensityAware="false" iconInset="false" type="Active"/>-->
+    </SelectDialog>
 </core:FragmentDefinition>

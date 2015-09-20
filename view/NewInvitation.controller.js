@@ -1,6 +1,10 @@
 jQuery.sap.declare("bwm.view.NewInvitation");
 jQuery.sap.require("bwm.view.BaseController");
 jQuery.sap.require("bwm.util.UtilMethod");
+var curLocList;
+var curLongitude;
+var curLatitude;
+var oView;
 
 bwm.view.BaseController.extend("bwm.view.NewInvitation", {
 
@@ -56,40 +60,14 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         sap.m.MessageToast.show(sMessage);
 
         var map = new BMap.Map("allmap");
+        //var geoc = new BMap.Geocoder();
+        /*
         //@TODO 替换成获取真实当前地址
         var point = new BMap.Point(121.608265, 31.20729); //Sap labs China
-        // 
-        var geoc = new BMap.Geocoder();
-        //@TODO 测试，拿到当前输入搜索地址列表
-        var ac = new BMap.Autocomplete( //建立一个自动完成的对象
-            {
-                "input": "静安寺",
-                "location": map
-            });
-        //@TODO: 关键字检索功能
-        //var map = new BMap.Map("allmap");
-        //map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
 
-        /*
-        var options = {
-            onSearchComplete: function(results) {
-                // 判断状态是否正确
-                if (local.getStatus() == 0 ) {
-                    var s = [];
-                    for (var i = 0; i < results.getCurrentNumPois(); i++) {
-                        s.push(results.getPoi(i).title + ", " + results.getPoi(i).address);
-                    }
-                    //document.getElementById("r-result").innerHTML = s.join("<br/>");
-                }
-            }
-        };
-        var local = new BMap.LocalSearch(map, options);
-        local.search("厕所");
-        */
-
-        //测试结束
         var pt = point;
         var abc = this.getView().byId("link01");
+
         geoc.getLocation(pt, function(rs) {
             var addComp = rs.addressComponents;
             var locDetail = addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
@@ -97,25 +75,86 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
             var olink1 = sap.ui.getCore().byId("__xmlview2--link01");
             //var olink1 = this.getView().byId("link01");
             olink1.setText(locDetail);
+
+            jQuery.ajax({
+                //type: "post",
+                url: "http://api.map.baidu.com/geocoder/v2/?ak=CD70726d5902ec38d1e1a9e7d249d923&callback=renderReverse&location=31.20729,121.608265&output=json&pois=1",
+                dataType: "jsonp",
+                async: false,
+                success: function(data, textStatus, jqXHR) {
+                    currentLoc = new sap.ui.model.json.JSONModel();
+                    currentLoc.setData(data);
+                    //sap.ui.getCore().setModel(invitation);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("Oh no, an error occurred");
+                }
+            });
         });
         sap.m.MessageToast.show(sMessage);
+        */
         //http://api.map.baidu.com/place/v2/suggestion?query=%E5%A4%A9&region=%E4%B8%8A%E6%B5%B7%E5%B8%82&output=json&ak=CD70726d5902ec38d1e1a9e7d249d923
         //http://api.map.baidu.com/geocoder/v2/?ak=CD70726d5902ec38d1e1a9e7d249d923&callback=renderReverse&location=39.983424,116.322987&output=json&pois=1
-        jQuery.ajax({
-            //type: "post",
-            url: "http://api.map.baidu.com/geocoder/v2/?ak=CD70726d5902ec38d1e1a9e7d249d923&callback=renderReverse&location=39.983424,116.322987&output=json&pois=1",
-            dataType: "jsonp",
-            async: false,
-            success: function(data, textStatus, jqXHR) {
-                currentLoc = new sap.ui.model.json.JSONModel();
-                currentLoc.setData(data);
-                //sap.ui.getCore().setModel(invitation);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert("Oh no, an error occurred");
-            }
-        });
+
         //var curLoc = this.getView().getModel("currentLoc").getData();
+        var geolocation = new BMap.Geolocation();
+        var oView = this;
+        geolocation.getCurrentPosition(function(r) {
+            if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                curLongitude = r.point.lng;
+                curLatitude = r.point.lat;
+                jQuery.ajax({
+                    //type: "post",
+                    url: "http://api.map.baidu.com/geocoder/v2/?ak=CD70726d5902ec38d1e1a9e7d249d923&callback=renderReverse&location=31.20729,121.608265&output=json&pois=1",
+                    dataType: "jsonp",
+                    async: false,
+                    success: function(data, textStatus, jqXHR) {
+                        var locList = [];
+                        var locSingle;
+                        var result = data.result.pois;
+
+                        curLocList = data.result.pois.map(function(el) {
+                            return {
+                                locationName: el.name
+                            };
+                        });
+                        /*
+                        for (var i = 0; i < result.length - 1; i++) {
+                            locList.push({
+                                locationName: result[i].name
+                            });
+                        };
+                        */
+                        var loclisttest = [];
+                        var a1 = { locationName:"abc"};
+                        var a2 = { locationName:"a123"};
+                        //a1.locationName = "abc";
+                        loclisttest.push(a1);
+                        loclisttest.push(a2);
+                        //CY
+                        //Below part is to rasie a popup window to show all possible locations
+                        if (oView.oCurLocDialog) {
+                            oView.oCurLocDialog.destroy();
+                        }
+
+                        var aModel = new sap.ui.model.json.JSONModel(curLocList);
+                        // oView.getView().setModel(new sap.ui.model.json.JSONModel(), "locListDialog");
+                        // oView.getView().getModel("locListDialog").setData(loclisttest);
+                        oView.oCurLocDialog = sap.ui.xmlfragment("bwm.fragment.CurrentLocSel", oView);
+                        oView.oCurLocDialog.setModel(aModel, "locListDialog");
+                        oView.getView().addDependent(this.oCurLocDialog);
+                        oView.oCurLocDialog.open();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert("Oh no, an error occurred");
+                    }
+                });
+            } else {
+                alert('failed' + this.getStatus());
+            }
+        }, {
+            enableHighAccuracy: true
+        })
     },
     //Dialog with a selection list to select a accurate location
     handleLocation1: function(oEvent) {
@@ -277,8 +316,8 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
             //create_time: mNewInvitation.create_time,
             //valid_in: mNewInvitation.valid_in,
             //end_time: mNewInvitation.end_time,
-            longitude: mNewInvitation.longitude,
-            latitude: mNewInvitation.latitude,
+            longitude: curLongitude,
+            latitude: curLatitude,
             address: mNewInvitation.address
         };
 
@@ -382,6 +421,9 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     onDiscDialogClose: function() {
         this.oDiscDetailDialog.destroy();
     },
+
+    //For location list selection close
+
     /*
     onCancel : function() {
         sap.ui.core.UIComponent.getRouterFor(this).backWithoutHash(this.getView());
