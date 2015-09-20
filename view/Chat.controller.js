@@ -14,7 +14,7 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
           var chatModel = new sap.ui.json.JSONModel();
 
     	  var oRouter = this.getRouter();
-  		  oRouter.getRoute("invitation").attachMatched(this.onRouteMatched, this);
+  		  oRouter.getRoute("chat").attachMatched(this.onRouteMatched, this);
     
       },
 
