@@ -1,60 +1,72 @@
-<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:com="sap.ui.commons" xmlns:l="sap.ui.layout" xmlns="sap.m"
-	xmlns:ux3="sap.ui.ux3" controllerName="bwm.view.Mine" xmlns:html="http://www.w3.org/1999/xhtml">
-	<Page title="Mine" showNavButton="true" navButtonPress="onNavButtonPressed">
+<core:View xmlns:core="sap.ui.core"
+           xmlns:mvc="sap.ui.core.mvc"
+           xmlns:com="sap.ui.commons"
+           xmlns:l="sap.ui.layout"
+           xmlns="sap.m"
+           xmlns:ux3="sap.ui.ux3"
+           controllerName="bwm.view.Mine"
+           xmlns:html="http://www.w3.org/1999/xhtml">
+    <Page title="Mine"
+          showNavButton="true"
+          navButtonPress="onNavButtonPressed">
         <content>
-			<!-- <com:TabStrip> <com:Tab title="Tab1" text="Tab1"> <com:TextArea value="123"> 
-				</com:TextArea> </com:Tab> <com:Tab title="Tab2" text="Tab2"> <com:TextArea 
-				value="234"> </com:TextArea> </com:Tab> </com:TabStrip> -->
-			<ux3:CollectionInspector fitParent="false">
-				<ux3:collections>
-					<ux3:Collection title="Invitation Status">
-						<ux3:items>
-							<core:Item text="Open">
-							</core:Item>
-							<core:Item text="Closed">
-							</core:Item>
-							<core:Item text="Finished">
-							</core:Item>
-							<core:Item text="Invalid">
-							</core:Item>
-						</ux3:items>
-					</ux3:Collection>
-				</ux3:collections>
-				<ux3:content>
-					<!-- <ux3:ThingViewer type="Account" firstTitle="Mine Test"> </ux3:ThingViewer> -->
-					<List headerText="Invitation List"
-					 items="{ path: '/Invitation' }">
-						<CustomListItem>
-							<content>
-                            <VBox>
-                                <items>
-                                    <core:Fragment fragmentName="bwm.fragment.InvitationOverview"
-                                                   type="XML" />
-                                    <Toolbar class="sapUiMediumMarginTop">
-										<Button text="Join" type="Accept" />
-										<ToolbarSpacer />
-										<Button icon="sap-icon://favorite" />
-										<ToolbarSpacer />
-										<Button icon="sap-icon://globe" />
-										<ToolbarSpacer />
-										<Button icon="sap-icon://share-2" />
-									</Toolbar>
-                                </items>
-                            </VBox>
-                        </content>
-		
-						</CustomListItem>
-					</List>
-				</ux3:content>
-			</ux3:CollectionInspector>
-		</content>
+            <!-- <com:TabStrip> <com:Tab title="Tab1" text="Tab1"> <com:TextArea value="123"> 
+                                </com:TextArea> </com:Tab> <com:Tab title="Tab2" text="Tab2"> <com:TextArea 
+                                value="234"> </com:TextArea> </com:Tab> </com:TabStrip> -->
+            <ux3:CollectionInspector fitParent="false">
+                <ux3:collections>
+                    <ux3:Collection title="Invitation Status">
+                        <ux3:items>
+                            <core:Item text="Open"></core:Item>
+                            <core:Item text="Closed"></core:Item>
+                            <core:Item text="Finished"></core:Item>
+                            <core:Item text="Invalid"></core:Item>
+                        </ux3:items>
+                    </ux3:Collection>
+                </ux3:collections>
+                <ux3:content>
+                    <!-- <ux3:ThingViewer type="Account" firstTitle="Mine Test"> </ux3:ThingViewer> -->
+                    <List headerText="Invitation List"
+                          items="{ path: '/Invitation' }">
+                        <CustomListItem>
+                            <content>
+                                <VBox>
+                                    <items>
+                                        <core:Fragment fragmentName="bwm.fragment.InvitationOverview"
+                                                       type="XML" />
+                                        <Toolbar class="sapUiMediumMarginTop">
+                                            <Button text="Join"
+                                                    type="Accept" />
+                                            <ToolbarSpacer />
+                                            <Button icon="sap-icon://favorite" />
+                                            <ToolbarSpacer />
+                                            <Button icon="sap-icon://globe" />
+                                            <ToolbarSpacer />
+                                            <Button icon="sap-icon://share-2" />
+                                        </Toolbar>
+                                    </items>
+                                </VBox>
+                            </content>
+                        </CustomListItem>
+                    </List>
+                </ux3:content>
+            </ux3:CollectionInspector>
+        </content>
         <footer>
             <Toolbar>
                 <content>
-                    <Button width="33%" iconFirst="true" icon="sap-icon://list"/>
-                    <Button width="33%" iconFirst="true" icon="sap-icon://map"/>
-                    <Button type="Emphasized" width="34%" iconFirst="true" icon="sap-icon://person-placeholder"/>
+                    <Button width="33%"
+                            iconFirst="true"
+                            icon="sap-icon://list" 
+                            press=".toInvitations"/>
+                    <Button width="33%"
+                            iconFirst="true"
+                            icon="sap-icon://map" 
+                            press=".toInvitationsMap"/>
+                    <Button type="Emphasized"
+                            width="34%"
+                            iconFirst="true"
+                            icon="sap-icon://person-placeholder" />
                 </content>
             </Toolbar>
         </footer>

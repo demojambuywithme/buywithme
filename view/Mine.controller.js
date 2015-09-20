@@ -38,4 +38,12 @@ bwm.view.BaseController.extend("bwm.view.Mine", {
     //
     //  }
 
+    toInvitations: function(){
+        this.getRouter().navTo("invitations");
+    },
+
+    toInvitationsMap: function(){
+        this.getRouter().navTo("invitationsMap");
+    }
+
 });
