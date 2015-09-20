@@ -430,8 +430,13 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     },
     */
     onNavButtonPressed: function() {
-        this.getRouter().backWithoutHash(this.getView());
-        sap.ui.core.UIComponent.getRouterFor(this).backWithoutHash(this.getView());
+        //this.getRouter().backWithoutHash(this.getView());
+        this.getRouter().myNavToWithoutHash({
+            currentView: this.getView(),
+            targetViewName: "bwm.view.Invitations",
+            targetViewType: "XML",
+            transition: "slide"
+        });
     },
 
     onSelect: function(oEvent) {
