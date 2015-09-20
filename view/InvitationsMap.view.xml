@@ -1,54 +1,78 @@
-<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:layout="sap.ui.layout" xmlns="sap.m" controllerName="bwm.view.InvitationsMap"
-	xmlns:html="http://www.w3.org/1999/xhtml">
-	<Page title="Invitations Map" showNavButton="true" navButtonPress="onNavButtonPressed">
-		<subHeader>
-			<Bar design="sap.m.BarDesign.SubHeader">
-				<contentLeft>
-					<HBox>
-						<!-- <Label text="Distance">
-						</Label>  -->
-						<Select id="dist" change="selChange" autoAdjustWidth="true">
-							<core:Item text="500米" key="500" />
-							<core:Item text="1000米" key="1000" />
-							<core:Item text="1500米" key="1500" />
-							<core:Item text="2000米" key="2000" />
-						</Select>
-					</HBox>
-				</contentLeft>
-				<contentMiddle>
-					<HBox>
-						<!-- <Label text="Category">
-						</Label> -->
-						<Select id="cate" items="{path: '/'}" change="selChange"
-							autoAdjustWidth="true">
-							<core:Item text="{description}" key="{id}" />
-						</Select>
-					</HBox>
-				</contentMiddle>
-				<contentRight>
-					<HBox>
-						<!-- <Label text="Discount Type">
-						</Label>  -->
-						<Select id="disc" items="{path: '/'}" change="selChange"
-							autoAdjustWidth="true">
-							<core:Item text="{description}" key="{id}" />
-						</Select>
-					</HBox>
-				</contentRight>
-			</Bar>
-		</subHeader>
-		<content>
-
-		</content>
-		<footer>
-	            <Toolbar>
-	                <content>
-	                    <Button type="Emphasized" width="33%" iconFirst="true" icon="sap-icon://list" />
-	                    <Button width="33%" iconFirst="true" icon="sap-icon://map" press="toInvitationsMap"/>
-	                    <Button width="34%" iconFirst="true" icon="sap-icon://person-placeholder" press="toMine"/>
-	                </content>
-	            </Toolbar>
-	        </footer>
-	</Page>
+<core:View xmlns:core="sap.ui.core"
+           xmlns:mvc="sap.ui.core.mvc"
+           xmlns:layout="sap.ui.layout"
+           xmlns="sap.m"
+           controllerName="bwm.view.InvitationsMap"
+           xmlns:html="http://www.w3.org/1999/xhtml">
+    <Page title="Invitations Map"
+          showNavButton="true"
+          navButtonPress="onNavButtonPressed">
+        <subHeader>
+            <Bar design="sap.m.BarDesign.SubHeader">
+                <contentLeft>
+                    <HBox>
+                        <!-- <Label text="Distance">
+                                                </Label>  -->
+                        <Select id="dist"
+                                change="selChange"
+                                autoAdjustWidth="true">
+                            <core:Item text="500&#231;&#177;&#179;"
+                                       key="500" />
+                            <core:Item text="1000&#231;&#177;&#179;"
+                                       key="1000" />
+                            <core:Item text="1500&#231;&#177;&#179;"
+                                       key="1500" />
+                            <core:Item text="2000&#231;&#177;&#179;"
+                                       key="2000" />
+                        </Select>
+                    </HBox>
+                </contentLeft>
+                <contentMiddle>
+                    <HBox>
+                        <!-- <Label text="Category">
+                                                </Label> -->
+                        <Select id="cate"
+                                items="{path: '/'}"
+                                change="selChange"
+                                autoAdjustWidth="true">
+                            <core:Item text="{description}"
+                                       key="{id}" />
+                        </Select>
+                    </HBox>
+                </contentMiddle>
+                <contentRight>
+                    <HBox>
+                        <!-- <Label text="Discount Type">
+                                                </Label>  -->
+                        <Select id="disc"
+                                items="{path: '/'}"
+                                change="selChange"
+                                autoAdjustWidth="true">
+                            <core:Item text="{description}"
+                                       key="{id}" />
+                        </Select>
+                    </HBox>
+                </contentRight>
+            </Bar>
+        </subHeader>
+        <content></content>
+        <footer>
+            <Toolbar>
+                <content>
+                    <Button width="33%"
+                            iconFirst="true"
+                            icon="sap-icon://list" 
+                            press=".toInvitations"/>
+                    <Button type="Emphasized"
+                            width="33%"
+                            iconFirst="true"
+                            icon="sap-icon://map" />
+                    <Button width="34%"
+                            iconFirst="true"
+                            icon="sap-icon://person-placeholder"
+                            press="toMine" />
+                </content>
+            </Toolbar>
+        </footer>
+    </Page>
 </core:View>

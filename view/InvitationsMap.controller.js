@@ -241,6 +241,12 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
     	circle = new BMap.Circle(currentPoint, keyDist);
     	map.addOverlay(circle);
     	circle.show();
+    },
+    toInviations: function(){
+		this.getRouter().navTo("invitations");
+    },
+    toMine: function(){
+		this.getRouter().navTo("mine");
     }
     /**
      * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
