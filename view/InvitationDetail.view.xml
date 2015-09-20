@@ -1,8 +1,3 @@
-<!-- <core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" 
-	controllerName="bwm.view.InvitationDetail" xmlns:html="http://www.w3.org/1999/xhtml"> 
-	<Page title="Invitation Detail" showNavButton="true" navButtonPress="onNavButtonPressed"> 
-	<content> </content> </Page> </core:View> -->
-
 <core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout" xmlns="sap.m" controllerName="bwm.view.InvitationDetail"
 	xmlns:html="http://www.w3.org/1999/xhtml">
@@ -11,26 +6,29 @@
 		<headerContent>
 			<Button icon="sap-icon://discussion" press="onNavToChat" />
 		</headerContent>
-		<!-- <l:HorizontalLayout class="sapUiSmallMargin"> <VBox> <items> <core:Fragment 
-			fragmentName="bwm.fragment.InvitationOverview" type="XML" /> </items> </VBox> 
-			</l:HorizontalLayout> -->
 		<VBox>
 			<items>
 				<core:Fragment fragmentName="bwm.fragment.InvitationOverview"
 					type="XML" />
 			</items>
 		</VBox>
-
-		<Bar>
+		<!-- <Carousel class="sapUiContentPadding" loop="true" width= "100%" height="20em"> 
+			<pages> <Image src="image\IMG_2218.JPG" densityAware="true" height = "20em" 
+			width ="100%"> </Image> <Image src="image\IMG_2220.JPG" densityAware="true" 
+			height = "20em" width ="100%"> <layoutData> <FlexItemData growFactor="1" 
+			/> </layoutData> </Image> </pages> </Carousel> -->
+		<!-- <Bar> <contentLeft> <core:Icon src="sap-icon://map" class="size1" 
+			color="#031E48" > <core:layoutData> <FlexItemData growFactor="1" /> </core:layoutData> 
+			</core:Icon> <Label text="Huaihai Road, GAP" textAlign="left"></Label> </contentLeft> 
+			</Bar> -->
+		<Bar binding="{path: 'Categroy'}">
 			<contentLeft>
 				<core:Icon src="sap-icon://grid" class="size1" color="#031E48">
-					<core:layoutData>
-						<FlexItemData growFactor="1" />
-					</core:layoutData>
+					<!-- <core:layoutData> <FlexItemData growFactor="1" /> </core:layoutData> -->
 				</core:Icon>
 			</contentLeft>
 			<contentMiddle>
-				<Label text="Clothing -> T-shirt"></Label>
+				<Label text="{description}"></Label>
 			</contentMiddle>
 		</Bar>
 		<Bar>
@@ -43,34 +41,41 @@
 				</core:Icon>
 			</contentLeft>
 			<contentMiddle>
-				<Label text="Buy 5 PC 40% Discount"></Label>
+				<!-- <Label id="discountType" text="{ parts: [ {path:'total_quantity'}, 
+					{path:'discount'}, {path:'DiscountType/dis_category'} ], formatter:'discountFormatter' 
+					}"></Label> -->
+				<Label
+					text="Buy {total_quantity} {= ${DiscountType/dis_category} === '01' ? ('Return '+ ${discount} ): ('PCs '+ (${discount}*100)+'%'+' Off')}">
+				</Label>
 			</contentMiddle>
 		</Bar>
+
 		<GrowingList threshold="10" triggerText="more"
-			scrollToLoad="true">
+			scrollToLoad="true" items="{ path: 'InvitationItems' }">
 			<items>
-				<CustomListItem>
+				<CustomListItem class="sapUiTinyMarginBottom">
 					<content>
 						<HBox>
 							<items>
-								<Image src="image\pic.jpg" width="50px" height="50px" />
-								<VBox>
+								<HBox width="200px">
 									<items>
-										<RatingIndicator value="4" />
-										<Label text="F, Lastname" />
+										<core:Fragment fragmentName="bwm.fragment.Joiner"
+											type="XML" />
 									</items>
-								</VBox>
+								</HBox>
+								<HBox>
+								<Button icon ="sap-icon://outgoing-call" 
+								        press = "callOut">
+								</Button>
+								</HBox>
 								<VBox>
 									<items>
-										<HBox>
-											<items>
-												<core:Icon src="sap-icon://time-entry-request" />
-												<Label text="45 Minutes Left" />
-											</items>
-										</HBox>
-										<ProgressIndicator class="sapUiSmallMarginBottom"
-											percentValue="80" displayValue="4/5" showValue="true" state="None"
-											height="20px" />
+										<Label text=" {quantity} PCs {money} RMB" design="Bold"
+											class="sapUiTinyMarginTop"
+											textAlign="Left" />
+										<Label text=" Disc. Price {money} RMB" design="Bold"
+											class="sapUiTinyMarginTop"
+											textAlign="Left" />
 									</items>
 								</VBox>
 							</items>
@@ -79,13 +84,25 @@
 				</CustomListItem>
 			</items>
 		</GrowingList>
+		<Toolbar class="sapUiMediumMarginTop">
+			<Text text="I Want"></Text>
+			<Input id="itemQuantity" value="10" width="60px" textAlign="Center"
+				fieldWidth="60%" />
+			<Text text="PC"></Text>
+			<Input id="itemCost" value="100.00" width="60px" textAlign="Center"
+				fieldWidth="60%" liveChange="onChangeValue" />
+			<Text text="RMB"></Text>
+			<Text id="actualCost" width="60px" textAlign="Center"
+				fieldWidth="60%" />
+			<Text text="RMB"></Text>
+		</Toolbar>
 		<footer>
 			<Toolbar class="sapUiMediumMarginTop">
-				<Button text="Accept" type="Accept" />
+				<Button icon="sap-icon://add-activity-2" press="onJoinInvitation" />
 				<ToolbarSpacer />
 				<Button icon="sap-icon://favorite" />
 				<ToolbarSpacer />
-				<Button icon="sap-icon://globe" />
+				<Button icon="sap-icon://globe" press="onNavToMap" />
 				<ToolbarSpacer />
 				<Button icon="sap-icon://share-2" />
 			</Toolbar>
