@@ -8,9 +8,15 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
      * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
      * @memberOf bwm.view.home
      */
-    //  onInit: function() {
-    //
-    //  },
+      onInit: function() {
+
+          //initialize a json model for chat history
+          var chatModel = new sap.ui.json.JSONModel();
+
+    	  var oRouter = this.getRouter();
+  		  oRouter.getRoute("invitation").attachMatched(this.onRouteMatched, this);
+    
+      },
 
     /**
      * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
@@ -38,4 +44,22 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
     //
     //  }
 
+      onRouteMatched : function (oEvent) {
+  		var oArgs, oView;
+  		oArgs = oEvent.getParameter("arguments");
+  		oView = this.getView();
+
+  		oView.bindElement({
+  			path : "/"+oArgs.invitation,
+  			events : {
+  				change: this.onBindingChange.bind(this),
+  				dataRequested: function (oEvent) {
+  					oView.setBusy(true);
+  				},
+  				dataReceived: function (oEvent) {
+  					oView.setBusy(false);
+  				}
+  			}
+  		});
+  	},
 });
