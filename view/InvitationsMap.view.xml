@@ -42,17 +42,13 @@
 
 		</content>
 		<footer>
-			<Bar design="sap.m.BarDesign.Footer">
-				<contentLeft>
-					<Button text="New Invitation"></Button>
-				</contentLeft>
-				<contentMiddle>
-					<Button text="Join Invitation"></Button>
-				</contentMiddle>
-				<contentRight>
-					<Button text="Mine"></Button>
-				</contentRight>
-			</Bar>
-		</footer>
+	            <Toolbar>
+	                <content>
+	                    <Button type="Emphasized" width="33%" iconFirst="true" icon="sap-icon://list" />
+	                    <Button width="33%" iconFirst="true" icon="sap-icon://map" press="toInvitationsMap"/>
+	                    <Button width="34%" iconFirst="true" icon="sap-icon://person-placeholder" press="toMine"/>
+	                </content>
+	            </Toolbar>
+	        </footer>
 	</Page>
 </core:View>
