@@ -242,7 +242,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
     	map.addOverlay(circle);
     	circle.show();
     },
-    toInviations: function(){
+    toInvitations: function(){
 		this.getRouter().navTo("invitations");
     },
     toMine: function(){
