@@ -47,19 +47,6 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
       onRouteMatched : function (oEvent) {
   		var oArgs, oView;
   		oArgs = oEvent.getParameter("arguments");
-  		oView = this.getView();
-
-  		oView.bindElement({
-  			path : "/"+oArgs.invitation,
-  			events : {
-  				change: this.onBindingChange.bind(this),
-  				dataRequested: function (oEvent) {
-  					oView.setBusy(true);
-  				},
-  				dataReceived: function (oEvent) {
-  					oView.setBusy(false);
-  				}
-  			}
-  		});
+        this.invitationId = oArgs.invitation;
   	},
 });
