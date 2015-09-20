@@ -6,6 +6,10 @@ var selCate;
 var selDisc;
 var circle;
 var markers;
+var sContent =
+	"<div id='infoWin'>"+ 
+	"</div>";
+var infoWindow = new BMap.InfoWindow(sContent);
 
 bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 	
@@ -87,10 +91,13 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 				var mk = new BMap.Marker(r.point);
 				currentPoint = r.point;
 				//mk.setTitle("test");
-				mk.setLabel(new BMap.Label("My Position"));
+				mk.setTitle("My Position");
+				var iconm = new BMap.Icon('image/myPosition.ico', new BMap.Size(32,32));
+				mk.setIcon(iconm);
 				map.addOverlay(mk);
 				map.panTo(r.point);
-				alert('您的位置：'+r.point.lng+','+r.point.lat);
+				//alert('您的位置：'+r.point.lng+','+r.point.lat);
+				
 				var keyDist = selDist.getSelectedKey();
 				var keyCate = selCate.getSelectedKey();
 				var keyDisc = selDisc.getSelectedKey();
@@ -107,12 +114,41 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 					}
 					var invPoint = new BMap.Point(invitation.oData[i].longitude, invitation.oData[i].latitude);
 					var dist = map.getDistance(currentPoint, invPoint).toFixed(2);
-					if (dist <= keyDist 
+					if (parseFloat(dist) <= parseFloat(keyDist) 
 							& cate == keyCate 
 							& disc == keyDisc){
 						//var invPoint = new BMap.Point(invitation.oData[i].latitude,invitation.oData[i].longtitude);
 						var marker = new BMap.Marker( invPoint );
-						marker.setLabel(new BMap.Label(invitation.oData[i].title));
+						//marker.setLabel(new BMap.Label(invitation.oData[i].title));
+						marker.setTitle(invitation.oData[i].title);
+						if (keyCate == '0550223232fd488db699a7ea9a9fdde0'){
+							marker.setIcon('image/sports.ico');
+						};
+						if (keyCate == 'a8d3fea970754d6fa8a4aeb8bf3dbaed'){
+							marker.setIcon('image/clothes.ico');
+						};
+						if (keyCate == 'cfe2733e8cbd408db39a5371ab6137ce'){
+							marker.setIcon('image/food.ico');
+						};
+						
+						marker.addEventListener("click", function(evt){          
+							   this.openInfoWindow(infoWindow);
+							   //图片加载完毕重绘infowindow
+							   var infoPage = sap.ui.view({viewName:"bwm.view.InfoWindow", type:sap.ui.core.mvc.ViewType.XML});
+							   var title = evt.target.getTitle();
+							   for(k=0; k<invitation.oData.length; k++){
+								   if(title == invitation.oData[k].title){
+									   infoPage.setModel(new sap.ui.model.json.JSONModel(invitation.oData[k]));
+									   break;
+								   }
+							   }
+							   infoPage.placeAt('infoWin');
+							   //infoWindow.redraw(); 
+							   //document.getElementById('infoWin').onload = function (){
+								   //alert('open');
+								   //infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+							   //};
+							});
 						map.addOverlay(marker);
 						//markers.push(marker);
 					}
@@ -133,7 +169,9 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
     	circle.remove();
     	
     	var mk = new BMap.Marker(currentPoint);
-		mk.setLabel(new BMap.Label("My Position"));
+		mk.setTitle("My Position");
+		var iconm = new BMap.Icon('image/myPosition.ico', new BMap.Size(32,32));
+		mk.setIcon(iconm);
 		map.addOverlay(mk);
 		
     	var keyDist = selDist.getSelectedKey();
@@ -150,14 +188,53 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 					disc = invitation.oData[i][j];
 				}
 			}
+			var invData = invitation.oData[i];
 			var invPoint = new BMap.Point(invitation.oData[i].longitude, invitation.oData[i].latitude);
 			var dist = map.getDistance(currentPoint, invPoint).toFixed(2);
-			if (dist <= keyDist 
+			if (parseFloat(dist) <= parseFloat(keyDist)
 					& cate == keyCate 
 					& disc == keyDisc){
 				//var invPoint = new BMap.Point(invitation.oData[i].latitude,invitation.oData[i].longtitude);
+				//var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map, autoViewport: false}});
+				//walking.search(currentPoint, invPoint);
 				var marker = new BMap.Marker( invPoint );
-				marker.setLabel(new BMap.Label(invitation.oData[i].title+" "+invitation.oData[i].valid_in+"/"+invitation.oData[i].total_quantity));
+				//marker.setLabel(new BMap.Label(invitation.oData[i].title));
+				marker.setTitle(invitation.oData[i].title);
+				if (keyCate == '0550223232fd488db699a7ea9a9fdde0'){
+					var icons = new BMap.Icon('http://localhost:8080/bwm/image/sports.ico', new BMap.Size(32,32));
+					marker.setIcon(icons);
+				};
+				if (keyCate == 'a8d3fea970754d6fa8a4aeb8bf3dbaed'){
+					var iconc = new BMap.Icon('http://localhost:8080/bwm/image/clothes.ico', new BMap.Size(32,32));
+					marker.setIcon(iconc);
+				};
+				if (keyCate == 'cfe2733e8cbd408db39a5371ab6137ce'){
+					var iconf = new BMap.Icon('http://localhost:8080/bwm/image/food.ico', new BMap.Size(32,32));
+					marker.setIcon(iconf);
+				};
+				marker.addEventListener("click", function(evt){          
+				   //var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map, autoViewport: false}});
+				   //walking.search(currentPoint, evt.target.getPosition());
+				   this.openInfoWindow(infoWindow);
+				   //图片加载完毕重绘infowindow
+				   infoWindow.setHeight(300);
+				   var infoPage = sap.ui.view({viewName:"bwm.view.InfoWindow", type:sap.ui.core.mvc.ViewType.XML});
+				   var title = evt.target.getTitle();
+				   for(k=0; k<invitation.oData.length; k++){
+					   if(title == invitation.oData[k].title){
+						   infoPage.setModel(new sap.ui.model.json.JSONModel(invitation.oData[k]));
+						   break;
+					   }
+				   }
+				   //infoPage.getController();
+				   infoPage.placeAt('infoWin');
+				   
+				   //infoWindow.redraw(); 
+				   //document.getElementById('infoWin').onload = function (){
+					   //alert('open');
+					   //infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+				   //};
+				});
 				map.addOverlay(marker);
 			}
 		};
