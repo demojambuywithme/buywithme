@@ -1,0 +1,24 @@
+<core:FragmentDefinition
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+    <HBox binding="{path: 'ItemParticipator'}" >
+        <items>
+            <Image binding = "{path:'MyAvatar'}"
+            		src="{
+                    		path: 'pic_data',
+							formatter: 'bwm.util.Formatter.getImageSrc'}"
+                    width="50px"
+                    height="50px"/>
+            <VBox>
+                <items>
+                    <RatingIndicator value="{rate}" 
+                    				maxValue="5"
+                    			 	enabled = "false"	/>
+                    <Label text="{name}"/>
+                </items>
+            </VBox>
+        </items>
+    </HBox>
+</core:FragmentDefinition>   
