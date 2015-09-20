@@ -3,9 +3,10 @@
           xmlns:core="sap.ui.core"
           xmlns="sap.m">
     <Page title="{i18n&gt;invitationsTitle}"
-          showNavButton="true"
-          showFooter="true"
-          navButtonPress="onNavButtonPressed">
+          showFooter="true" >
+		<headerContent>
+			<Button icon="sap-icon://add" press=".onAdd"/>
+		</headerContent>
         <content>
             <GrowingList threshold="10"
                          triggerText="more"

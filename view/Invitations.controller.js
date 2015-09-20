@@ -9,7 +9,6 @@ bwm.view.BaseController.extend("bwm.view.Invitations", {
 	onBeforeRendering : function() {
 	},
 	onAfterRendering : function() {
-
 	},
 	getRouter : function() {
 		return sap.ui.core.UIComponent.getRouterFor(this);
@@ -31,5 +30,8 @@ bwm.view.BaseController.extend("bwm.view.Invitations", {
 		this.getRouter().navTo("invitationDetailMap", {
 			invitation : oItem.getBindingContext().getPath().substr(1),
 		});
-	}
+	},
+    onAdd: function(){
+		this.getRouter().navTo("newInvitation");
+    }
 });
