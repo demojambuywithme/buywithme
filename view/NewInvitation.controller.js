@@ -126,8 +126,12 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                         };
                         */
                         var loclisttest = [];
-                        var a1 = { locationName:"abc"};
-                        var a2 = { locationName:"a123"};
+                        var a1 = {
+                            locationName: "abc"
+                        };
+                        var a2 = {
+                            locationName: "a123"
+                        };
                         //a1.locationName = "abc";
                         loclisttest.push(a1);
                         loclisttest.push(a2);
@@ -430,13 +434,15 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     },
     */
     onNavButtonPressed: function() {
+        this.getRouter().navTo("invitations");
+        
         //this.getRouter().backWithoutHash(this.getView());
-        this.getRouter().myNavToWithoutHash({
-            currentView: this.getView(),
-            targetViewName: "bwm.view.Invitations",
-            targetViewType: "XML",
-            transition: "slide"
-        });
+        // this.getRouter().myNavToWithoutHash({
+        //     currentView: this.getView(),
+        //     targetViewName: "bwm.view.Invitations",
+        //     targetViewType: "XML",
+        //     transition: "slide"
+        // });
     },
 
     onSelect: function(oEvent) {
