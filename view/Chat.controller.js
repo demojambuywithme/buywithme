@@ -11,7 +11,7 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
       onInit: function() {
 
           //initialize a json model for chat history
-          var chatModel = new sap.ui.json.JSONModel();
+          //var chatModel = new sap.ui.json.JSONModel();
 
     	  var oRouter = this.getRouter();
   		  oRouter.getRoute("chat").attachMatched(this.onRouteMatched, this);

@@ -27,11 +27,11 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 	 */
 
 	onInit : function() {
-		var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-		oRouter.getRoute("invitation").attachPatternMatched(
-				this._onObjectMatched, this);
-//		this.getRoute().getRoute('invitationDetail')attachMatched(
+//		var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+//		oRouter.getRoute("invitation").attachPatternMatched(
 //				this._onObjectMatched, this);
+		this.getRouter().getRoute('invitationDetail').attachMatched(
+				this._onObjectMatched, this);
 	
 	},
 	_onObjectMatched : function(oEvent) {
@@ -123,8 +123,12 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 	},
 	
 	onNavToChat : function(){
-		var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-		oRouter.navTo("chat");
+		//var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+		//oRouter.navTo("chat");
+		var oView = this.getView();
+		this.getRouter().navTo("chat", {
+			invitation : oView.getBindingContext().getPath().substr(1),
+		});
 	},
 	
 	onNavToMap : function(){
