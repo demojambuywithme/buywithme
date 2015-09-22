@@ -58,43 +58,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
 
         var sMessage = "You current location is determined";
         sap.m.MessageToast.show(sMessage);
-
         var map = new BMap.Map("allmap");
-        //var geoc = new BMap.Geocoder();
-        /*
-        //@TODO 替换成获取真实当前地址
-        var point = new BMap.Point(121.608265, 31.20729); //Sap labs China
-
-        var pt = point;
-        var abc = this.getView().byId("link01");
-
-        geoc.getLocation(pt, function(rs) {
-            var addComp = rs.addressComponents;
-            var locDetail = addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
-            //@TODO 替换成用真实ID拿link01，不应用__xmlview2--link01，runtime有时候会变
-            var olink1 = sap.ui.getCore().byId("__xmlview2--link01");
-            //var olink1 = this.getView().byId("link01");
-            olink1.setText(locDetail);
-
-            jQuery.ajax({
-                //type: "post",
-                url: "http://api.map.baidu.com/geocoder/v2/?ak=CD70726d5902ec38d1e1a9e7d249d923&callback=renderReverse&location=31.20729,121.608265&output=json&pois=1",
-                dataType: "jsonp",
-                async: false,
-                success: function(data, textStatus, jqXHR) {
-                    currentLoc = new sap.ui.model.json.JSONModel();
-                    currentLoc.setData(data);
-                    //sap.ui.getCore().setModel(invitation);
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    alert("Oh no, an error occurred");
-                }
-            });
-        });
-        sap.m.MessageToast.show(sMessage);
-        */
-        //http://api.map.baidu.com/place/v2/suggestion?query=%E5%A4%A9&region=%E4%B8%8A%E6%B5%B7%E5%B8%82&output=json&ak=CD70726d5902ec38d1e1a9e7d249d923
-        //http://api.map.baidu.com/geocoder/v2/?ak=CD70726d5902ec38d1e1a9e7d249d923&callback=renderReverse&location=39.983424,116.322987&output=json&pois=1
 
         //var curLoc = this.getView().getModel("currentLoc").getData();
         var geolocation = new BMap.Geolocation();
@@ -105,6 +69,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                 curLatitude = r.point.lat;
                 jQuery.ajax({
                     //type: "post",
+                    //TO DO, Add real latitude and longitude into it
                     url: "http://api.map.baidu.com/geocoder/v2/?ak=CD70726d5902ec38d1e1a9e7d249d923&callback=renderReverse&location=31.20729,121.608265&output=json&pois=1",
                     dataType: "jsonp",
                     async: false,
@@ -118,23 +83,6 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                                 locationName: el.name
                             };
                         });
-                        /*
-                        for (var i = 0; i < result.length - 1; i++) {
-                            locList.push({
-                                locationName: result[i].name
-                            });
-                        };
-                        */
-                        var loclisttest = [];
-                        var a1 = {
-                            locationName: "abc"
-                        };
-                        var a2 = {
-                            locationName: "a123"
-                        };
-                        //a1.locationName = "abc";
-                        loclisttest.push(a1);
-                        loclisttest.push(a2);
                         //CY
                         //Below part is to rasie a popup window to show all possible locations
                         if (oView.oCurLocDialog) {
@@ -160,16 +108,15 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
             enableHighAccuracy: true
         })
     },
-    //Dialog with a selection list to select a accurate location
-    handleLocation1: function(oEvent) {
-        if (this.oCurLocDialog) {
-            this.oCurLocDialog.destroy();
-        }
-        this.oCurLocDialog = sap.ui.xmlfragment("bwm.fragment.CurrentLocSel", this);
-        this.getView().addDependent(this.oCurLocDialog);
-        this.oCurLocDialog.open();
-    },
 
+    //
+    handleClose: function(oEvent) {
+        var aItem = oEvent.getParameters("selectedItem");
+        if (aItem) {
+            var locLink = this.getView().byId("link01");
+             locLink.setText(aItem.selectedItem.mProperties.description);
+        }
+    },
 
     //CY03
     //Create a json model for new invitation data
@@ -419,7 +366,8 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         var total_quantity = this.getView().getModel("newInvitation").getData().Invitation.total_quantity;
         var discount = this.getView().getModel("newInvitation").getData().Invitation.discount;
         var selectLable = "Buy" + " " + total_quantity + " " + "PC" + " " + discount + " " + "OFF";
-        var discLabel = sap.ui.getCore().byId("__xmlview2--discountType_select");
+        // var discLabel = sap.ui.getCore().byId("__xmlview2--discountType_select");
+        var discLabel = oView.byId("discountType_select");
         discLabel.setValue(selectLable);
     },
     onDiscDialogClose: function() {
@@ -435,7 +383,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     */
     onNavButtonPressed: function() {
         this.getRouter().navTo("invitations");
-        
+
         //this.getRouter().backWithoutHash(this.getView());
         // this.getRouter().myNavToWithoutHash({
         //     currentView: this.getView(),
