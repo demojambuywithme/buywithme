@@ -57,7 +57,7 @@
 					<content>
 						<HBox>
 							<items>
-								<HBox width="200px">
+								<HBox width="190px">
 									<items>
 										<core:Fragment fragmentName="bwm.fragment.Joiner"
 											type="XML" />
@@ -84,23 +84,30 @@
 				</CustomListItem>
 			</items>
 		</GrowingList>
+		<VBox>
 		<Toolbar class="sapUiMediumMarginTop">
 			<Text text="I Want"></Text>
-			<Input id="itemQuantity" value="10" width="60px" textAlign="Center"
+			<Input id="itemQuantity" value="10" width="80px" textAlign="Center"
 				fieldWidth="60%" />
 			<Text text="PC"></Text>
-			<Input id="itemCost" value="100.00" width="60px" textAlign="Center"
+			<Input id="itemCost" value="100.00" width="80px" textAlign="Center"
 				fieldWidth="60%" liveChange="onChangeValue" />
 			<Text text="RMB"></Text>
-			<Text id="actualCost" width="60px" textAlign="Center"
-				fieldWidth="60%" />
-			<Text text="RMB"></Text>
 		</Toolbar>
+		</VBox>
+		<Bar>
+		<contentLeft>
+		<Text text="Discount Price"/>
+		<Text id="actualCost" width="80px" textAlign="Left"
+				fieldWidth="60%" />
+		<Text text="RMB"></Text>
+		</contentLeft>
+		</Bar>
 		<footer>
 			<Toolbar class="sapUiMediumMarginTop">
 				<Button icon="sap-icon://add-activity-2" press="onJoinInvitation" />
 				<ToolbarSpacer />
-				<Button icon="sap-icon://favorite" />
+				<Button icon="sap-icon://unfavorite" activeIcon="sap-icon://favorite" press="onFavorite"/>
 				<ToolbarSpacer />
 				<Button icon="sap-icon://globe" press="onNavToMap" />
 				<ToolbarSpacer />

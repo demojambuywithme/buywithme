@@ -162,6 +162,12 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 				window.open('tel:' + phoneNo);
 			}
 		});
+	},
+	
+	onFavorite(oEvent){
+	    //var oFavorite = this.getView().byId("")
+		//var oFavorite= oEvent.getSource();
+		//oFavorite.
 	}
 /**
  * Similar to onAfterRendering, but this hook is invoked before the controller's
