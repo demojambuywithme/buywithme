@@ -1,3 +1,4 @@
+jQuery.sap.includeStyleSheet("css/bwm.css");
 jQuery.sap.declare("bwm.Component");
 jQuery.sap.require("bwm.MyRouter");
 

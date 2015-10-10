@@ -12,11 +12,42 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
 
           //initialize a json model for chat history
           //var chatModel = new sap.ui.json.JSONModel();
+          var that = this;
 
-    	  var oRouter = this.getRouter();
-  		  oRouter.getRoute("chat").attachMatched(this.onRouteMatched, this);
-    
+              var oRouter = this.getRouter();
+              oRouter.getRoute("chat").attachMatched(this.onRouteMatched, this);
+
+            this.socket = io('http://localhost:8090/chat');
+            this.text = this.byId('msg');
+            this.msgs = [{
+                user: 'jay',
+                text: 'do you want to join this?'
+            },{
+                user: 'loring',
+                text: 'shit'
+            }];
+            this.msgsModel = new sap.ui.model.json.JSONModel(this.msgs);
+            this.msg = {
+                text: ""
+            };
+            this.msgModel = new sap.ui.model.json.JSONModel(this.msg);
+            this.getView().setModel(this.msgsModel, 'msgs');
+            this.getView().setModel(this.msgModel, 'msg');
+
+            this.socket.on('chatHistory', function(chats) {
+                that.msgsModel.setData(chats);
+            });
+
+
       },
+
+
+        onSend: function() {
+
+            this.getView().getModel('msg').get
+
+            
+        },
 
     /**
      * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
@@ -48,5 +79,9 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
   		var oArgs, oView;
   		oArgs = oEvent.getParameter("arguments");
         this.invitationId = oArgs.invitation;
+
+        this.socket.emit('join', {
+            conversationId: this.invitationId,
+        });
   	},
 });

@@ -7,16 +7,37 @@
           showNavButton="true"
           navButtonPress="onNavButtonPressed">
         <content>
-            <List inset="true"></List>
+            <List inset="true"
+                  backgroundDesign="Transparent"
+                  showSeparators="None"
+                  items="{msgs&gt;/}">
+                <items>
+                    <CustomListItem class="sapUiSmallMarginBottom">
+                        <VBox>
+                            <items>
+                                <Label text="{msgs&gt;user}" />
+                                <TextArea editable="false"
+                                          value="{msgs&gt;text}"
+                                          class="chatMessage--others"
+                                          rows="2"
+                                          wrapping="None" />
+                            </items>
+                        </VBox>
+                    </CustomListItem>
+                </items>
+            </List>
         </content>
         <footer>
             <Toolbar>
                 <content>
-                    <Input width="100%"
+                    <Input id="msg"
+                           width="100%"
                            placeholder="Say Something" />
-                    <Button text="Send" />
+                    <Button text="Send"
+                            press="onSend" />
                 </content>
             </Toolbar>
         </footer>
     </Page>
 </core:View>
+
