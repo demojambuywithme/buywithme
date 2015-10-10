@@ -13,7 +13,7 @@
             <!-- <com:TabStrip> <com:Tab title="Tab1" text="Tab1"> <com:TextArea value="123"> 
                                 </com:TextArea> </com:Tab> <com:Tab title="Tab2" text="Tab2"> <com:TextArea 
                                 value="234"> </com:TextArea> </com:Tab> </com:TabStrip> -->
-            <ux3:CollectionInspector fitParent="false">
+            <ux3:CollectionInspector sidebarVisible="false" fitParent="false">
                 <ux3:collections>
                     <ux3:Collection title="Invitation Status">
                         <ux3:items>
