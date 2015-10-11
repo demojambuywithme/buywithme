@@ -9,36 +9,10 @@ bwm.view.BaseController.extend("bwm.view.Logon", {
      * @memberOf bwm.view.home
      */
       onInit: function() {
-
-          var logonModel = new sap.ui.model.json.JSONModel({
+          this.getView().setModel(new sap.ui.model.json.JSONModel({
               user: "",
-              password: ""
-          });
-
-          this.getView().setModel(logonModel, "logon");
-
-            this.users = {
-                jay: {
-                    id: "311c0ab7fed848c7857f8f5204faf111",
-                    name: "Zhao Jay"
-                },
-                chunyang: {
-                    id: "4defa41b7b934dab9f36627b32fb7bb7",
-                    name: "Xu Chunyang"
-                },
-                aaron: {
-                    id: "81794267dc2e4e5e9619e51e37bfb1de",
-                    name: "Shen Aaron"
-                },
-                xin: {
-                    id: "877da535455a47b893b19e9ab8a1f2c2",
-                    name: "Jiang Xin"
-                },
-                loring: {
-                    id: "6273876ccd96464cae261fd8c390267f",
-                    name: "Wu Loring"
-                }
-            };
+              password:""
+          }), "logon");
       },
 
     /**
@@ -68,8 +42,9 @@ bwm.view.BaseController.extend("bwm.view.Logon", {
     //  }
       onLogon: function(){
           var logonInfo = this.getView().getModel("logon").getData();
-          if(this.users[logonInfo.user]){
-              var userModel = new sap.ui.model.json.JSONModel(this.users[logonInfo.user]);
+          var users = this.getView().getModel("users").getData();
+          if(users[logonInfo.user]){
+              var userModel = new sap.ui.model.json.JSONModel(users[logonInfo.user]);
               this.getComponent().setModel(userModel, 'user');
               this.getRouter().navTo('invitations');
           }else {

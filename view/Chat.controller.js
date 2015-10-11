@@ -8,46 +8,50 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
      * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
      * @memberOf bwm.view.home
      */
-      onInit: function() {
+    onInit: function() {
 
-          //initialize a json model for chat history
-          //var chatModel = new sap.ui.json.JSONModel();
-          var that = this;
+        var oRouter = this.getRouter();
+        oRouter.getRoute("chat").attachMatched(this.onRouteMatched, this);
 
-              var oRouter = this.getRouter();
-              oRouter.getRoute("chat").attachMatched(this.onRouteMatched, this);
+        //init model
+        this.initModel();
 
-            this.socket = io('http://localhost:8090/chat');
-            this.text = this.byId('msg');
-            this.msgs = [{
-                user: 'jay',
-                text: 'do you want to join this?'
-            },{
-                user: 'loring',
-                text: 'shit'
-            }];
-            this.msgsModel = new sap.ui.model.json.JSONModel(this.msgs);
-            this.msg = {
-                text: ""
-            };
-            this.msgModel = new sap.ui.model.json.JSONModel(this.msg);
-            this.getView().setModel(this.msgsModel, 'msgs');
-            this.getView().setModel(this.msgModel, 'msg');
+        //socket connection
+        this.socket = io('http://localhost:8090/chat');
+        this.socket.emit('join', {
+            conversationId: '001'
+        });
 
-            this.socket.on('chatHistory', function(chats) {
-                that.msgsModel.setData(chats);
-            });
+        // this.msgs = [{
+        //     user: 'jay',
+        //     text: 'do you want to join this?'
+        // }, {
+        //     user: 'loring',
+        //     text: 'shit'
+        // }];
+
+        this.socket.on('chatHistory', function(chats) {
+            that.msgsModel.setData(chats);
+        });
 
 
-      },
+    },
+    initModel: function(){
+        this.getView().setModel(new sap.ui.model.json.JSONModel({
+            text: ""
+        }), 'msg');
+        
+        this.getView().setModel(new sap.ui.model.json.JSONModel([]), 'msgs');
+    },
 
-
-        onSend: function() {
-
-            this.getView().getModel('msg').get
-
-            
-        },
+    onSend: function() {
+        var msg = this.getView().getModel('msg').getData().text;
+        this.socket.emit('chat', {
+            conversationId: '001',
+            usrid: 'aaron',
+            msg: msg
+        });
+    },
 
     /**
      * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
@@ -75,13 +79,13 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
     //
     //  }
 
-      onRouteMatched : function (oEvent) {
-  		var oArgs, oView;
-  		oArgs = oEvent.getParameter("arguments");
+    onRouteMatched: function(oEvent) {
+        var oArgs, oView;
+        oArgs = oEvent.getParameter("arguments");
         this.invitationId = oArgs.invitation;
 
         this.socket.emit('join', {
             conversationId: this.invitationId,
         });
-  	},
+    },
 });

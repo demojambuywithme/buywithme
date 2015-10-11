@@ -32,6 +32,7 @@
                 <content>
                     <Input id="msg"
                            width="100%"
+                           value="{msg>/text}"
                            placeholder="Say Something" />
                     <Button text="Send"
                             press="onSend" />
@@ -40,4 +41,3 @@
         </footer>
     </Page>
 </core:View>
-

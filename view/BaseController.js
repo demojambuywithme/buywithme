@@ -15,7 +15,6 @@ sap.ui.core.mvc.Controller.extend("bwm.view.BaseController", {
     },
 
     getComponent: function(){
-        var sComponentId = sap.ui.core.Component.getOwnerIdFor(this.getView());  
-        return sap.ui.component(sComponentId); 
+        return this.getOwnerComponent();
     }
 });
