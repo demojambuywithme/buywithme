@@ -43,8 +43,13 @@ bwm.view.BaseController.extend("bwm.view.Logon", {
       onLogon: function(){
           var logonInfo = this.getView().getModel("logon").getData();
           var users = this.getView().getModel("users").getData();
-          if(users[logonInfo.user]){
-              var userModel = new sap.ui.model.json.JSONModel(users[logonInfo.user]);
+          var checkUserExist = function(u, user){
+              return u === user.id;
+          };
+          var theUser = users.filter($.proxy(checkUserExist,null, logonInfo.user))[0];
+
+          if(theUser){
+              var userModel = new sap.ui.model.json.JSONModel(theUser);
               this.getComponent().setModel(userModel, 'user');
               this.getRouter().navTo('invitations');
           }else {

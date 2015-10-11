@@ -149,28 +149,22 @@ sap.ui.core.UIComponent
                 this.setModel(deviceModel, "device");
 
                 //mock users in system
-                var users = {
-                    jay: {
-                        id: "311c0ab7fed848c7857f8f5204faf111",
-                        name: "Zhao Jay"
-                    },
-                    chunyang: {
-                        id: "4defa41b7b934dab9f36627b32fb7bb7",
-                        name: "Xu Chunyang"
-                    },
-                    aaron: {
-                        id: "81794267dc2e4e5e9619e51e37bfb1de",
-                        name: "Shen Aaron"
-                    },
-                    xin: {
-                        id: "877da535455a47b893b19e9ab8a1f2c2",
-                        name: "Jiang Xin"
-                    },
-                    loring: {
-                        id: "6273876ccd96464cae261fd8c390267f",
-                        name: "Wu Loring"
-                    }
-                };
+                var users = [{
+                    id: "jay",
+                    name: "Zhao Jay"
+                }, {
+                    id: "chunyang",
+                    name: "Xu Chunyang"
+                }, {
+                    id: "aaron",
+                    name: "Shen Aaron"
+                }, {
+                    id: "xin",
+                    name: "Jiang Xin"
+                }, {
+                    id: "loring",
+                    name: "Wu Loring"
+                }];
                 this.setModel(new sap.ui.model.json.JSONModel(users), "users");
 
 

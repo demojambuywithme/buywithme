@@ -3,24 +3,29 @@
            xmlns="sap.m"
            controllerName="bwm.view.Chat"
            xmlns:html="http://www.w3.org/1999/xhtml">
-    <Page title="Chat"
+    <Page id="chatting"
+          title="Chat"
           showNavButton="true"
           navButtonPress="onNavButtonPressed">
         <content>
-            <List inset="true"
+            <!-- <core:HTML id='msglist'> -->
+            <!-- </core:HTML> -->
+            <List id='msglist'
+                  inset="true"
                   backgroundDesign="Transparent"
                   showSeparators="None"
-                  items="{msgs&gt;/}">
+                  items="{msgs&gt;/}"
+                  updateFinished="onUpdateFinished">
                 <items>
                     <CustomListItem class="sapUiSmallMarginBottom">
                         <VBox>
                             <items>
-                                <Label text="{msgs&gt;user}" />
                                 <TextArea editable="false"
-                                          value="{msgs&gt;text}"
+                                          value="{msgs&gt;msg}"
                                           class="chatMessage--others"
-                                          rows="2"
-                                          wrapping="None" />
+                                          rows="{= Math.ceil(${msgs&gt;msg}.length / 19) }"
+                                          wrapping="Soft" />
+                                <Label text="{msgs&gt;usrname}" />
                             </items>
                         </VBox>
                     </CustomListItem>
@@ -32,7 +37,7 @@
                 <content>
                     <Input id="msg"
                            width="100%"
-                           value="{msg>/text}"
+                           value="{msg&gt;/text}"
                            placeholder="Say Something" />
                     <Button text="Send"
                             press="onSend" />
