@@ -27,12 +27,14 @@ bwm.view.BaseController
 						// false);
 						jQuery
 								.ajax({
-									url : "http://10.58.132.213:8000/BWM/services/bwm.xsodata/Invitation",
+										url : "http://10.58.132.213:8000/BWM/services/bwm.xsodata/Invitation",
+									//url: "model/Invitation",
 									dataType : "json",
 									async : false,
 									success : function(data, textStatus, jqXHR) {
 										invitation = new sap.ui.model.json.JSONModel();
-										invitation.setData(data.d.results);
+										//invitation.setData(data.d.results);
+										invitation.setData(data);
 										// sap.ui.getCore().setModel(invitation);
 									},
 									error : function(jqXHR, textStatus,
@@ -102,11 +104,10 @@ bwm.view.BaseController
 										function(r) {
 											if (this.getStatus() == BMAP_STATUS_SUCCESS) {
 												map = new BMap.Map(
-														"__page1-cont");
+														"__page0-cont");
 												// var point = new
 												// BMap.Point(116.331398,39.897445);
-												map
-														.addControl(new BMap.NavigationControl());
+												map.addControl(new BMap.NavigationControl());
 												map.enableScrollWheelZoom();
 												map.centerAndZoom(r.point, 17);
 												var mk = new BMap.Marker(
@@ -127,21 +128,21 @@ bwm.view.BaseController
 														.getSelectedKey();
 												var keyDisc = selDisc
 														.getSelectedKey();
-												for (i = 0; i < invitation.oData.length; i++) {
+												for (i = 0; i < invitation.oData.d.results.length; i++) {
 													var cate;
 													var disc;
-													for (j in invitation.oData[i]) {
+													for (j in invitation.oData.d.results[i]) {
 														if (j == "category.id") {
-															cate = invitation.oData[i][j];
+															cate = invitation.oData.d.results[i][j];
 														}
 														;
 														if (j == "discountType.id") {
-															disc = invitation.oData[i][j];
+															disc = invitation.oData.d.results[i][j];
 														}
 													}
 													var invPoint = new BMap.Point(
-															invitation.oData[i].longitude,
-															invitation.oData[i].latitude);
+															invitation.oData.d.results[i].longitude,
+															invitation.oData.d.results[i].latitude);
 													var dist = map.getDistance(
 															currentPoint,
 															invPoint)
@@ -155,8 +156,7 @@ bwm.view.BaseController
 																invPoint);
 														// marker.setLabel(new
 														// BMap.Label(invitation.oData[i].title));
-														marker
-																.setTitle(invitation.oData[i].title);
+														marker.setTitle(invitation.oData.d.results[i].title);
 														if (keyCate == '0550223232fd488db699a7ea9a9fdde0') {
 															marker
 																	.setIcon('image/sports.ico');
@@ -172,43 +172,6 @@ bwm.view.BaseController
 																	.setIcon('image/food.ico');
 														}
 														;
-
-														marker
-																.addEventListener(
-																		"click",
-																		function(
-																				evt) {
-																			this
-																					.openInfoWindow(infoWindow);
-																			var infoPage = new sap.ui.view(
-																					{
-																						viewName : "bwm.view.InfoWindow",
-																						type : sap.ui.core.mvc.ViewType.XML
-																					});
-																			// infoPage.setHeight(300);
-																			var title = evt.target
-																					.getTitle();
-																			for (k = 0; k < invitation.oData.length; k++) {
-																				if (title == invitation.oData[k].title) {
-																					infoPage
-																							.setHeight(300);
-																					infoPage
-																							.setModel(new sap.ui.model.json.JSONModel(
-																									invitation.oData[k]));
-																					break;
-																				}
-																			}
-																			infoPage
-																					.placeAt('infoWin');
-																			// infoWindow.redraw();
-																			// document.getElementById('infoWin').onload
-																			// =
-																			// function
-																			// (){
-																			// alert('open');
-																			// infoWindow.redraw();
-																			// };
-																		});
 														map.addOverlay(marker);
 														// markers.push(marker);
 													}
@@ -242,22 +205,22 @@ bwm.view.BaseController
 						var keyDist = selDist.getSelectedKey();
 						var keyCate = selCate.getSelectedKey();
 						var keyDisc = selDisc.getSelectedKey();
-						for (i = 0; i < invitation.oData.length; i++) {
+						for (i = 0; i < invitation.oData.d.results.length; i++) {
 							var cate;
 							var disc;
-							for (j in invitation.oData[i]) {
+							for (j in invitation.oData.d.results[i]) {
 								if (j == "category.id") {
-									cate = invitation.oData[i][j];
+									cate = invitation.oData.d.results[i][j];
 								}
 								;
 								if (j == "discountType.id") {
-									disc = invitation.oData[i][j];
+									disc = invitation.oData.d.results[i][j];
 								}
 							}
-							var invData = invitation.oData[i];
+							var invData = invitation.oData.d.results[i];
 							var invPoint = new BMap.Point(
-									invitation.oData[i].longitude,
-									invitation.oData[i].latitude);
+									invitation.oData.d.results[i].longitude,
+									invitation.oData.d.results[i].latitude);
 							var dist = map.getDistance(currentPoint, invPoint)
 									.toFixed(2);
 							if (parseFloat(dist) <= parseFloat(keyDist)
@@ -271,7 +234,7 @@ bwm.view.BaseController
 								var marker = new BMap.Marker(invPoint);
 								// marker.setLabel(new
 								// BMap.Label(invitation.oData[i].title));
-								marker.setTitle(invitation.oData[i].title);
+								marker.setTitle(invitation.oData.d.results[i].title);
 								if (keyCate == '0550223232fd488db699a7ea9a9fdde0') {
 									var icons = new BMap.Icon(
 											'http://localhost:8080/bwm/image/sports.ico',
@@ -293,10 +256,10 @@ bwm.view.BaseController
 									marker.setIcon(iconf);
 								}
 								;
-								marker
-										.addEventListener(
+								
+								marker.addEventListener(
 												"click",
-												function(evt) {
+												$.proxy(function(controller, evt) {
 													// var walking = new
 													// BMap.WalkingRoute(map,
 													// {renderOptions:{map: map,
@@ -308,69 +271,95 @@ bwm.view.BaseController
 													// type:sap.ui.core.mvc.ViewType.XML});
 													var title = evt.target
 															.getTitle();
-													var invData;
-													for (k = 0; k < invitation.oData.length; k++) {
-														if (title == invitation.oData[k].title) {
+													var invData = null;
+													for (k = 0; k < invitation.oData.d.results.length; k++) {
+														if (title == invitation.oData.d.results[k].title) {
 															// infoPage.setHeight(300);
-															invData = invitation.oData[k];
+															invData = invitation.oData.d.results[k];
 															break;
 															// infoPage.setModel(new
 															// sap.ui.model.json.JSONModel());
 															// break;
 														}
 													}
-													
-													for (j in invitation.oData[i]) {
+
+													for (j in invData) {
 														if (j == "creator.id") {
-															creator = invitation.oData[i][j];
+															creator = invData[j];
 														}
 														;
 													}
 													// infoPage.getController();
 													// infoPage.placeAt('infoWin');
+													var user=null;
+													var pic_id=null;
 													jQuery.ajax({
-																url : "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('" + creator +
-																		"')",
+																url : "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('"
+																		+ creator
+																		+ "')",
 																dataType : "json",
 																async : false,
 																success : function(
 																		data,
 																		textStatus,
 																		jqXHR) {
-																	invitation = new sap.ui.model.json.JSONModel();
-																	invitation.setData(data.d.results);
+																	user = data.d;
+																	for (j in data.d) {
+																		if (j == "pic.id") {
+																			pic_id = data.d[j];
+																		};
+																	}
+																	//invitation = new sap.ui.model.json.JSONModel();
+																	//invitation.setData(data.d.results);
 																	// sap.ui.getCore().setModel(invitation);
 																},
 																error : function(
 																		jqXHR,
 																		textStatus,
 																		errorThrown) {
-																	// alert("Oh
-																	// no, an
-																	// error
-																	// occurred");
+																	
 																}
 															});
+													jQuery.ajax({
+														url : "http://10.58.132.213:8000/BWM/services/bwm.xsodata/Avatar('"
+																+ pic_id
+																+ "')",
+														dataType : "json",
+														async : false,
+														success : function(
+																data,
+																textStatus,
+																jqXHR) {
+															picUser = "http://10.58.132.213:8000"+data.d.pic_path+data.d.pic_name;
+															// sap.ui.getCore().setModel(invitation);
+														},
+														error : function(
+																jqXHR,
+																textStatus,
+																errorThrown) {
+															
+														}
+													});
 													var sContent = "<div id='infoWin' style='line-height:1.8em;font-size:12px;'>"
-															+ "<img src='http://cdn2.iconfinder.com/data/icons/diagona/icon/16/031.png'/></br>"
-															+ "<b>"
-															+ invData.title
-															+ "</b></br>"
-															+ "<b>"
+															+ "<b>Address: </b>"
+															+ invData.address
+															+ "</br>"
+															+ "<img id='userPic' src='"
+															+ picUser
+															+ "' width='10%' height='10%'/>"
+															+ "<b>    "
+															+ user.name
 															+ "</b></br>"
 															+ "</div>"
+													var opts = {title : '<span id="infoTitle" style="font-size:14px;color:#0A8021">'+invData.title+'</span>'};
 													var infoWindow = new BMap.InfoWindow(
-															sContent);
-													this
-															.openInfoWindow(infoWindow);
-													infoWindow.setHeight(300);
+															sContent, opts);
+													this.openInfoWindow(infoWindow);
+													document.getElementById("infoWin").onclick = function (){controller.getRouter().navTo("invitationDetail", {invitation : invData.id});};
+													//infoWindow.setHeight(300);
 													// infoWindow.redraw();
-													// document.getElementById('infoWin').onload
-													// = function (){
-													// alert('open');
-													// infoWindow.redraw();
-													// };
-												});
+													document.getElementById('userPic').onload = function (){ infoWindow.redraw();};
+												},null, this));
 								map.addOverlay(marker);
 							}
 						}
