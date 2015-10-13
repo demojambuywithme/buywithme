@@ -104,7 +104,7 @@ bwm.view.BaseController
 										function(r) {
 											if (this.getStatus() == BMAP_STATUS_SUCCESS) {
 												map = new BMap.Map(
-														"__page0-cont");
+														"__page1-cont");
 												// var point = new
 												// BMap.Point(116.331398,39.897445);
 												map.addControl(new BMap.NavigationControl());
