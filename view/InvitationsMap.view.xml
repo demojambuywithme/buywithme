@@ -43,21 +43,21 @@
 		</content>
 		<footer>
 			<Toolbar>
-                <content>
-                    <Button width="33%"
-                            iconFirst="true"
-                            icon="sap-icon://list" />
-                    <Button type="Emphasized"
-                    		width="33%"
-                            iconFirst="true"
-                            icon="sap-icon://map"
-                            press="toInvitationsMap" />
-                    <Button width="34%"
-                            iconFirst="true"
-                            icon="sap-icon://person-placeholder"
-                            press="toMine" />
-                </content>
-            </Toolbar>
+		                <content>
+		                    <Button width="33%"
+		                            iconFirst="true"
+		                            icon="sap-icon://list" />
+		                    <Button type="Emphasized"
+		                    		width="33%"
+		                            iconFirst="true"
+		                            icon="sap-icon://map"
+		                            press="toInvitationsMap" />
+		                    <Button width="34%"
+		                            iconFirst="true"
+		                            icon="sap-icon://person-placeholder"
+		                            press="toMine" />
+		                </content>
+	            	</Toolbar>
 			<!-- <Bar design="sap.m.BarDesign.Footer">
 				<contentLeft>
 					<Button width="33%" iconFirst="true"
