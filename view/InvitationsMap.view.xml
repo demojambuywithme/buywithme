@@ -2,9 +2,9 @@
 	xmlns:layout="sap.ui.layout" xmlns="sap.m" controllerName="bwm.view.InvitationsMap"
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<Page title="Invitations Map" showNavButton="false">
-		<headerContent>
+		<!-- <headerContent>
 			<Button icon="sap-icon://list" press="toInvitations" />
-		</headerContent>
+		</headerContent>  -->
 		<subHeader>
 			<Bar design="sap.m.BarDesign.SubHeader">
 				<contentLeft>
@@ -42,7 +42,23 @@
 
 		</content>
 		<footer>
-			<Bar design="sap.m.BarDesign.Footer">
+			<Toolbar>
+                <content>
+                    <Button width="33%"
+                            iconFirst="true"
+                            icon="sap-icon://list" />
+                    <Button type="Emphasized"
+                    		width="33%"
+                            iconFirst="true"
+                            icon="sap-icon://map"
+                            press="toInvitationsMap" />
+                    <Button width="34%"
+                            iconFirst="true"
+                            icon="sap-icon://person-placeholder"
+                            press="toMine" />
+                </content>
+            </Toolbar>
+			<!-- <Bar design="sap.m.BarDesign.Footer">
 				<contentLeft>
 					<Button width="33%" iconFirst="true"
 						icon="sap-icon://list" press="toInvitations" />
@@ -54,7 +70,7 @@
 					<Button width="34%" iconFirst="true"
 						icon="sap-icon://person-placeholder" press="toMine" />
 				</contentRight>
-			</Bar>
+			</Bar>  -->
 		</footer>
 	</Page>
 </core:View>
