@@ -7,6 +7,7 @@ var selDisc;
 var circle;
 var markers;
 var creator;
+var mapContainer;
 
 bwm.view.BaseController
 		.extend(
@@ -97,6 +98,8 @@ bwm.view.BaseController
 					 * @memberOf bwm.view.home
 					 */
 					onAfterRendering : function() {
+						var page = this.byId("mapPage");
+						mapContainer = page.sId + "-cont";
 						selDist = this.byId("dist");
 						var geolocation = new BMap.Geolocation();
 						geolocation
@@ -104,7 +107,7 @@ bwm.view.BaseController
 										function(r) {
 											if (this.getStatus() == BMAP_STATUS_SUCCESS) {
 												map = new BMap.Map(
-														"__page1-cont");
+														mapContainer);
 												// var point = new
 												// BMap.Point(116.331398,39.897445);
 												map.addControl(new BMap.NavigationControl());
