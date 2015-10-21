@@ -40,10 +40,9 @@
 				<!-- <Label id="discountType" text="{ parts: [ {path:'total_quantity'}, 
 					{path:'discount'}, {path:'DiscountType/dis_category'} ], formatter:'discountFormatter' 
 					}"></Label> -->
-				<Label
-					text="Buy {total_quantity} {= ${DiscountType/dis_category} === '01' ? ('Return '+ ${discount} ): ('PCs '+ (${discount}*100)+'%'+' Off')}"
-					 width="250px" textAlign="Center">
-				</Label>
+				<Label 
+				    text="{ parts: [ 'total_quantity', 'DiscountType/dis_category', 'discount', 'total_money','return_money'], formatter: 'bwm.util.Formatter.discountInforFormatter' }"
+					width="250px" textAlign="Center"/>
 		</HBox>
         </VBox>
         <VBox>
