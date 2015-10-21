@@ -52,9 +52,11 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 				console.log(data);
 				invitation_data = data;
 				that.calculateCost();
-				if(that.getView().getModel("user").getData().id == invitation_data["creator.id"]){
+				if(that.getView().getModel("user").getData().uuid == invitation_data["creator.id"]){
 					that.getView().byId("joinInv").setVisible(false);
+					that.getView().byId("closeInv").setVisible(true);
 				}else{
+					that.getView().byId("joinInv").setVisible(true);
 					that.getView().byId("closeInv").setVisible(false);
 				}
 			}
@@ -79,7 +81,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 			inv_id : bwm.util.UtilMethod.guid(),
 			"inv_head.id" : invitation_data.id,
 			//"joiner.id" : "6273876ccd96464cae261fd8c390267f",
-			"joiner.id" : this.getView().getModel("user").getData().id,
+			"joiner.id" : this.getView().getModel("user").getData().uuid,
 			quantity : this.getView().byId("itemQuantity").getValue(),
 			money : this.getView().byId("itemCost").getValue()
 		};
@@ -89,25 +91,26 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 
 		oModel.addBatchChangeOperations(batchChanges);
 		oModel.setUseBatch(true);
-		oModel.submitBatch(jQuery.proxy(function(data) {
-			console.log(data);
-			oModel.refresh();
-			this.onInit();
-			// @TODO will navigation to the detail Invitation
-			// sap.ui.core.UIComponent.getRouterFor(this).navTo();
-			// currently, navigation to Main
-			this.onNavButtonPressed();
-			jQuery.sap.require("sap.m.MessageToast");
-			// ID of newly inserted product is available in mResponse.ID
-			this.oBusyDialog.close();
-			sap.m.MessageToast.show("Congratulation! Join successfully!");
-		}, this),
+		oModel.submitBatch(
+			jQuery.proxy(function(data) {
+					console.log(data);
+					oModel.refresh();
+					this.onInit();
+					// @TODO will navigation to the detail Invitation
+					// sap.ui.core.UIComponent.getRouterFor(this).navTo();
+					// currently, navigation to Main
+					this.onNavButtonPressed();
+					jQuery.sap.require("sap.m.MessageToast");
+					// ID of newly inserted product is available in mResponse.ID
+					this.oBusyDialog.close();
+					sap.m.MessageToast.show("Congratulation! Join successfully!");
+				}, this),
 
-		jQuery.proxy(function(err) {
-			console.log(err);
-			this.oBusyDialog.close();
-			this.showErrorAlert("Problem join this invitation");
-		}, this));
+			jQuery.proxy(function(err) {
+					console.log(err);
+					this.oBusyDialog.close();
+					this.showErrorAlert("Problem join this invitation");
+				}, this));
 	},
 
 	onJoinInvitation : function() {
