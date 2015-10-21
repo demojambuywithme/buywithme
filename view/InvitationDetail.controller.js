@@ -32,7 +32,11 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 //				this._onObjectMatched, this);
 		this.getRouter().getRoute('invitationDetail').attachMatched(
 				this._onObjectMatched, this);
-	
+//	    if(this.getView().getModel("user").getData().id == invitation_data.creator.id){
+//	    	this.getView().byId("joinInv").setVisible("false");
+//	    }else{
+//	    	this.getView().byId("closeInv").setVisible("false");
+//	    }
 	},
 	_onObjectMatched : function(oEvent) {
 		console.log(oEvent.getParameter("arguments"));
@@ -48,6 +52,11 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 				console.log(data);
 				invitation_data = data;
 				that.calculateCost();
+				if(that.getView().getModel("user").getData().id == invitation_data["creator.id"]){
+					that.getView().byId("joinInv").setVisible(false);
+				}else{
+					that.getView().byId("closeInv").setVisible(false);
+				}
 			}
 		});
 	},
@@ -69,7 +78,8 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 		var invitationItem = {
 			inv_id : bwm.util.UtilMethod.guid(),
 			"inv_head.id" : invitation_data.id,
-			"joiner.id" : "6273876ccd96464cae261fd8c390267f",
+			//"joiner.id" : "6273876ccd96464cae261fd8c390267f",
+			"joiner.id" : this.getView().getModel("user").getData().id,
 			quantity : this.getView().byId("itemQuantity").getValue(),
 			money : this.getView().byId("itemCost").getValue()
 		};
@@ -144,7 +154,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 		this.calculateCost();
 	},
 	
-	calculateCost(){
+	calculateCost : function(){
 		if (!invitation_data.discount){
 			this.getView().byId("actualCost").setText(this.getView().byId("itemCost").getValue());
 		}else{
@@ -152,7 +162,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 		}	
 	},
 	
-	callOut(oEvent){
+	onCallOut : function(oEvent){
 		var oItem = oEvent.getSource();
 		var itemId = oItem.getBindingContext().getPath();
 		this.getView().getModel().read(itemId+"/ItemParticipator", {
@@ -164,11 +174,52 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 		});
 	},
 	
-	onFavorite(oEvent){
+	onFavorite : function(oEvent){
 	    //var oFavorite = this.getView().byId("")
 		//var oFavorite= oEvent.getSource();
 		//oFavorite.
+	},
+	
+	onCloseInvitation : function(oEvent){
+/*		    var batchChanges = [];
+	        var oModel = this.getView().getModel();
+	        
+	        var mNewInv = {
+	            id: invitation_data.id,
+	            title: invitation_data.title,
+	            status: 2,
+	            "creator.id": invitation_data["creator.id"],
+	            "category.id": invitation_data["category.id"],
+	            "discountType.id": invitation_data["discountType.id"],
+	            total_quantity: invitation_data.total_quantity,
+	            discount: invitation_data.discount,
+	            total_money: invitation_data.total_money,
+	            return_money: invitation_data.return_money,
+	            create_time: invitation_data.create_time,
+	            valid_in: invitation_data.valid_in,
+	            end_time: invitation_data.end_time,
+	            longitude: invitation_data.longitude,
+	            latitude: invitation_data.latitude,
+	            address: invitation_data.address
+	        };
+
+	        batchChanges.push(oModel.createBatchOperation("/Invitation", "PUT", mNewInv));*/
 	}
+/*	onActionSheet : function(oEvent){
+		var oButton = oEvent.getSource();
+		
+		//create action sheet only once
+		if(!this._actionSheet){
+			this._actionSheet = sap.ui.xmlfragment(
+					"bwm.fragment.ActionSheet",
+					this
+					);
+			this.getView().addDependent(this._actionSheet);
+		}
+		this._actionSheet.openBy(oButton);
+		
+	}*/
+	
 /**
  * Similar to onAfterRendering, but this hook is invoked before the controller's
  * View is re-rendered (NOT before the first rendering! onInit() is used for
