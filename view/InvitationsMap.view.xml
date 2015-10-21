@@ -6,7 +6,7 @@
 			<Button icon="sap-icon://list" press="toInvitations" />
 		</headerContent>  -->
 		<subHeader>
-			<Bar design="sap.m.BarDesign.SubHeader">
+			<Bar>
 				<contentLeft>
 					<HBox>
 						<!-- <Label text="Distance"> </Label> -->

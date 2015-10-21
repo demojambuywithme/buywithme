@@ -48,7 +48,7 @@ sap.ui.core.UIComponent
                         }, {
                             pattern: "invitationMap/{invitation}",
                             name: "invitationDetailMap",
-                            view: "invitationDetailMap"
+                            view: "InvitationDetailMap"
                         }]
                     }, {
                         pattern: "invitationsMap",
