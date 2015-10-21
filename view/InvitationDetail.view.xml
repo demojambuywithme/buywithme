@@ -1,7 +1,9 @@
 <core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout" xmlns="sap.m" controllerName="bwm.view.InvitationDetail"
 	xmlns:html="http://www.w3.org/1999/xhtml">
-	<Page title="Invitation Detail" showNavButton="true"
+	<Page title="Invitation Detail" 
+	    class="sapUiContentPadding"
+	    showNavButton="true"
 		navButtonPress="onNavButtonPressed">
 		<headerContent>
 			<Button icon="sap-icon://discussion" press="onNavToChat" />
@@ -21,35 +23,46 @@
 			color="#031E48" > <core:layoutData> <FlexItemData growFactor="1" /> </core:layoutData> 
 			</core:Icon> <Label text="Huaihai Road, GAP" textAlign="left"></Label> </contentLeft> 
 			</Bar> -->
-		<Bar binding="{path: 'Categroy'}">
-			<contentLeft>
-				<core:Icon src="sap-icon://grid" class="size1" color="#031E48">
+	    <Panel width="auto">
+	    <VBox>
+		<HBox binding="{path: 'Categroy'}" class="sapUiSmallMarginTop">
+				<core:Icon src="sap-icon://grid" size="150%" width="30px" color="#64E4CE" class="sapUiSmallMarginEnd">
 					<!-- <core:layoutData> <FlexItemData growFactor="1" /> </core:layoutData> -->
 				</core:Icon>
-			</contentLeft>
-			<contentMiddle>
-				<Label text="{description}"></Label>
-			</contentMiddle>
-		</Bar>
-		<Bar>
-			<contentLeft>
-				<core:Icon src="sap-icon://simple-payment" class="size1"
-					color="#031E48">
-					<core:layoutData>
-						<FlexItemData growFactor="1" />
-					</core:layoutData>
+				<Label text="{description}" width="250px" textAlign="Center"></Label>
+		</HBox>
+		<HBox class="sapUiSmallMarginTop">
+				<core:Icon src="sap-icon://simple-payment" size="150%" width="30px" color="#64E4CE" class="sapUiSmallMarginEnd">
+					<!--<core:layoutData>
+						<FlexItemData growFactor="1" /> 
+					</core:layoutData>-->
 				</core:Icon>
-			</contentLeft>
-			<contentMiddle>
 				<!-- <Label id="discountType" text="{ parts: [ {path:'total_quantity'}, 
 					{path:'discount'}, {path:'DiscountType/dis_category'} ], formatter:'discountFormatter' 
 					}"></Label> -->
-				<Label
-					text="Buy {total_quantity} {= ${DiscountType/dis_category} === '01' ? ('Return '+ ${discount} ): ('PCs '+ (${discount}*100)+'%'+' Off')}">
-				</Label>
-			</contentMiddle>
-		</Bar>
-
+				<Label 
+				    text="{ parts: [ 'total_quantity', 'DiscountType/dis_category', 'discount', 'total_money','return_money'], formatter: 'bwm.util.Formatter.discountInforFormatter' }"
+					width="250px" textAlign="Center"/>
+		</HBox>
+        </VBox>
+        <VBox>
+		<Toolbar>
+			<Text text="I Want"></Text>
+			<Input id="itemQuantity" value="10" width="75px" textAlign="Center"
+				fieldWidth="60%" />
+			<Text text="PC"></Text>
+			<Input id="itemCost" value="100.00" width="75px" textAlign="Center"
+				fieldWidth="60%" liveChange="onChangeValue" />
+			<Text text="RMB"></Text>
+		</Toolbar>
+		<Toolbar>
+	    <Text text="Discount Price:"/>
+		<Text id="actualCost" width="80px" textAlign="Center"
+				fieldWidth="60%" design="Bold"/>
+		<Text text="RMB"></Text>
+		</Toolbar>
+		</VBox>
+        </Panel>
 		<GrowingList threshold="10" triggerText="more"
 			scrollToLoad="true" items="{ path: 'InvitationItems' }">
 			<items>
@@ -57,23 +70,23 @@
 					<content>
 						<HBox>
 							<items>
-								<HBox width="190px">
+								<HBox width="185px">
 									<items>
 										<core:Fragment fragmentName="bwm.fragment.Joiner"
 											type="XML" />
 									</items>
 								</HBox>
 								<HBox>
-								<Button icon ="sap-icon://outgoing-call" 
-								        press = "callOut">
+								<Button icon ="sap-icon://outgoing-call" color="#64E4CE" class="sapUiTinyMarginTop"
+								        press = "onCallOut">
 								</Button>
 								</HBox>
 								<VBox>
 									<items>
-										<Label text=" {quantity} PCs {money} RMB" design="Bold"
+										<Label text=" {quantity} PCs {money} RMB" 
 											class="sapUiTinyMarginTop"
 											textAlign="Left" />
-										<Label text=" Disc. Price {money} RMB" design="Bold"
+										<Label text=" Disc. Pri. {money} RMB" 
 											class="sapUiTinyMarginTop"
 											textAlign="Left" />
 									</items>
@@ -84,8 +97,8 @@
 				</CustomListItem>
 			</items>
 		</GrowingList>
-		<VBox>
-		<Toolbar class="sapUiMediumMarginTop">
+		<!--<VBox>
+		<Toolbar>
 			<Text text="I Want"></Text>
 			<Input id="itemQuantity" value="10" width="80px" textAlign="Center"
 				fieldWidth="60%" />
@@ -94,24 +107,31 @@
 				fieldWidth="60%" liveChange="onChangeValue" />
 			<Text text="RMB"></Text>
 		</Toolbar>
-		</VBox>
-		<Bar>
+		<HBox>
+	    <Text text="Discount Price"/>
+		<Text id="actualCost" width="80px" textAlign="Left"
+				fieldWidth="60%" />
+		<Text text="RMB"></Text>
+		</HBox>
+		</VBox> -->
+		<!--<Bar>
 		<contentLeft>
 		<Text text="Discount Price"/>
 		<Text id="actualCost" width="80px" textAlign="Left"
 				fieldWidth="60%" />
 		<Text text="RMB"></Text>
 		</contentLeft>
-		</Bar>
+		</Bar>-->
 		<footer>
 			<Toolbar class="sapUiMediumMarginTop">
-				<Button icon="sap-icon://add-activity-2" press="onJoinInvitation" />
+			    <Button id="closeInv" icon="sap-icon://sys-cancel" press="onCloseInvitation" />
+				<Button id="joinInv"  icon="sap-icon://add-activity-2" press="onJoinInvitation" />
 				<ToolbarSpacer />
 				<Button icon="sap-icon://unfavorite" activeIcon="sap-icon://favorite" press="onFavorite"/>
 				<ToolbarSpacer />
 				<Button icon="sap-icon://globe" press="onNavToMap" />
 				<ToolbarSpacer />
-				<Button icon="sap-icon://share-2" />
+				<Button icon="sap-icon://share-2" press="onShare" />
 			</Toolbar>
 		</footer>
 	</Page>
