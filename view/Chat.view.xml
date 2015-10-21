@@ -8,29 +8,8 @@
           showNavButton="true"
           navButtonPress="onNavButtonPressed">
         <content>
-            <!-- <core:HTML id='msglist'> -->
-            <!-- </core:HTML> -->
-            <List id='msglist'
-                  inset="true"
-                  backgroundDesign="Transparent"
-                  showSeparators="None"
-                  items="{msgs&gt;/}"
-                  updateFinished="onUpdateFinished">
-                <items>
-                    <CustomListItem class="sapUiSmallMarginBottom">
-                        <VBox>
-                            <items>
-                                <TextArea editable="false"
-                                          value="{msgs&gt;msg}"
-                                          class="chatMessage--others"
-                                          rows="{= Math.ceil(${msgs&gt;msg}.length / 19) }"
-                                          wrapping="Soft" />
-                                <Label text="{msgs&gt;usrname}" />
-                            </items>
-                        </VBox>
-                    </CustomListItem>
-                </items>
-            </List>
+            <core:HTML id='msglist'>
+            </core:HTML>
         </content>
         <footer>
             <Toolbar>

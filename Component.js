@@ -130,11 +130,13 @@ sap.ui.core.UIComponent
                     oMockServer
                         .simulate(sMetadataUrl, sMockdataBaseUrl);
                     oMockServer.start();
+
+                    this.oMockServer = oMockServer;
                 }
 
-                var oModel = new sap.ui.model.odata.ODataModel(
-                    sServiceUrl, true);
-                this.setModel(oModel);
+                // var oModel = new sap.ui.model.odata.ODataModel(
+                //     sServiceUrl, true);
+                // this.setModel(oModel);
 
                 // set device model
                 var deviceModel = new sap.ui.model.json.JSONModel({

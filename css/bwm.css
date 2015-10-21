@@ -150,7 +150,15 @@
 /*     padding: 0 0.75rem; */
 /* } */
 
-.chatMessage--others {
+
+
+
+/* Bit of normalisation */
+
+
+/* .bubble */
+
+.bubble {
 	background-image: linear-gradient(bottom, rgb(210,244,254) 25%, rgb(149,194,253) 100%);
 background-image: -o-linear-gradient(bottom, rgb(210,244,254) 25%, rgb(149,194,253) 100%);
 background-image: -moz-linear-gradient(bottom, rgb(210,244,254) 25%, rgb(149,194,253) 100%);
@@ -181,14 +189,14 @@ background-image: -webkit-gradient(
 	word-wrap: break-word;
 }
 
-.chatMessage--others:before, .chatMessage--others:after {
+.bubble:before, .bubble:after {
 	border-radius: 20px / 10px;
 	content: '';
 	display: block;
 	position: absolute;
 }
 
-.chatMessage--others:before {
+.bubble:before {
 	border: 10px solid transparent;
 	border-bottom-color: rgba(0, 0, 0, 0.5);
 	bottom: 0;
@@ -196,14 +204,14 @@ background-image: -webkit-gradient(
 	z-index: -2;
 }
 
-.chatMessage--others:after {
+.bubble:after {
 	border: 8px solid transparent;
 	border-bottom-color: #d2f4fe;
 	bottom: 1px;
 	left: -5px;
 }
 
-.chatMessage-mine {
+.bubble--alt {
 	background-image: linear-gradient(bottom, rgb(172,228,75) 25%, rgb(122,205,71) 100%);
 background-image: -o-linear-gradient(bottom, rgb(172,228,75) 25%, rgb(122,205,71) 100%);
 background-image: -moz-linear-gradient(bottom, rgb(172,228,75) 25%, rgb(122,205,71) 100%);
@@ -219,16 +227,18 @@ background-image: -webkit-gradient(
 	float: right;
 }
 
-.chatMessage-mine:before {
+.bubble--alt:before {
 	border-bottom-color: rgba(0, 0, 0, 0.5);
 	border-radius: 20px / 10px;
 	left: auto;
 	right: -7px;
 }
 
-.chatMessage-mine:after {
+.bubble--alt:after {
 	border-bottom-color: #ace44b;
 	border-radius: 20px / 10px;
 	left: auto;
 	right: -5px;
 }
+
+
