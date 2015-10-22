@@ -132,12 +132,11 @@ sap.ui.core.UIComponent
                     oMockServer.start();
 
                     this.oMockServer = oMockServer;
+                }else{
+                     var oModel = new sap.ui.model.odata.ODataModel(
+                         sServiceUrl, true);
+                     this.setModel(oModel);
                 }
-
-                // var oModel = new sap.ui.model.odata.ODataModel(
-                //     sServiceUrl, true);
-                // this.setModel(oModel);
-
                 // set device model
                 var deviceModel = new sap.ui.model.json.JSONModel({
                     isTouch: sap.ui.Device.support.touch,

@@ -3,6 +3,8 @@ jQuery.sap.require("bwm.view.BaseController");
 jQuery.sap.require("bwm.util.UtilMethod");
 var invitation_data;
 var invitation_id = "";
+var invitation_item_id = "";
+var hasJoined = false;
 bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 
 	/**
@@ -33,6 +35,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 //				this._onObjectMatched, this);
 		this.getRouter().getRoute('invitationDetail').attachMatched(
 				this._onObjectMatched, this);
+		
 //	    if(this.getView().getModel("user").getData().id == invitation_data.creator.id){
 //	    	this.getView().byId("joinInv").setVisible("false");
 //	    }else{
@@ -54,8 +57,8 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 				invitation_data = data;
 				that.calculateCost();
 				if(that.getView().getModel("user").getData().uuid == invitation_data["creator.id"]){
-					that.getView().byId("joinInv").setVisible(false);
-					that.getView().byId("closeInv").setVisible(true);
+					that.setJoinButtonVisible(false);
+					that.setCancelButtonVisible(true);
 				}else{
 					that.setJoinCancelBtnForJoiner();
 				}
@@ -72,23 +75,24 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 			success: function(data){
 				console.log(data);
 				var invitationItems = data;
-				var hasJoined = false;
+				//var hasJoined = false;
 				for( var i =0;i<data.results.length; i++ ) {
 					if(data.results[i]["joiner.id"] == logonUserGUID ) {
 						hasJoined = true;
+						invitation_item_id = data.results[i]["inv_id"];
 						break;
 					}
 				}
 				if(hasJoined) {
-					thisController.getView().byId("joinInv").setVisible(false);
-					thisController.getView().byId("closeInv").setVisible(true);
+					thisController.setJoinButtonVisible(false);
+					thisController.setCancelButtonVisible(true);
 				}else{
-					thisController.getView().byId("joinInv").setVisible(true);
-					thisController.getView().byId("closeInv").setVisible(false);
+					thisController.setJoinButtonVisible(true);
+					thisController.setCancelButtonVisible(false);
 				}
 			},
 			
-			failed: function(err) {
+			error: function(err) {
 				console.log(err)
 			}
 		});
@@ -215,29 +219,38 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 	},
 	
 	onCloseInvitation : function(oEvent){
-/*		    var batchChanges = [];
-	        var oModel = this.getView().getModel();
-	        
-	        var mNewInv = {
-	            id: invitation_data.id,
-	            title: invitation_data.title,
-	            status: 2,
-	            "creator.id": invitation_data["creator.id"],
-	            "category.id": invitation_data["category.id"],
-	            "discountType.id": invitation_data["discountType.id"],
-	            total_quantity: invitation_data.total_quantity,
-	            discount: invitation_data.discount,
-	            total_money: invitation_data.total_money,
-	            return_money: invitation_data.return_money,
-	            create_time: invitation_data.create_time,
-	            valid_in: invitation_data.valid_in,
-	            end_time: invitation_data.end_time,
-	            longitude: invitation_data.longitude,
-	            latitude: invitation_data.latitude,
-	            address: invitation_data.address
-	        };
+		if (hasJoined) {
+			if((invitation_item_id !== "") && (invitation_id !== "")) {
+				var oModel = this.getView().getModel();
+				var thisController = this;
+				var invitation_item_path = "/InvitationItem(inv_id='"+invitation_item_id+"',inv_head.id='"+invitation_id+"')";
+				oModel.remove(invitation_item_path, {
+					success : jQuery.proxy(function(mResponse) {
+						oModel.refresh();
+						//this.onInit();
+						thisController.setJoinButtonVisible(true);
+						thisController.setCancelButtonVisible(false);
+						jQuery.sap.require("sap.m.MessageToast");
+						// ID of newly inserted product is available in mResponse.ID
+						this.oBusyDialog.close();
+						sap.m.MessageToast.show("Item has been canceled");
+					}, this),
+					error : jQuery.proxy(function() {
+						this.oBusyDialog.close();
+						this.showErrorAlert("Problem when cancel item");
+					}, this)
+				});
 
-	        batchChanges.push(oModel.createBatchOperation("/Invitation", "PUT", mNewInv));*/
+			} 
+		}
+	},
+	
+	setCancelButtonVisible: function(bVisible ) {
+		this.getView().byId("closeInv").setVisible(bVisible);
+	},
+	
+	setJoinButtonVisible: function(bVisible) {
+		this.getView().byId("joinInv").setVisible(bVisible);
 	},
 /*	onActionSheet : function(oEvent){
 		var oButton = oEvent.getSource();
