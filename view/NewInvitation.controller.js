@@ -382,15 +382,9 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     },
     */
     onNavButtonPressed: function() {
-        this.getRouter().navTo("invitations");
+        //this.getRouter().navTo("invitations");
 
-        //this.getRouter().backWithoutHash(this.getView());
-        // this.getRouter().myNavToWithoutHash({
-        //     currentView: this.getView(),
-        //     targetViewName: "bwm.view.Invitations",
-        //     targetViewType: "XML",
-        //     transition: "slide"
-        // });
+    	this.onNavBack();
     },
 
     onSelect: function(oEvent) {

@@ -1,5 +1,5 @@
 jQuery.sap.declare("bwm.view.BaseController");
-
+jQuery.sap.require("sap.ui.core.routing.History");
 sap.ui.core.mvc.Controller.extend("bwm.view.BaseController", {
     getEventBus: function () {
         var sComponentId = sap.ui.core.Component.getOwnerIdFor(this.getView());
@@ -16,5 +16,19 @@ sap.ui.core.mvc.Controller.extend("bwm.view.BaseController", {
 
     getComponent: function(){
         return this.getOwnerComponent();
-    }
+    },
+    
+    onNavBack: function (oEvent) {
+		var oHistory, sPreviousHash;
+
+		oHistory = sap.ui.core.routing.History.getInstance();
+		sPreviousHash = oHistory.getPreviousHash();
+
+		if (sPreviousHash !== undefined) {
+			window.history.go(-1);
+		} else {
+			this.getRouter().navTo("invitations", {}, true /*no history*/); //Home 
+		}
+	}
+
 });

@@ -166,7 +166,8 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 	},
 
 	onNavButtonPressed : function() {
-		this.getRouter().backWithoutHash(this.getView());
+		//this.getRouter().backWithoutHash(this.getView());
+		this.onNavBack();
 		// sap.ui.core.UIComponent.getRouterFor(this).backWithoutHash(this.getView());
 	},
 	
