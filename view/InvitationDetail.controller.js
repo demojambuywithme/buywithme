@@ -2,6 +2,7 @@ jQuery.sap.declare("bwm.view.InvitationDetail");
 jQuery.sap.require("bwm.view.BaseController");
 jQuery.sap.require("bwm.util.UtilMethod");
 var invitation_data;
+var invitation_id = "";
 bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 
 	/**
@@ -25,7 +26,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 	 * errorThrown) { //alert("Oh no, an error occurred"); } });
 	 * invDetView.setModel(oInvation,"invation"); }
 	 */
-
+	
 	onInit : function() {
 //		var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 //		oRouter.getRoute("invitation").attachPatternMatched(
@@ -43,7 +44,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 		this.getView().bindElement({
 			path : "/" + oEvent.getParameter("arguments").invitation
 		});
-		var invitation_id = oEvent.getParameter("arguments").invitation.substring(
+		invitation_id = oEvent.getParameter("arguments").invitation.substring(
 				12, 44);
 		var that = this;
 		
@@ -56,13 +57,43 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 					that.getView().byId("joinInv").setVisible(false);
 					that.getView().byId("closeInv").setVisible(true);
 				}else{
-					that.getView().byId("joinInv").setVisible(true);
-					that.getView().byId("closeInv").setVisible(false);
+					that.setJoinCancelBtnForJoiner();
 				}
 			}
 		});
+		
+		
 	},
-
+	
+	setJoinCancelBtnForJoiner: function() {
+		var logonUserGUID = this.getView().getModel("user").getData().uuid;
+		var thisController = this;
+		this.getView().getModel().read("/Invitation('"+invitation_id+"')/InvitationItems", {
+			success: function(data){
+				console.log(data);
+				var invitationItems = data;
+				var hasJoined = false;
+				for( var i =0;i<data.results.length; i++ ) {
+					if(data.results[i]["joiner.id"] == logonUserGUID ) {
+						hasJoined = true;
+						break;
+					}
+				}
+				if(hasJoined) {
+					thisController.getView().byId("joinInv").setVisible(false);
+					thisController.getView().byId("closeInv").setVisible(true);
+				}else{
+					thisController.getView().byId("joinInv").setVisible(true);
+					thisController.getView().byId("closeInv").setVisible(false);
+				}
+			},
+			
+			failed: function(err) {
+				console.log(err)
+			}
+		});
+	},
+	
 	discountFormatter : function(total_quantity, discount, discountCat) {
 		if (discountCat == "01") {
 			return ("Buy " + total_quantity + " Return " + discount);
@@ -207,7 +238,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 	        };
 
 	        batchChanges.push(oModel.createBatchOperation("/Invitation", "PUT", mNewInv));*/
-	}
+	},
 /*	onActionSheet : function(oEvent){
 		var oButton = oEvent.getSource();
 		
@@ -240,10 +271,10 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
  * 
  * @memberOf bwm.view.home
  */
-// onAfterRendering: function() {
-//
-// },
-/**
+ onAfterRendering: function() {
+	 console.log("after rendering");
+ }
+/*
  * Called when the Controller is destroyed. Use this one to free resources and
  * finalize activities.
  * 
