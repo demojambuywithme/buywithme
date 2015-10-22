@@ -20,10 +20,9 @@
                                     <core:Fragment fragmentName="bwm.fragment.InvitationOverview"
                                                    type="XML" />
                                     <Toolbar>
-                                        <Button text="Join"
-                                                type="Accept"
+                                        <Button icon="sap-icon://display"
                                                 width="25%"
-                                                press=".onJoin" />
+                                                press=".onDisplay" />
                                         <!-- <ToolbarSpacer /> -->
                                         <Button icon="sap-icon://favorite"
                                                 width="25%" />

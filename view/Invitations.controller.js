@@ -19,7 +19,7 @@ bwm.view.BaseController.extend("bwm.view.Invitations", {
 	toMine : function() {
 		this.getRouter().navTo("mine");
 	},
-	onJoin : function(oEvent) {
+	onDisplay : function(oEvent) {
 		var oItem = oEvent.getSource();
 		this.getRouter().navTo("invitationDetail", {
 			invitation : oItem.getBindingContext().getPath().substr(1),
