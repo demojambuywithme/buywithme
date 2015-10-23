@@ -1,20 +1,20 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
     <Dialog title="Discount Details" type="Message">
         <content>
-            <Vbox>
-                <Hbox>
+            <VBox>
+                <HBox>
                     <Toolbar>
                         <Text text="X : "></Text>
                         <Input id="inputX" value="{newInvitation>/Invitation/total_quantity}" width="70px" textAlign="Center" fieldWidth="60%" />
                     </Toolbar>
-                </Hbox>
-                <Hbox>
+                </HBox>
+                <HBox>
                     <Toolbar>
                         <Text text="Y :"></Text>
                         <Input id="inputY" value="{newInvitation>/Invitation/discount}" width="70px" textAlign="Center" fieldWidth="60%" />
                     </Toolbar>
-                </Hbox>
-            </Vbox>
+                </HBox>
+            </VBox>
         </content>
         <beginButton>
             <Button text="Confirm" press="onDiscDialogConfirm" />
