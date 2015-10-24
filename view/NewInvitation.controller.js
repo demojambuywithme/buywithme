@@ -16,7 +16,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
      * @memberOf bwm.view.home
      */
     onInit: function() {
-
+        //Initialization for new invitation
         if (this._oPopover) {
             this._oPopover.destroy();
         }
@@ -67,10 +67,13 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
             if (this.getStatus() == BMAP_STATUS_SUCCESS) {
                 curLongitude = r.point.lng;
                 curLatitude = r.point.lat;
+                var mapUrl = "http://api.map.baidu.com/geocoder/v2/?ak=CD70726d5902ec38d1e1a9e7d249d923&callback=renderReverse&location=" + curLatitude + "," + curLongitude + "&output=json&pois=1";
                 jQuery.ajax({
                     //type: "post",
                     //TO DO, Add real latitude and longitude into it
-                    url: "http://api.map.baidu.com/geocoder/v2/?ak=CD70726d5902ec38d1e1a9e7d249d923&callback=renderReverse&location=31.20729,121.608265&output=json&pois=1",
+
+                    //url: "http://api.map.baidu.com/geocoder/v2/?ak=CD70726d5902ec38d1e1a9e7d249d923&callback=renderReverse&location=31.20729,121.608265&output=json&pois=1",
+                    url: mapUrl,
                     dataType: "jsonp",
                     async: false,
                     success: function(data, textStatus, jqXHR) {
@@ -105,7 +108,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                 alert('failed' + this.getStatus());
             }
         }, {
-            enableHighAccuracy: true
+            enableHighAccuracy: true,
         })
     },
 
@@ -114,7 +117,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         var aItem = oEvent.getParameters("selectedItem");
         if (aItem) {
             var locLink = this.getView().byId("link01");
-             locLink.setText(aItem.selectedItem.mProperties.description);
+            locLink.setText(aItem.selectedItem.mProperties.description);
         }
     },
 
@@ -225,19 +228,6 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         //to get access to the global model
         this.getView().addDependent(dialog);
         dialog.open();
-        //===============Open by fragment======================
-        /*if (!this._oPopover) {
-            this._oPopover = sap.ui.xmlfragment("bwm.fragment.PhotoPick", this);
-
-            //to get access to the global model
-            this.getView().addDependent(this.oPopover);
-        }
-        
-        // delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
-        var oButton1 = oEvent.getSource();
-        jQuery.sap.delayedCall(0, this, function() {
-            this._oPopover.openBy(oButton1);
-        });*/
     },
 
     getRouter: function() {
@@ -308,7 +298,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                 invPics.push(image);
                 batchChanges.push(oModel.createBatchOperation("/InvitationPicture", "POST", image));
             }
-        };
+        }
 
         oModel.addBatchChangeOperations(batchChanges);
         oModel.setUseBatch(true);
@@ -374,8 +364,49 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         this.oDiscDetailDialog.destroy();
     },
 
-    //For location list selection close
+    //For value helps
+    //Value help for "I want to buy ? PC"
+    handlePCValueHelp: function(oEvent) {
+        var oView = this;
+        oView.inputId = oEvent.getSource().getId();
+        // create value help dialog
+        if (!oView.oPCDialog) {
+            //Initialization for PC value help
+            var oModelPC = new sap.ui.model.json.JSONModel("./model/Pieces.json");
+            oView.oPCDialog = sap.ui.xmlfragment("bwm.fragment.PCDialog", oView);
+            oView.oPCDialog.setModel(oModelPC, "PCValueHelpDialog");
+            oView.getView().addDependent(oView.oPCDialog);
+        }
+        // open value help dialog filtered by the input value
+        oView.oPCDialog.open();
+    },
 
+    _handlePCValueHelpClose: function(evt) {
+        var oSelectedItem = evt.getParameter("selectedItem");
+        if (oSelectedItem) {
+            var PCInput = this.getView().byId("piece01");
+            PCInput.setValue(oSelectedItem.getTitle());
+        }
+
+    },
+
+    //Calculate Amount
+    handleAmountChange: function(oEvent) {
+        var newValue = oEvent.getParameter("value");
+        var discountAmount = this.getView().byId("discountAmount01");
+
+        var disc = this.getView().getModel("newInvitation").getData().Invitation.discount;
+        if (disc == "10%") {
+            newValue = newValue * 0.9
+        };
+        if (disc == "0.3") {
+            newValue = newValue * 0.7
+        };
+        newValue = newValue.toFixed(2);
+        discountAmount.setNumber(newValue);
+    },
+
+    //For location list selection close
     /*
     onCancel : function() {
         sap.ui.core.UIComponent.getRouterFor(this).backWithoutHash(this.getView());
@@ -384,7 +415,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     onNavButtonPressed: function() {
         //this.getRouter().navTo("invitations");
 
-    	this.onNavBack();
+        this.onNavBack();
     },
 
     onSelect: function(oEvent) {
