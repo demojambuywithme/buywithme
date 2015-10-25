@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <SelectDialog
+    title="How much discount?"
+    class="sapUiPopupWithPadding"
+    contentWidth="100px"
+    items="{path: 'DRTValueHelpDialog>/'}"
+    confirm="_handleDRTValueHelpClose"
+    cancel="_handleDRTValueHelpClose">
+    <StandardListItem
+      title="{DRTValueHelpDialog>disc}"/>
+  </SelectDialog>
+</core:FragmentDefinition>

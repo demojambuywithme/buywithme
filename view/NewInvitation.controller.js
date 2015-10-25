@@ -132,8 +132,8 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                 "creator.id": "4defa41b7b934dab9f36627b32fb7bb7", //User Jiang, Xin
                 status: "1",
                 id: invGuid,
-                total_quantity: "3",
-                discount: 0.3
+                total_quantity: "0",
+                discount: 0
             }
         });
     },
@@ -390,6 +390,54 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
 
     },
 
+    //Value help for discount details: Buy X PCs Y Off => X
+    handleDPCValueHelp: function(oEvent) {
+        var oView = this;
+        // create value help dialog
+        if (!oView.oDPCDialog) {
+            //Initialization for PC value help
+            var oModelDPC = new sap.ui.model.json.JSONModel("./model/Pieces.json");
+            oView.oDPCDialog = sap.ui.xmlfragment("bwm.fragment.DPCDialog", oView);
+            oView.oDPCDialog.setModel(oModelDPC, "DPCValueHelpDialog");
+            oView.getView().addDependent(oView.oDPCDialog);
+        }
+        // open value help dialog filtered by the input value
+        oView.oDPCDialog.open();
+    },
+
+    _handleDPCValueHelpClose: function(evt) {
+        var oSelectedItem = evt.getParameter("selectedItem");
+        if (oSelectedItem) {
+            var piece = oSelectedItem.getTitle();
+            this.getView().getModel("newInvitation").setProperty("/Invitation/total_quantity", piece);
+            //PCInput.setNumber(oSelectedItem.getTitle());
+        }
+
+    },
+    //Value help for discount details: Buy X PCs Y Off => X
+    handleDRTValueHelp: function(oEvent) {
+        var oView = this;
+        // create value help dialog
+        if (!oView.oDRTDialog) {
+            //Initialization for PC value help
+            var oModelDRT = new sap.ui.model.json.JSONModel("./model/DiscValueHelp.json");
+            oView.oDRTDialog = sap.ui.xmlfragment("bwm.fragment.DRTDialog", oView);
+            oView.oDRTDialog.setModel(oModelDRT, "DRTValueHelpDialog");
+            oView.getView().addDependent(oView.oDPCDialog);
+        }
+        // open value help dialog filtered by the input value
+        oView.oDRTDialog.open();
+    },
+
+    _handleDRTValueHelpClose: function(evt) {
+        var oSelectedItem = evt.getParameter("selectedItem");
+        if (oSelectedItem) {
+            var disc = oSelectedItem.getTitle();
+            this.getView().getModel("newInvitation").setProperty("/Invitation/discount", disc);
+            //PCInput.setNumber(oSelectedItem.getTitle());
+        }
+
+    },
     //Calculate Amount
     handleAmountChange: function(oEvent) {
         var newValue = oEvent.getParameter("value");
@@ -397,11 +445,32 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
 
         var disc = this.getView().getModel("newInvitation").getData().Invitation.discount;
         if (disc == "10%") {
-            newValue = newValue * 0.9
-        };
-        if (disc == "0.3") {
-            newValue = newValue * 0.7
-        };
+            newValue = newValue * 0.9;
+        }
+        if (disc == "20%") {
+            newValue = newValue * 0.8;
+        }
+        if (disc == "30%") {
+            newValue = newValue * 0.7;
+        }
+        if (disc == "40%") {
+            newValue = newValue * 0.6;
+        }
+        if (disc == "50%") {
+            newValue = newValue * 0.5;
+        }
+        if (disc == "60%") {
+            newValue = newValue * 0.4;
+        }
+        if (disc == "70%") {
+            newValue = newValue * 0.3;
+        }
+        if (disc == "80%") {
+            newValue = newValue * 0.2;
+        }
+        if (disc == "90%") {
+            newValue = newValue * 0.1;
+        }
         newValue = newValue.toFixed(2);
         discountAmount.setNumber(newValue);
     },
