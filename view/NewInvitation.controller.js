@@ -145,14 +145,14 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     onPhotoDataSuccess: function(imageData) {
         var myCarousel = oView.byId("myImage");
         var carouselWidth = myCarousel.getWidth();
-        if (carouselWidth == "0") {
+        if (carouselWidth == "0px") {
             myCarousel.setWidth("180px");
         }
         var newImage = new sap.m.Image();
         var layoutData = new sap.m.FlexItemData();
         layoutData.setAlignSelf(sap.m.FlexAlignSelf.Stretch);
-        newImage.setWidth("113px");
-        //newImage.setHeight("113px");
+        newImage.setWidth("110px");
+        newImage.setHeight("110px");
         newImage.setSrc("data:image/jpeg;base64," + imageData);
         newImage.setLayoutData(layoutData);
         myCarousel.addPage(newImage);
@@ -161,14 +161,14 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     onPhotoURISuccess: function(imageURI) {
         var myCarousel = oView.byId("myImage");
         var carouselWidth = myCarousel.getWidth();
-        if (carouselWidth == "0") {
+        if (carouselWidth == "0px") {
             myCarousel.setWidth("180px");
         }
         var newImage = new sap.m.Image();
         var layoutData = new sap.m.FlexItemData();
         layoutData.setAlignSelf(sap.m.FlexAlignSelf.Stretch);
-        newImage.setWidth("113px");
-        //newImage.setHeight("113px");
+        newImage.setWidth("110px");
+        newImage.setHeight("110px");
         newImage.setSrc(imageURI);
         newImage.setLayoutData(layoutData);
         myCarousel.addPage(newImage);

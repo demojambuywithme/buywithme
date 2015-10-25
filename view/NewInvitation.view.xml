@@ -70,7 +70,7 @@
                         </Image> -->
                     </pages>
                 </Carousel>
-                <Image id="addPicture" class="sapUiSmallMarginTop" src="./pictures_cy/plus.png" densityAware="true" width="100px" color="#64E4CE" press="onPhotoDialogPress">
+                <Image id="addPicture" class="sapUiSmallMarginTop" src="./pictures_cy/plus.png" densityAware="true" width="110px" color="#64E4CE" press="onPhotoDialogPress">
                 </Image>
                 <!--<core:Icon src="sap-icon://sys-add" size="100px" color="#64E4CE" press="onPhotoDialogPress">
                 <core:Icon src="/pictures_cy/plus.ico" size="100px" color="#64E4CE" press="onPhotoDialogPress">
