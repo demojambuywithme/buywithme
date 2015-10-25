@@ -43,7 +43,7 @@ bwm.view.BaseController.extend("bwm.view.Invitations", {
 	onAdd: function () {
 		this.getRouter().myNavToWithoutHash({
 			currentView: this.getView(),
-			targetViewName: "bwm.view.Mine",
+			targetViewName: "bwm.view.NewInvitation",
 			targetViewType: "XML",
 			transition: "slide",
 		});
