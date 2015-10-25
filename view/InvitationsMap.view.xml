@@ -21,7 +21,7 @@
 				<contentMiddle>
 					<HBox>
 						<!-- <Label text="Category"> </Label> -->
-						<Select id="cate" items="{path: '/'}" change="selChange"
+						<Select id="cate" items="{/Category}" change="selChange"
 							autoAdjustWidth="true">
 							<core:Item text="{description}" key="{id}" />
 						</Select>
@@ -30,7 +30,7 @@
 				<contentRight>
 					<HBox>
 						<!-- <Label text="Discount Type"> </Label> -->
-						<Select id="disc" items="{path: '/'}" change="selChange"
+						<Select id="disc" items="{/DiscountType}" change="selChange"
 							autoAdjustWidth="true">
 							<core:Item text="{description}" key="{id}" />
 						</Select>
