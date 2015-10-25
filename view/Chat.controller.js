@@ -8,123 +8,125 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
      * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
      * @memberOf bwm.view.home
      */
-    onInit: function() {
-
-        if (this.getComponent().oMockServer) {
-            this.getComponent().oMockServer.stop();
-        }
-
-        var oRouter = this.getRouter();
-        oRouter.getRoute("chat").attachMatched(this.onRouteMatched, this);
+    onInit: function () {
+        // var oRouter = this.getRouter();
+        // oRouter.getRoute("chat").attachMatched(this.onRouteMatched, this);
 
         //init model
         this.initModel();
 
         this.oUser = this.getView().getModel('user').getData();
-        // this.aUser = this.getView().getModel('users').getData();
+        this.aUser = this.getComponent().getModel('users').getData();
 
         //socket connection
         this.socket = io('http://localhost:8090/chat');
-        this.socket.emit('join', {
-            conversationId: '001'
-        });
 
-        //on chat history
-        this.onChatHistory();
-
-        //on new msg
-        this.onNewMsg();
+        // init chats
+        this.chats = [];
 
         this.byId('chatting').addEventDelegate({
-            onBeforeShow: this.onBeforeShow
+            onBeforeShow: this.onBeforeShow,
+            onAfterShow: this.onBeforeShow
         });
-
-        // this.msgs = [{
-        //     user: 'jay',
-        //     text: 'do you want to join this?'
-        // }, {
-        //     user: 'loring',
-        //     text: 'shit'
-        // }];
     },
-    initModel: function() {
+    initModel: function () {
         this.getView().setModel(new sap.ui.model.json.JSONModel({
-            text: ""
+            text: ''
         }), 'msg');
 
         this.getView().setModel(new sap.ui.model.json.JSONModel({
             id: 'aaron',
             name: 'shen Aaron'
         }), 'user');
+        this.getView().setModel(new sap.ui.model.json.JSONModel({
+            id: 'jay',
+            name: 'jay ss'
+        }), 'user');
     },
-    onBeforeShow: function() {
+    onBeforeShow: function () {
+        this.socket.emit('join', {
+            conversationId: '001'
+        });
+        //on chat history
+        this.onChatHistory();
+
+        //on new msg
+        this.onNewMsg();
 
     },
-
-    onChatHistory: function() {
-        this.socket.on('chatHistory', $.proxy(function(chats) {
+    onChatHistory: function () {
+        this.socket.on('chatHistory', $.proxy(function (chats) {
             this.chats = chats;
 
-            var htmlString = this.chats2Html(chats);
-
-            this.byId('msglist').setContent(htmlString);
+            var dom = this.chats2dom(chats);
+            this.byId('msglist').setDOMContent(dom);
 
             // $("#chats").scrollTop($("#chats")[0].scrollHeight);
             // chats = chats.map(this.assignUserName2Msg, this);
 
         }, this));
     },
-    onNewMsg: function() {
-        this.socket.on('newMessage', $.proxy(function(chat) {
+    onNewMsg: function () {
+        this.socket.on('newMessage', $.proxy(function (chat) {
             this.chats.push(chat);
 
-            var htmlString = this.chats2Html(this.chats);
-
-            this.byId('msglist').setContent(htmlString);
+            var dom = this.chats2dom(this.chats);
+            this.byId('msglist').setDOMContent(dom);
         }, this));
     },
-    chats2Html: function(chats) {
+    clearChats: function () {
+        var id = this.byId('msglist').getId();
+        $('#' + id).empty();
+    },
+    chats2dom: function (chats) {
+        var filterUser = function (usrid, ouser) {
+            return ouser.id === usrid;
+        }
+
+        var isUserExist = function (id, user) {
+            return user.id = id;
+        };
+
+        chats = chats.filter($.proxy(function (chat) {
+            return this.aUser.some($.proxy(isUserExist, null, chat.usrid));
+        }, this));
 
         var $chats = $('<div>');
 
-        chats.map($.proxy(function(chat) {
-            var $chat = $('<div>').addClass('bubble').text(chat.msg);
-            if (chat.usrid === this.oUser.id) {
-                $chat.addClass('bubble--alt');
-            }
-            return $chat;
-        }, this)).map($.proxy(function($chats, $chat) {
-            $chat.appendTo($chats);
-        }, null, $chats));
+        chats.map($.proxy(function (chat) {
 
-        return $chats.html();
-    },
-    onUpdateFinished: function() {
-        this.styleMsg();
-    },
-    styleMsg: function() {
-        // var id = this.byId('msglist').getId();
-        // var selector = '#' + id + ' textarea';
-        // var domElements = $(selector);
-        // var msgs = this.getView().getModel('msgs').getData();
-        // var currentUserId = this.getView().getModel('user').getData().id;
+                var $chat = $('<div>');
+                var ouser = this.aUser.filter($.proxy(filterUser, null, chat.usrid))[0];
+                var $name = $('<div>').text(ouser.name);
+                var $msg = $('<div>').addClass('bubble').text(chat.msg);
+                if (chat.usrid === this.oUser.id) {
+                    $msg.addClass('bubble--right');
+                    $name.css('float', 'right');
+                } else {
+                    $msg.addClass('bubble--left');
+                    $name.css('float', 'left');
+                }
 
-        // msgs.map(function(msg, i) {
-        //     var domEl = $(domElements[i]);
-        //     msg.usrid === currentUserId ? domEl.addClass('chatMessage--mine') : domEl.addClass('chatMessage--others');
-        // }, this);
+                $msg.appendTo($chat);
+                $name.appendTo($chat);
+                return $chat;
+            }, this))
+            .map($.proxy(function ($chats, $chat) {
+                $chat.appendTo($chats);
+            }, null, $chats));
+
+        return $chats[0];
     },
-    onSend: function() {
+    onSend: function () {
         var msg = this.getView().getModel('msg').getData().text;
         this.socket.emit('chat', {
             conversationId: '001',
             // usrid: this.getView().getModel('user').getData().id,
-            usrid: "aaron",
+            usrid: this.oUser.id,
             msg: msg
         });
     },
-
-    onRouteMatched: function(oEvent) {
+    onRouteMatched: function (oEvent) {
         // var oArgs, oView;
         // oArgs = oEvent.getParameter("arguments");
         // this.invitationId = oArgs.invitation;
@@ -154,12 +156,7 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
      * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
      * @memberOf bwm.view.home
      */
-    onExit: function() {},
-    onNavButtonPressed: function() {
-        if (this.getComponent().oMockServer) {
-            this.getComponent().oMockServer.start();
-        }
-        this.getRouter().backWithoutHash(this.getView());
-    },
+    onExit: function () {},
+    onNavButtonPressed: function () {}
 
 });

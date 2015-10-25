@@ -6,10 +6,10 @@
     <Page id="chatting"
           title="Chat"
           showNavButton="true"
-          navButtonPress="onNavButtonPressed">
+          navButtonPress="onNavButtonPressed"
+          class="chatpage">
         <content>
-            <core:HTML id='msglist'>
-            </core:HTML>
+            <core:HTML id='msglist'></core:HTML>
         </content>
         <footer>
             <Toolbar>
@@ -25,3 +25,4 @@
         </footer>
     </Page>
 </core:View>
+

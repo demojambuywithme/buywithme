@@ -95,7 +95,7 @@ sap.ui.core.UIComponent
                     }]
                 }
             },
-            init: function() {
+            init: function () {
 
                 sap.ui.core.UIComponent.prototype.init.apply(this,
                     arguments);
@@ -132,11 +132,11 @@ sap.ui.core.UIComponent
                     oMockServer.start();
 
                     this.oMockServer = oMockServer;
-                }else{
-                     var oModel = new sap.ui.model.odata.ODataModel(
-                         sServiceUrl, true);
-                     this.setModel(oModel);
                 }
+
+                var oModel = new sap.ui.model.odata.ODataModel(sServiceUrl, true);
+                this.setModel(oModel);
+
                 // set device model
                 var deviceModel = new sap.ui.model.json.JSONModel({
                     isTouch: sap.ui.Device.support.touch,
@@ -151,24 +151,24 @@ sap.ui.core.UIComponent
 
                 //mock users in system
                 var users = [{
-                	uuid: "311c0ab7fed848c7857f8f5204faf111",
+                    uuid: "311c0ab7fed848c7857f8f5204faf111",
                     id: "jay",
                     name: "Zhao Jay"
-   
+
                 }, {
-                	uuid: "4defa41b7b934dab9f36627b32fb7bb7",
+                    uuid: "4defa41b7b934dab9f36627b32fb7bb7",
                     id: "chunyang",
                     name: "Xu Chunyang"
                 }, {
-                	uuid: "81794267dc2e4e5e9619e51e37bfb1de",
+                    uuid: "81794267dc2e4e5e9619e51e37bfb1de",
                     id: "aaron",
                     name: "Shen Aaron"
                 }, {
-                	uuid: "877da535455a47b893b19e9ab8a1f2c2",
+                    uuid: "877da535455a47b893b19e9ab8a1f2c2",
                     id: "xin",
                     name: "Jiang Xin"
                 }, {
-                	uuid: "6273876ccd96464cae261fd8c390267f",
+                    uuid: "6273876ccd96464cae261fd8c390267f",
                     id: "loring",
                     name: "Wu Loring"
                 }];
