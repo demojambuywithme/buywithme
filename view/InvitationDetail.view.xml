@@ -131,8 +131,9 @@
 		</Bar>-->
 		<footer>
 			<Toolbar class="sapUiMediumMarginTop">
-			    <Button id="closeInv" icon="sap-icon://sys-cancel" press="onCloseInvitation" />
 				<Button id="joinInv"  icon="sap-icon://add-activity-2" press="onJoinInvitation" />
+				<Button id="quitInv" icon="sap-icon://sys-minus" press="onQuitInvitation" />
+				<Button id="closeInv" icon="sap-icon://sys-cancel" press="onCloseInvitation" />
 				<ToolbarSpacer />
 				<Button icon="sap-icon://unfavorite" activeIcon="sap-icon://favorite" press="onFavorite"/>
 				<ToolbarSpacer />

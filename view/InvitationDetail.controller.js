@@ -43,7 +43,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 		//	    if(this.getView().getModel("user").getData().id == invitation_data.creator.id){
 		//	    	this.getView().byId("joinInv").setVisible("false");
 		//	    }else{
-		//	    	this.getView().byId("closeInv").setVisible("false");
+		//	    	this.getView().byId("quitInv").setVisible("false");
 		//	    }
 	},
 	onBeforeShow: function (oEvt) {
@@ -61,7 +61,8 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 				this.calculateCost();
 				if (this.getView().getModel("user").getData().uuid == this.invitation_data["creator.id"]) {
 					this.setJoinButtonVisible(false);
-					this.setCancelButtonVisible(true);
+					this.setCancelButtonVisible(false);
+					this.setCloseButtonVisible(true);
 				} else {
 					this.setJoinCancelBtnForJoiner();
 				}
@@ -86,9 +87,11 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 				if (hasJoined) {
 					this.setJoinButtonVisible(false);
 					this.setCancelButtonVisible(true);
+					this.setCloseButtonVisible(false);
 				} else {
 					this.setJoinButtonVisible(true);
 					this.setCancelButtonVisible(false);
+					this.setCloseButtonVisible(false);
 				}
 			}, this)
 		});
@@ -133,6 +136,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 				sap.m.MessageToast.show("Congratulation! Join successfully!");
 				this.setCancelButtonVisible(true);
 				this.setJoinButtonVisible(false);
+				this.setCloseButtonVisible(false);
 			}, this),
 
 			jQuery.proxy(function (err) {
@@ -213,7 +217,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 		//oFavorite.
 	},
 
-	onCloseInvitation: function (oEvent) {
+	onQuitInvitation: function (oEvent) {
 		if (hasJoined) {
 			if ((invitation_item_id !== "") && (this.invitation_id !== "")) {
 				var oModel = this.getView().getModel();
@@ -241,12 +245,16 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 	},
 
 	setCancelButtonVisible: function (bVisible) {
-		this.getView().byId("closeInv").setVisible(bVisible);
+		this.getView().byId("quitInv").setVisible(bVisible);
 	},
 
 	setJoinButtonVisible: function (bVisible) {
 		this.getView().byId("joinInv").setVisible(bVisible);
 	},
+	
+	setCloseButtonVisible: function (bVisible){
+		this.getView().byId("closeInv").setVisible(bVisible);
+	}
 
 	/**
 	 * Similar to onAfterRendering, but this hook is invoked before the controller's
