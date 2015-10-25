@@ -125,11 +125,13 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     //Create a json model for new invitation data
     initializeNewInvitationData: function() {
         var invGuid = bwm.util.UtilMethod.guid();
+        //var creatorGuid = this.getView().getModel("user").getData().uuid;
         this.getView().getModel("newInvitation").setData({
             Invitation: {
                 valid_in: "2",
                 //@TODO Question: Creator.id needs to be replaced; and do I need to create invGuid manually?
                 "creator.id": "4defa41b7b934dab9f36627b32fb7bb7", //User Jiang, Xin
+                //"creator.id": creatorGuid,
                 status: "1",
                 id: invGuid,
                 total_quantity: "0",
@@ -175,9 +177,11 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                     busyIndicatorDelay: 1000, // int
                     text: "Taking a photo", // string
                     type: sap.m.ButtonType.Default, // sap.m.ButtonType
-                    width: "200px", // sap.ui.core.CSSSize
+                    width: "290px", // sap.ui.core.CSSSize
                     enabled: true,
-                    //icon : undefined, // sap.ui.core.URI
+                    "class": "sapUiLargeMarginBegin",
+                    icon : sap.ui.core.IconPool.getIconURI("camera"), // sap.ui.core.URI
+                    iconFirst : true,
                     press: [
                         function(oEvent) {
                             var control = oEvent.getSource();
@@ -196,9 +200,10 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                     busyIndicatorDelay: 1000, // int
                     text: "Picking from gallery", // string
                     type: sap.m.ButtonType.Default, // sap.m.ButtonType
-                    width: "200px", // sap.ui.core.CSSSize
+                    width: "290px", // sap.ui.core.CSSSize
                     enabled: true, // boolean
-                    //icon : undefined, // sap.ui.core.URI
+                    icon : sap.ui.core.IconPool.getIconURI("background"), // sap.ui.core.URI
+                    iconFirst : true,
                     press: [
                         function(oEvent) {
                             var control = oEvent.getSource();
