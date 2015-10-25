@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <SelectDialog
+    title="How many pieces?"
+    class="sapUiPopupWithPadding"
+    contentWidth="100px"
+    items="{path: 'PCValueHelpDialog>/'}"
+    confirm="_handlePCValueHelpClose"
+    cancel="_handlePCValueHelpClose">
+    <StandardListItem
+      title="{PCValueHelpDialog>pc}"/>
+  </SelectDialog>
+</core:FragmentDefinition>

@@ -1,5 +1,5 @@
 <mvc:View id="view1234" controllerName="bwm.view.NewInvitation" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:v="sap.ui.comp.variants" xmlns:form="sap.ui.layout.form">
-    <Page title="New Come&amp;Buy" class="sapUiContentPadding" showNavButton="true" navButtonPress="onNavButtonPressed" enableScrolling="true">
+    <Page title="New Invitation" class="sapUiContentPadding" showNavButton="true" navButtonPress="onNavButtonPressed" enableScrolling="true">
         <headerContent>
         </headerContent>
         <VBox>
@@ -7,15 +7,14 @@
             </Input>
             <Panel width="auto">
                 <!-- <Image style="float" class="sapUiSmallMarginEnd" src="./pictures_cy/123.png" densityAware="true" width="113px">class="sapUiTinyMarginBottom"-->
-                
-                <VBox >
+                <VBox>
                     <HBox alignItems="Stretch">
                         <core:Icon src="sap-icon://grid" size="150%" width="30px" color="#64E4CE" class="sapUiSmallMarginEnd">
                             <core:layoutData>
                                 <FlexItemData alignSelf="Center" growFactor="" />
                             </core:layoutData>
                         </core:Icon>
-                        <Select maxWidth="300%" width="230px" autoAdjustWidth="false" id="catrogry_select" items="{path: '/Category', sorter: { path: 'description' } 	}">
+                        <Select maxWidth="300%" width="230px" autoAdjustWidth="false" id="catrogry_select" items="{path: '/Category', sorter: { path: 'description' }   }">
                             <core:Item key="{id}" text="{description}" />
                         </Select>
                     </HBox>
@@ -34,15 +33,14 @@
                 <VBox>
                     <Toolbar>
                         <Text text="I Want"></Text>
-                        <Input id="piece01" value="10" width="70px" textAlign="Center" fieldWidth="60%" />
+                        <Input id="piece01" value="0" width="70px" textAlign="Center" fieldWidth="60%" showValueHelp="true" valueHelpRequest="handlePCValueHelp" valueHelpOnly="true" />
                         <Text text="PC"></Text>
-                        <Input id="amout01" value="100.00" width="70px" textAlign="Center" fieldWidth="60%" />
+                        <Input id="amout01" value="0.00" width="70px" liveChange="handleAmountChange" textAlign="Center" fieldWidth="60%" />
                         <Text text="RMB"></Text>
                     </Toolbar>
                     <Toolbar>
-                        <Text text="My Cost is:" />
-                        <ObjectNumber number="100.5" unit="RMB" />
-                        <ObjectNumber number="50.5" unit="RMB" id="dis_money" class="sapUiTinyMarginBegin" />
+                        <Text text="My Discount Cost is:" />
+                        <ObjectNumber id="discountAmount01" number="0.00" unit="RMB" />
                     </Toolbar>
                     <Toolbar>
                         <Text text="Auto Close in">
@@ -60,8 +58,8 @@
                 <Link id="link01" text="Where are you" class="sapUiTinyMarginTop" press="handleLocation" />
             </HBox>
             <!-- @TODO Picture part needs to be reworked to use data binding, and 
-				cordova plugin! alignItems="Stretch"-->
-            <HBox  class="sapUiExploredNoMarginInfo">
+                cordova plugin! alignItems="Stretch"-->
+            <HBox class="sapUiExploredNoMarginInfo">
                 <Carousel class="sapUiContentPadding" width="180px" id="myImage">
                     <pages>
                         <!-- Test -->
