@@ -20,7 +20,7 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
 		this.aUser = this.getComponent().getModel('users').getData();
 
 		//socket connection
-		this.socket = io('http://10.58.91.184:8090/chat');
+		// this.socket = io('http://10.58.91.184:8090/chat');
 
 		// init chats
 		this.chats = [];
@@ -37,25 +37,25 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
 		}), 'msg');
 	},
 	onBeforeShow: function (oEvt) {
-		this.conversationId = oEvt.data.invitation;
-		this.socket.emit('join', {
-			conversationId: this.conversationId
-		});
-		//on chat history
-		this.onChatHistory();
+		// this.conversationId = oEvt.data.invitation;
+		// this.socket.emit('join', {
+		// 	conversationId: this.conversationId
+		// });
+		// //on chat history
+		// this.onChatHistory();
 
-		//on new msg
-		this.onNewMsg();
+		// //on new msg
+		// this.onNewMsg();
 
 	},
 	onAfterHide: function () {
-		this.socket.emit('leave', {
-			conversationId: this.conversationId
-		});
-		this.socket.removeAllListeners('chatHistory');
-		this.socket.removeAllListeners('newMessage');
-		this.chats = [];
-		this.clearChats();
+		// this.socket.emit('leave', {
+		// 	conversationId: this.conversationId
+		// });
+		// this.socket.removeAllListeners('chatHistory');
+		// this.socket.removeAllListeners('newMessage');
+		// this.chats = [];
+		// this.clearChats();
 	},
 	onChatHistory: function () {
 		this.socket.on('chatHistory', $.proxy(function (chats) {
@@ -117,48 +117,15 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
 		return $chats[0];
 	},
 	onSend: function () {
-		var msg = this.getView().getModel('msg').getData().text;
-		this.getView().getModel('msg').setData({
-			text: ''
-		});
-		this.socket.emit('chat', {
-			conversationId: this.conversationId,
-			// usrid: this.getView().getModel('user').getData().id,
-			usrid: this.oUser.id,
-			msg: msg
-		});
-	},
-	onRouteMatched: function (oEvent) {
-		// var oArgs, oView;
-		// oArgs = oEvent.getParameter("arguments");
-		// this.invitationId = oArgs.invitation;
-
-		// this.socket.emit('join', {
-		//     conversationId: this.invitationId,
+		// var msg = this.getView().getModel('msg').getData().text;
+		// this.getView().getModel('msg').setData({
+		// 	text: ''
 		// });
-	},
-	/**
-	 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-	 * (NOT before the first rendering! onInit() is used for that one!).
-	 * @memberOf bwm.view.home
-	 */
-	onBeforeRendering: function () {
-
-	},
-
-	/**
-	 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
-	 * This hook is the same one that SAPUI5 controls get after being rendered.
-	 * @memberOf bwm.view.home
-	 */
-	onAfterRendering: function () {
-
-	},
-
-	/**
-	 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-	 * @memberOf bwm.view.home
-	 */
-	onExit: function () {}
-
+		// this.socket.emit('chat', {
+		// 	conversationId: this.conversationId,
+		// 	// usrid: this.getView().getModel('user').getData().id,
+		// 	usrid: this.oUser.id,
+		// 	msg: msg
+		// });
+	}
 });
