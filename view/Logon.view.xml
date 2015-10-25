@@ -1,12 +1,13 @@
-<core:View xmlns:core="sap.ui.core" 
-    xmlns:mvc="sap.ui.core.mvc" 
-    xmlns="sap.m" controllerName="bwm.view.Logon" 
-    xmlns:html="http://www.w3.org/1999/xhtml">
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="bwm.view.Logon" xmlns:html="http://www.w3.org/1999/xhtml">
     <Page title="Title">
-        <content>
-            <Label text="User"/> <Input id="user" value="{logon>/user}"/>
-            <Label text="Password"/> <Input type="Password" value="{logon>/password}"/>
-            <Button text="Logon" press=".onLogon"/>
+        <content class="sapUiMediumMarginBeginTop">
+            <VBox class="sapUiMediumMarginBeginTop">
+                <Label text="User" class="sapUiSmallMarginBeginEnd" />
+                <Input id="user" width="300px" value="{logon>/user}" class="sapUiSmallMarginBegin" />
+                <Label text="Password" class="sapUiSmallMarginBeginEnd" />
+                <Input type="Password" width="300px" value="{logon>/password}" class="sapUiSmallMarginBegin" />
+                <Button text="Logon" press=".onLogon" class="sapUiSmallMarginBegin" />
+            </VBox>
         </content>
     </Page>
 </core:View>
