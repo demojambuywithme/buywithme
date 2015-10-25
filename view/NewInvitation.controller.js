@@ -125,12 +125,11 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     //Create a json model for new invitation data
     initializeNewInvitationData: function() {
         var invGuid = bwm.util.UtilMethod.guid();
-        //var creatorGuid = this.getView().getModel("user").getData().uuid;
         this.getView().getModel("newInvitation").setData({
             Invitation: {
                 valid_in: "2",
                 //@TODO Question: Creator.id needs to be replaced; and do I need to create invGuid manually?
-                "creator.id": "4defa41b7b934dab9f36627b32fb7bb7", //User Jiang, Xin
+                //"creator.id": "4defa41b7b934dab9f36627b32fb7bb7", //User Jiang, Xin
                 //"creator.id": creatorGuid,
                 status: "1",
                 id: invGuid,
@@ -145,11 +144,15 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     //There will be two options: <1>Taking a photo <2>Picking from gallery
     onPhotoDataSuccess: function(imageData) {
         var myCarousel = oView.byId("myImage");
+        var carouselWidth = myCarousel.getWidth();
+        if (carouselWidth == "0") {
+            myCarousel.setWidth("180px");
+        }
         var newImage = new sap.m.Image();
         var layoutData = new sap.m.FlexItemData();
         layoutData.setAlignSelf(sap.m.FlexAlignSelf.Stretch);
-        newImage.setWidth("200px");
-        newImage.setHeight("200px");
+        newImage.setWidth("113px");
+        //newImage.setHeight("113px");
         newImage.setSrc("data:image/jpeg;base64," + imageData);
         newImage.setLayoutData(layoutData);
         myCarousel.addPage(newImage);
@@ -157,11 +160,15 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
 
     onPhotoURISuccess: function(imageURI) {
         var myCarousel = oView.byId("myImage");
+        var carouselWidth = myCarousel.getWidth();
+        if (carouselWidth == "0") {
+            myCarousel.setWidth("180px");
+        }
         var newImage = new sap.m.Image();
         var layoutData = new sap.m.FlexItemData();
         layoutData.setAlignSelf(sap.m.FlexAlignSelf.Stretch);
-        newImage.setWidth("200px");
-        newImage.setHeight("200px");
+        newImage.setWidth("113px");
+        //newImage.setHeight("113px");
         newImage.setSrc(imageURI);
         newImage.setLayoutData(layoutData);
         myCarousel.addPage(newImage);
@@ -180,8 +187,8 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                     width: "290px", // sap.ui.core.CSSSize
                     enabled: true,
                     "class": "sapUiLargeMarginBegin",
-                    icon : sap.ui.core.IconPool.getIconURI("camera"), // sap.ui.core.URI
-                    iconFirst : true,
+                    icon: sap.ui.core.IconPool.getIconURI("camera"), // sap.ui.core.URI
+                    iconFirst: true,
                     press: [
                         function(oEvent) {
                             var control = oEvent.getSource();
@@ -202,8 +209,8 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                     type: sap.m.ButtonType.Default, // sap.m.ButtonType
                     width: "290px", // sap.ui.core.CSSSize
                     enabled: true, // boolean
-                    icon : sap.ui.core.IconPool.getIconURI("background"), // sap.ui.core.URI
-                    iconFirst : true,
+                    icon: sap.ui.core.IconPool.getIconURI("background"), // sap.ui.core.URI
+                    iconFirst: true,
                     press: [
                         function(oEvent) {
                             var control = oEvent.getSource();
@@ -241,27 +248,65 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
 
     saveInvitation: function(nID) {
 
+        //Creator ID
+        var creatorGuid = this.getView("bwm.view.Logon").getModel("user").getData().uuid;
         var batchChanges = [];
         var oModel = this.getView().getModel();
         var mNewInvitation = this.getView().getModel("newInvitation").getData().Invitation;
         var discountTypeId = this.getView().byId("discountType_select").getSelectedKey();
         var categortid = this.getView().byId("catrogry_select").getSelectedKey();
         // Basic payload data
+        //Time
+        var myData = new Date();
+        var myFromTime = Date.parse(new Date());
+        var valid_period = mNewInvitation.valid_in * 3600 * 1000;
+        var myToTime = myFromTime + valid_period;
+
+        var discNew;
+        if (mNewInvitation.discount == "10%") {
+            discNew = 0.9;
+        }
+        if (mNewInvitation.discount == "20%") {
+            discNew = 0.8;
+        }
+        if (mNewInvitation.discount == "30%") {
+            discNew = 0.7;
+        }
+        if (mNewInvitation.discount == "40%") {
+            discNew = 0.6;
+        }
+        if (mNewInvitation.discount == "50%") {
+            discNew = 0.5;
+        }
+        if (mNewInvitation.discount == "60%") {
+            discNew = 0.4;
+        }
+        if (mNewInvitation.discount == "70%") {
+            discNew = 0.3;
+        }
+        if (mNewInvitation.discount == "80%") {
+            discNew = 0.2;
+        }
+        if (mNewInvitation.discount == "90%") {
+            discNew = 0.1;
+        }
+
         var mNewInv = {
             //替换
             id: nID,
             title: mNewInvitation.title,
             status: 1,
-            "creator.id": "877da535455a47b893b19e9ab8a1f2c2",
+            //"creator.id": "877da535455a47b893b19e9ab8a1f2c2",
+            "creator.id": creatorGuid,
             "category.id": categortid,
             "discountType.id": discountTypeId,
             total_quantity: mNewInvitation.total_quantity,
-            // discount: mNewInvitation.discount,
+            discount: discNew,
             total_money: mNewInvitation.total_money,
             return_money: mNewInvitation.return_money,
-            //create_time: mNewInvitation.create_time,
-            //valid_in: mNewInvitation.valid_in,
-            //end_time: mNewInvitation.end_time,
+            create_time: myFromTime,
+            valid_in: valid_period,
+            end_time: myToTime,
             longitude: curLongitude,
             latitude: curLatitude,
             address: mNewInvitation.address
@@ -278,7 +323,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
             "inv_head.id": nID,
             "joiner.id": mNewInv['creator.id'],
             quantity: this.getView().byId("piece01").getValue(),
-            money: this.getView().byId("dis_money").getNumber()
+            money: this.getView().byId("discountAmount01").getNumber()
         };
 
         batchChanges.push(oModel.createBatchOperation("/InvitationItem", "POST", invatationItem));
@@ -342,9 +387,9 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                 this.oBusyDialog = new sap.m.BusyDialog();
             }
             this.saveInvitation(this.getView().getModel("newInvitation").getProperty("/Invitation/id"));
-            /*            //@TODO: Later on this should navigate to invitation list
-                        this.onNavButtonPressed();
-                        sap.m.MessageToast.show("Data Saved!");*/
+            //@TODO: Later on this should navigate to invitation list
+            this.onNavButtonPressed();
+            sap.m.MessageToast.show("Invitation Published!");
         }
     },
     //For discount details, to maintain value X and Y
@@ -486,11 +531,11 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         sap.ui.core.UIComponent.getRouterFor(this).backWithoutHash(this.getView());
     },
     */
-    onNavButtonPressed: function() {
-        //this.getRouter().navTo("invitations");
+    // onNavButtonPressed: function() {
+    //     //this.getRouter().navTo("invitations");
 
-        this.onNavBack();
-    },
+    //     this.onNavBack();
+    // },
 
     onSelect: function(oEvent) {
         "use strict";
