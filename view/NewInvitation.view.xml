@@ -24,7 +24,7 @@
                                 <FlexItemData alignSelf="Center" growFactor="" />
                             </core:layoutData>
                         </core:Icon>
-                        <Select width="230px" id="discountType_select" items="{path: '/DiscountType', sorter: { path: 'description' }}" change="onNavToDisType">
+                        <Select width="230px" id="discountType_select" items="{path: '/DiscountType', sorter: { path: 'description', descending: 'true'}}" change="onNavToDisType">
                             <core:Item key="{id}" text="{description}" press="onNavToDisType1" />
                         </Select>
                     </HBox>
@@ -60,16 +60,17 @@
             <!-- @TODO Picture part needs to be reworked to use data binding, and 
                 cordova plugin! alignItems="Stretch"-->
             <HBox class="sapUiExploredNoMarginInfo">
-                <Carousel class="sapUiContentPadding" width="180px" id="myImage">
+                <!--                 <Carousel id="picturesCarousel" class="sapUiContentPadding" width="180px" id="myImage"> -->
+                <Carousel id="myImage" class="sapUiContentPadding" width="0px">
                     <pages>
                         <!-- Test -->
-                        <Image class="sapUiSmallMarginEnd" src="./pictures_cy/123.png" densityAware="true" width="113px">
+                        <!--                      <Image class="sapUiSmallMarginEnd" src="./pictures_cy/123.png" densityAware="true" width="113px">
                         </Image>
                         <Image class="sapUiSmallMarginEnd" src="./pictures_cy/123.png" densityAware="true" width="113px">
-                        </Image>
+                        </Image> -->
                     </pages>
                 </Carousel>
-                <Image class="sapUiSmallMarginTop" src="./pictures_cy/plus.png" densityAware="true" width="100px" color="#64E4CE" press="onPhotoDialogPress">
+                <Image id="addPicture" class="sapUiSmallMarginTop" src="./pictures_cy/plus.png" densityAware="true" width="100px" color="#64E4CE" press="onPhotoDialogPress">
                 </Image>
                 <!--<core:Icon src="sap-icon://sys-add" size="100px" color="#64E4CE" press="onPhotoDialogPress">
                 <core:Icon src="/pictures_cy/plus.ico" size="100px" color="#64E4CE" press="onPhotoDialogPress">
