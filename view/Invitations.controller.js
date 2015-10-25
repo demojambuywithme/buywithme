@@ -38,16 +38,8 @@ bwm.view.BaseController.extend("bwm.view.Invitations", {
 				invitation: oItem.getBindingContext().getProperty('id')
 			}
 		});
-		// this.getRouter().navTo("invitationDetail", {
-		// 	invitation: oItem.getBindingContext().getPath().substr(1),
-		// });
 	},
-	onGlobe: function (oEvent) {
-		var oItem = oEvent.getSource();
-		this.getRouter().navTo("invitationDetailMap", {
-			invitation: oItem.getBindingContext().getPath().substr(1),
-		});
-	},
+	onGlobe: function (oEvent) {},
 	onAdd: function () {
 		this.getRouter().myNavToWithoutHash({
 			currentView: this.getView(),
@@ -55,6 +47,5 @@ bwm.view.BaseController.extend("bwm.view.Invitations", {
 			targetViewType: "XML",
 			transition: "slide",
 		});
-		this.getRouter().navTo("newInvitation");
 	}
 });

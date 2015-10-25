@@ -207,7 +207,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 	},
 
 	onNavToMap: function () {
-		this.getRouter().navTo("invitationDetailMap");
+
 	},
 
 	onChangeValue: function () {

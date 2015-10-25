@@ -48,10 +48,6 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
 		this.onNewMsg();
 
 	},
-	onAfterShow: function () {
-		// var id = '#' + this.byId('msglist').getId();
-		// $(id).scrollTop($(id)[0].scrollHeight);
-	},
 	onAfterHide: function () {
 		this.socket.emit('leave', {
 			conversationId: this.conversationId

@@ -6,9 +6,7 @@
            xmlns:ux3="sap.ui.ux3"
            controllerName="bwm.view.Mine"
            xmlns:html="http://www.w3.org/1999/xhtml">
-    <Page title="Mine"
-          showNavButton="true"
-          navButtonPress="onNavButtonPressed">
+    <Page title="Mine">
         <content>
             <!-- <com:TabStrip> <com:Tab title="Tab1" text="Tab1"> <com:TextArea value="123"> 
                                 </com:TextArea> </com:Tab> <com:Tab title="Tab2" text="Tab2"> <com:TextArea 

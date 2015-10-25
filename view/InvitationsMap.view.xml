@@ -46,7 +46,8 @@
 		                <content>
 		                    <Button width="33%"
 		                            iconFirst="true"
-		                            icon="sap-icon://list" />
+		                            icon="sap-icon://list" 
+		                            press="toInvitations"/>
 		                    <Button type="Emphasized"
 		                    		width="33%"
 		                            iconFirst="true"
