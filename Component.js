@@ -31,8 +31,8 @@ sap.ui.core.UIComponent
 					},
 					routes: [{
 						pattern: "",
-						name: "navigation",
-						view: "Navigation",
+						name: "logon",
+						view: "Logon",
 						targetAggregation: "pages",
 						targetControl: "idAppControl"
 					}, {
@@ -88,8 +88,8 @@ sap.ui.core.UIComponent
 						targetControl: "idAppControl"
 					}, {
 						pattern: "logon",
-						name: "logon",
-						view: "Logon",
+						name: "logon1",
+						view: "Logon1",
 						targetAggregation: "pages",
 						targetControl: "idAppControl"
 					}]

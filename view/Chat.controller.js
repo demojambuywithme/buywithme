@@ -15,10 +15,8 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
 		//init model
 		this.initModel();
 
-		this.oUser = {
-			id: 'aaron'
-		};
-		// this.oUser = this.getComponent().getModel('user').getData();
+
+		this.oUser = this.getComponent().getModel('user').getData();
 		this.aUser = this.getComponent().getModel('users').getData();
 
 		//socket connection
@@ -55,7 +53,11 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
 		// $(id).scrollTop($(id)[0].scrollHeight);
 	},
 	onAfterHide: function () {
-
+		this.socket.emit('leave', {
+			conversationId: this.conversationId
+		});
+		this.chats = [];
+		this.clearChats();
 	},
 	onChatHistory: function () {
 		this.socket.on('chatHistory', $.proxy(function (chats) {
