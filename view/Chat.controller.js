@@ -56,6 +56,8 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
 		this.socket.emit('leave', {
 			conversationId: this.conversationId
 		});
+		this.socket.removeAllListeners('chatHistory');
+		this.socket.removeAllListeners('newMessage');
 		this.chats = [];
 		this.clearChats();
 	},
