@@ -68,37 +68,11 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 			}, this)
 		});
 	},
-	// _onObjectMatched: function (oEvent) {
-	// 	console.log(oEvent.getParameter("arguments"));
-	// 	this.getView().bindElement({
-	// 		path: "/" + oEvent.getParameter("arguments").invitation
-	// 	});
-	// 	invitation_id = oEvent.getParameter("arguments").invitation.substring(
-	// 		12, 44);
-	// 	var that = this;
-
-	// 	this.getView().getModel().read("/Invitation('" + invitation_id + "')", {
-	// 		success: function (data) {
-	// 			console.log(data);
-	// 			invitation_data = data;
-	// 			that.calculateCost();
-	// 			if (that.getView().getModel("user").getData().uuid == invitation_data["creator.id"]) {
-	// 				that.setJoinButtonVisible(false);
-	// 				that.setCancelButtonVisible(true);
-	// 			} else {
-	// 				that.setJoinCancelBtnForJoiner();
-	// 			}
-	// 		}
-	// 	});
-
-
-	// },
 
 	setJoinCancelBtnForJoiner: function () {
 		var logonUserGUID = this.getView().getModel("user").getData().uuid;
-		var thisController = this;
 		this.getView().getModel().read("/Invitation('" + this.invitation_id + "')/InvitationItems", {
-			success: function (data) {
+			success: jQuery.proxy(function (data) {
 				console.log(data);
 				var invitationItems = data;
 				//var hasJoined = false;
@@ -110,17 +84,13 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 					}
 				}
 				if (hasJoined) {
-					thisController.setJoinButtonVisible(false);
-					thisController.setCancelButtonVisible(true);
+					this.setJoinButtonVisible(false);
+					this.setCancelButtonVisible(true);
 				} else {
-					thisController.setJoinButtonVisible(true);
-					thisController.setCancelButtonVisible(false);
+					this.setJoinButtonVisible(true);
+					this.setCancelButtonVisible(false);
 				}
-			},
-
-			error: function (err) {
-				console.log(err)
-			}
+			}, this)
 		});
 	},
 
@@ -141,7 +111,6 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 		var invitationItem = {
 			inv_id: bwm.util.UtilMethod.guid(),
 			"inv_head.id": this.invitation_data.id,
-			//"joiner.id" : "6273876ccd96464cae261fd8c390267f",
 			"joiner.id": this.getView().getModel("user").getData().uuid,
 			quantity: this.getView().byId("itemQuantity").getValue(),
 			money: this.getView().byId("itemCost").getValue()
@@ -157,14 +126,13 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 				console.log(data);
 				oModel.refresh();
 				this.onInit();
-				// @TODO will navigation to the detail Invitation
-				// sap.ui.core.UIComponent.getRouterFor(this).navTo();
-				// currently, navigation to Main
-				this.onNavButtonPressed();
+				//this.onNavButtonPressed();
 				jQuery.sap.require("sap.m.MessageToast");
 				// ID of newly inserted product is available in mResponse.ID
 				this.oBusyDialog.close();
 				sap.m.MessageToast.show("Congratulation! Join successfully!");
+				this.setCancelButtonVisible(true);
+				this.setJoinButtonVisible(false);
 			}, this),
 
 			jQuery.proxy(function (err) {
@@ -189,12 +157,6 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 			// show successfully join message
 			// sap.m.MessageToast.show("Congratulation! Join successfully!");
 		}
-	},
-
-	onNavButtonPressed: function () {
-		//this.getRouter().backWithoutHash(this.getView());
-		this.onNavBack();
-		// sap.ui.core.UIComponent.getRouterFor(this).backWithoutHash(this.getView());
 	},
 
 	onNavToChat: function () {
@@ -255,14 +217,14 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 		if (hasJoined) {
 			if ((invitation_item_id !== "") && (this.invitation_id !== "")) {
 				var oModel = this.getView().getModel();
-				var thisController = this;
+//				var thisController = this;
 				var invitation_item_path = "/InvitationItem(inv_id='" + invitation_item_id + "',inv_head.id='" + this.invitation_id + "')";
 				oModel.remove(invitation_item_path, {
 					success: jQuery.proxy(function (mResponse) {
 						oModel.refresh();
 						//this.onInit();
-						thisController.setJoinButtonVisible(true);
-						thisController.setCancelButtonVisible(false);
+						this.setJoinButtonVisible(true);
+						this.setCancelButtonVisible(false);
 						jQuery.sap.require("sap.m.MessageToast");
 						// ID of newly inserted product is available in mResponse.ID
 						this.oBusyDialog.close();
@@ -285,20 +247,6 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 	setJoinButtonVisible: function (bVisible) {
 		this.getView().byId("joinInv").setVisible(bVisible);
 	},
-	/*	onActionSheet : function(oEvent){
-			var oButton = oEvent.getSource();
-			
-			//create action sheet only once
-			if(!this._actionSheet){
-				this._actionSheet = sap.ui.xmlfragment(
-						"bwm.fragment.ActionSheet",
-						this
-						);
-				this.getView().addDependent(this._actionSheet);
-			}
-			this._actionSheet.openBy(oButton);
-			
-		}*/
 
 	/**
 	 * Similar to onAfterRendering, but this hook is invoked before the controller's
