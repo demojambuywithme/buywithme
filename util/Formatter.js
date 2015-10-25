@@ -17,6 +17,21 @@ bwm.util.Formatter = {
 		}
 		
 		return returnText;
-	}
+	},
 	
+	validInFormatter : function(create_time,valid_in, end_time){
+		   if(end_time){
+			   if ((Math.trunc((end_time - Date.parse(new Date()))/1000/60)) >= 0){
+	            return (Math.trunc((end_time - Date.parse(new Date()))/1000/60));
+			   } else{
+				   return 0;
+			   }
+		   }else{
+			   if ((Math.trunc(((Date.parse(new Date()) - create_time)/1000/60 - valid_in*60)))>=0){
+		        return (Math.trunc(((Date.parse(new Date()) - create_time)/1000/60 - valid_in*60)));
+			   }else{
+				return 0;
+			   }
+		   }
+		}
 };
