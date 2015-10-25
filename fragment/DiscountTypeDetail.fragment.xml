@@ -5,13 +5,13 @@
                 <HBox>
                     <Toolbar>
                         <Text text="X : "></Text>
-                        <Input id="inputX" value="{newInvitation>/Invitation/total_quantity}" width="70px" textAlign="Center" fieldWidth="60%" />
+                        <Input id="inputX" value="{newInvitation>/Invitation/total_quantity}" width="100px" textAlign="Center" fieldWidth="60%" showValueHelp="true" valueHelpRequest="handleDPCValueHelp" valueHelpOnly="true"/>
                     </Toolbar>
                 </HBox>
                 <HBox>
                     <Toolbar>
                         <Text text="Y :"></Text>
-                        <Input id="inputY" value="{newInvitation>/Invitation/discount}" width="70px" textAlign="Center" fieldWidth="60%" />
+                        <Input id="inputY" value="{newInvitation>/Invitation/discount}" width="100px" textAlign="Center" fieldWidth="60%" showValueHelp="true" valueHelpRequest="handleDRTValueHelp" valueHelpOnly="true"/>
                     </Toolbar>
                 </HBox>
             </VBox>

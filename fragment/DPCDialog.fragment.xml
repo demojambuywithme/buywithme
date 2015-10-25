@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <SelectDialog
+    title="How many pieces?"
+    class="sapUiPopupWithPadding"
+    contentWidth="100px"
+    items="{path: 'DPCValueHelpDialog>/'}"
+    confirm="_handleDPCValueHelpClose"
+    cancel="_handleDPCValueHelpClose">
+    <StandardListItem
+      title="{DPCValueHelpDialog>pc}"/>
+  </SelectDialog>
+</core:FragmentDefinition>
