@@ -4,18 +4,28 @@ jQuery.sap.require("bwm.util.Formatter");
 bwm.view.BaseController.extend("bwm.view.Invitations", {
 	// controller logic goes here
 	onInit: function () {
-
+		this.getView().addEventDelegate({
+			onBeforeShow: $.proxy(this.onBeforeShow, this)
+		});
 	},
-	onBeforeRendering: function () {},
-	onAfterRendering: function () {},
-	getRouter: function () {
-		return sap.ui.core.UIComponent.getRouterFor(this);
+	onBeforeShow: function () {
+		this.getView().getModel().refresh();
 	},
 	toInvitationsMap: function () {
-		this.getRouter().navTo("invitationsMap");
+		this.getRouter().myNavToWithoutHash({
+			currentView: this.getView(),
+			targetViewName: "bwm.view.InvitationsMap",
+			targetViewType: "XML",
+			transition: "slide",
+		});
 	},
 	toMine: function () {
-		this.getRouter().navTo("mine");
+		this.getRouter().myNavToWithoutHash({
+			currentView: this.getView(),
+			targetViewName: "bwm.view.Mine",
+			targetViewType: "XML",
+			transition: "slide",
+		});
 	},
 	onDisplay: function (oEvent) {
 		var oItem = oEvent.getSource();
@@ -39,6 +49,12 @@ bwm.view.BaseController.extend("bwm.view.Invitations", {
 		});
 	},
 	onAdd: function () {
+		this.getRouter().myNavToWithoutHash({
+			currentView: this.getView(),
+			targetViewName: "bwm.view.Mine",
+			targetViewType: "XML",
+			transition: "slide",
+		});
 		this.getRouter().navTo("newInvitation");
 	}
 });

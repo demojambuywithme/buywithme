@@ -191,12 +191,6 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 		}
 	},
 
-	onNavButtonPressed: function () {
-		//this.getRouter().backWithoutHash(this.getView());
-		this.onNavBack();
-		// sap.ui.core.UIComponent.getRouterFor(this).backWithoutHash(this.getView());
-	},
-
 	onNavToChat: function () {
 		//var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 		//oRouter.navTo("chat");

@@ -20,7 +20,7 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
 		this.aUser = this.getComponent().getModel('users').getData();
 
 		//socket connection
-		this.socket = io('http://localhost:8090/chat');
+		this.socket = io('http://10.58.91.184:8090/chat');
 
 		// init chats
 		this.chats = [];
