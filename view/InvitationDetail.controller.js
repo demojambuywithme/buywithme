@@ -126,7 +126,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 		oModel.setUseBatch(true);
 		oModel.submitBatch(
 			jQuery.proxy(function (data) {
-				console.log(data);
+				invitation_item_id = invitationItem.inv_id;
 				oModel.refresh();
 				this.onInit();
 				//this.onNavButtonPressed();
@@ -137,12 +137,14 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 				this.setCancelButtonVisible(true);
 				this.setJoinButtonVisible(false);
 				this.setCloseButtonVisible(false);
+				hasJoined = true;
 			}, this),
 
 			jQuery.proxy(function (err) {
 				console.log(err);
 				this.oBusyDialog.close();
 				this.showErrorAlert("Problem join this invitation");
+				hasJoined = false;
 			}, this));
 	},
 
