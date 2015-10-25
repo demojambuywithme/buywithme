@@ -133,8 +133,9 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                 //"creator.id": creatorGuid,
                 status: "1",
                 id: invGuid,
-                total_quantity: "0",
-                discount: 0
+                total_quantity: null,
+                total_money: null,
+                return_money : null,
             }
         });
     },
@@ -174,7 +175,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         myCarousel.addPage(newImage);
     },
     onPhotoFail: function(message) {
-        alert("Failed because: " + message);
+        //alert("Failed because: " + message);
     },
     onPhotoDialogPress: function(oEvent) {
         var dialog = new sap.m.Dialog({
@@ -246,7 +247,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         return sap.ui.core.UIComponent.getRouterFor(this);
     },
 
-    saveInvitation: function(nID) {
+    saveInvitation: function(invGUID) {
 
         //Creator ID
         var creatorGuid = this.getView("bwm.view.Logon").getModel("user").getData().uuid;
@@ -261,52 +262,55 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         var myFromTime = Date.parse(new Date());
         var valid_period = mNewInvitation.valid_in * 3600 * 1000;
         var myToTime = myFromTime + valid_period;
-
-        var discNew;
+        //var toTime  = new Date(myToTime);
+        
+        var discNew = 0.00;
         if (mNewInvitation.discount == "10%") {
-            discNew = 0.9;
+            discNew = 0.90;
         }
         if (mNewInvitation.discount == "20%") {
-            discNew = 0.8;
+            discNew = 0.80;
         }
         if (mNewInvitation.discount == "30%") {
-            discNew = 0.7;
+            discNew = 0.70;
         }
         if (mNewInvitation.discount == "40%") {
-            discNew = 0.6;
+            discNew = 0.60;
         }
         if (mNewInvitation.discount == "50%") {
-            discNew = 0.5;
+            discNew = 0.50;
         }
         if (mNewInvitation.discount == "60%") {
-            discNew = 0.4;
+            discNew = 0.40;
         }
         if (mNewInvitation.discount == "70%") {
-            discNew = 0.3;
+            discNew = 0.30;
         }
         if (mNewInvitation.discount == "80%") {
-            discNew = 0.2;
+            discNew = 0.20;
         }
         if (mNewInvitation.discount == "90%") {
-            discNew = 0.1;
+            discNew = 0.10;
         }
-
+         
+        var fromDateTS = "/Date("+myFromTime+")/";
+        var toDateTS   = "/Date("+myToTime+")/";
         var mNewInv = {
             //替换
-            id: nID,
+            id: invGUID,
             title: mNewInvitation.title,
             status: 1,
             //"creator.id": "877da535455a47b893b19e9ab8a1f2c2",
             "creator.id": creatorGuid,
             "category.id": categortid,
             "discountType.id": discountTypeId,
-            total_quantity: mNewInvitation.total_quantity,
-            discount: discNew,
+            total_quantity: parseInt(mNewInvitation.total_quantity),
+            discount: discNew+"",
             total_money: mNewInvitation.total_money,
             return_money: mNewInvitation.return_money,
-            create_time: myFromTime,
+            create_time: fromDateTS,
             valid_in: valid_period,
-            end_time: myToTime,
+            end_time: toDateTS,
             longitude: curLongitude,
             latitude: curLatitude,
             address: mNewInvitation.address
@@ -320,7 +324,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
 
         var invatationItem = {
             inv_id: bwm.util.UtilMethod.guid(),
-            "inv_head.id": nID,
+            "inv_head.id": invGUID,
             "joiner.id": mNewInv['creator.id'],
             quantity: this.getView().byId("piece01").getValue(),
             money: this.getView().byId("discountAmount01").getNumber()
@@ -342,7 +346,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
 
                 var image = {
                     id: bwm.util.UtilMethod.guid(),
-                    "inv_head.id": nID,
+                    "inv_head.id":invGUID,
                     pic_data: imageData
                 };
                 invPics.push(image);
@@ -386,7 +390,8 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
             if (!this.oBusyDialog) {
                 this.oBusyDialog = new sap.m.BusyDialog();
             }
-            this.saveInvitation(this.getView().getModel("newInvitation").getProperty("/Invitation/id"));
+           this.saveInvitation(this.getView().getModel("newInvitation").getProperty("/Invitation/id"));
+            //this.saveInvitation();
             //@TODO: Later on this should navigate to invitation list
             this.onNavButtonPressed();
             sap.m.MessageToast.show("Invitation Published!");
