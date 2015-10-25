@@ -25,31 +25,38 @@
 			</Bar> -->
 	    <Panel width="auto">
 	    <VBox>
-		<HBox binding="{path: 'Categroy'}" class="sapUiSmallMarginTop">
-				<core:Icon src="sap-icon://grid" size="150%" width="30px" color="#64E4CE" class="sapUiSmallMarginEnd">
+		<HBox binding="{path: 'Categroy'}">
+				<core:Icon src="sap-icon://grid" size="150%" width="30px" color="#64E4CE" class="sapUiSmallMarginEnd sapUiTinyMarginTop">
 					<!-- <core:layoutData> <FlexItemData growFactor="1" /> </core:layoutData> -->
 				</core:Icon>
-				<Label text="{description}" width="250px" textAlign="Center"></Label>
+				<!--<Label text="{description}" width="250px" textAlign="Center"></Label>-->
+				<Select maxWidth="300%" width="230px" autoAdjustWidth="false" enabled="false" textAlign="Center" >
+                    <core:Item text="{description}" />
+                </Select>
 		</HBox>
-		<HBox class="sapUiSmallMarginTop">
-				<core:Icon src="sap-icon://simple-payment" size="150%" width="30px" color="#64E4CE" class="sapUiSmallMarginEnd">
+		<HBox class="sapUiTinyMarginTop">
+				<core:Icon src="sap-icon://simple-payment" size="150%" width="30px" color="#64E4CE" class="sapUiSmallMarginEnd sapUiTinyMarginTop">
 					<!--<core:layoutData>
 						<FlexItemData growFactor="1" /> 
 					</core:layoutData>-->
 				</core:Icon>
-				<!-- <Label id="discountType" text="{ parts: [ {path:'total_quantity'}, 
-					{path:'discount'}, {path:'DiscountType/dis_category'} ], formatter:'discountFormatter' 
-					}"></Label> -->
-				<Label 
+				<!--<Label
+					text="Buy {total_quantity} {= ${DiscountType/dis_category} === '01' ? ('Return '+ ${discount} ): ('PCs '+ (${discount}*100)+'%'+' Off')}"
+					 width="250px" textAlign="Center">
+				</Label> -->
+				<!--<Label 
 				    text="{ parts: [ 'total_quantity', 'DiscountType/dis_category', 'discount', 'total_money','return_money'], formatter: 'bwm.util.Formatter.discountInforFormatter' }"
-					width="250px" textAlign="Center"/>
+					width="250px" textAlign="Center"/> -->
+				<Select maxWidth="300%" width="230px" autoAdjustWidth="false" enabled="false" textAlign="Center" >
+                    <core:Item text="Buy {= ${DiscountType/dis_category} === '01' ? (${total_money} + ' Return '+ ${return_money} ): (${total_quantity} + ' PCs '+ (${discount}*100)+'%'+' Off')}" />
+                </Select>
 		</HBox>
         </VBox>
         <VBox>
 		<Toolbar>
 			<Text text="I Want"></Text>
 			<Input id="itemQuantity" value="10" width="75px" textAlign="Center"
-				fieldWidth="60%" />
+				fieldWidth="60%" showValueHelp="true" valueHelpRequest="handlePCValueHelp" valueHelpOnly="true" />
 			<Text text="PC"></Text>
 			<Input id="itemCost" value="100.00" width="75px" textAlign="Center"
 				fieldWidth="60%" liveChange="onChangeValue" />
@@ -63,23 +70,25 @@
 		</Toolbar>
 		</VBox>
         </Panel>
+        <VBox>
+        <Label text="Joined People" class="sapUiTinyMarginTop" design="Bold"/>
+        </VBox>
 		<GrowingList threshold="10" triggerText="more"
 			scrollToLoad="true" items="{ path: 'InvitationItems' }">
 			<items>
-				<CustomListItem class="sapUiTinyMarginBottom">
+				<CustomListItem>
 					<content>
 						<HBox>
 							<items>
-								<HBox width="185px">
+								<HBox width="155px">
 									<items>
 										<core:Fragment fragmentName="bwm.fragment.Joiner"
 											type="XML" />
 									</items>
 								</HBox>
-								<HBox>
-								<Button icon ="sap-icon://outgoing-call" color="#64E4CE" class="sapUiTinyMarginTop"
-								        press = "onCallOut">
-								</Button>
+								<HBox width="40px">
+								<core:Icon src="sap-icon://outgoing-call" size="170%" width="30px" color="#64E4CE" class="sapUiTinyMarginTop"
+								        press = "onCallOut"/>
 								</HBox>
 								<VBox>
 									<items>
@@ -100,19 +109,17 @@
 		<!--<VBox>
 		<Toolbar>
 			<Text text="I Want"></Text>
-			<Input id="itemQuantity" value="10" width="80px" textAlign="Center"
+			<Input id="itemQuantity" value="0" width="80px" textAlign="Center"
 				fieldWidth="60%" />
 			<Text text="PC"></Text>
-			<Input id="itemCost" value="100.00" width="80px" textAlign="Center"
+			<Input id="itemCost" value="0.00" width="80px" textAlign="Center"
 				fieldWidth="60%" liveChange="onChangeValue" />
 			<Text text="RMB"></Text>
 		</Toolbar>
-		<HBox>
+		<Toolbar>
 	    <Text text="Discount Price"/>
-		<Text id="actualCost" width="80px" textAlign="Left"
-				fieldWidth="60%" />
-		<Text text="RMB"></Text>
-		</HBox>
+		<ObjectNumber id="actualCost" number="0.00" unit="RMB"/>
+		</Toolbar>
 		</VBox> -->
 		<!--<Bar>
 		<contentLeft>
