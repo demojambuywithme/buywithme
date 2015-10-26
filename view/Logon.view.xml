@@ -1,12 +1,19 @@
 <core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="bwm.view.Logon" xmlns:html="http://www.w3.org/1999/xhtml">
-    <Page title="Title">
+    <Page title="Logon - Buy with Me">
         <content class="sapUiMediumMarginBeginTop">
             <VBox class="sapUiMediumMarginBeginTop">
+                <Image id="logonPic" class="sapUiSmallMargin" src="./pictures_cy/bwm.jpg" densityAware="true" width="325px">
+                </Image>
                 <Label text="User" class="sapUiSmallMarginBeginEnd" />
-                <Input id="user" width="300px" value="{logon>/user}" class="sapUiSmallMarginBegin" />
+                <Input id="user" width="325px" value="{logon>/user}" class="sapUiSmallMarginBegin" placeholder="Your UserID/Email/Moblie"/>
                 <Label text="Password" class="sapUiSmallMarginBeginEnd" />
-                <Input type="Password" width="300px" value="{logon>/password}" class="sapUiSmallMarginBegin" />
-                <Button text="Logon" press=".onLogon" class="sapUiSmallMarginBegin" />
+                <Input type="Password" width="325px" value="{logon>/password}" class="sapUiSmallMarginBegin" placeholder="Your Password/PinCode"/>
+                <FlexBox height="100px" alignItems="Start" justifyContent="Center" class="sapUiMediumMarginTop">
+                    <items>
+                        <Button text="LOGON" width="140px" press=".onLogon" class="sapUiSmallMargin" type="Emphasized" />
+                    </items>
+                </FlexBox>
+                
             </VBox>
         </content>
     </Page>
