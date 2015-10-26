@@ -5,10 +5,10 @@
     <Page title="{i18n&gt;invitationsTitle}"
           showFooter="true" >
 		<headerContent>
-			<Button icon="sap-icon://add" press=".onAdd"/>
+			<Button icon="sap-icon://add" type="Emphasized" press=".onAdd"/>
 		</headerContent>
         <content>
-            <GrowingList threshold="10"
+            <GrowingList threshold="5"
                          triggerText="more"
                          scrollToLoad="true"
                          items="{ path: '/Invitation' }">
@@ -22,17 +22,21 @@
                                     <Toolbar>
                                         <Button icon="sap-icon://display"
                                                 width="25%"
-                                                press=".onDisplay" />
+                                                press=".onDisplay" 
+                                                type="Emphasized"/>
                                         <!-- <ToolbarSpacer /> -->
                                         <Button icon="sap-icon://favorite"
-                                                width="25%" />
+                                                width="25%" 
+                                                type="Emphasized"/>
                                         <!-- <ToolbarSpacer /> -->
                                         <Button icon="sap-icon://globe"
                                                 width="25%"
-                                                press=".onGlobe" />
+                                                press=".onGlobe" 
+                                                type="Emphasized"/>
                                         <!-- <ToolbarSpacer /> -->
                                         <Button icon="sap-icon://share-2"
-                                                width="25%" />
+                                                width="25%" 
+                                                type="Emphasized"/>
                                     </Toolbar>
                                 </items>
                             </VBox>

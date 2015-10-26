@@ -34,13 +34,13 @@
                                                        type="XML" />
                                         <Toolbar class="sapUiMediumMarginTop">
                                             <Button text="Join"
-                                                    type="Accept" />
+                                                    type="Accept" width="25%"/>
                                             <ToolbarSpacer />
-                                            <Button icon="sap-icon://favorite" />
+                                            <Button icon="sap-icon://favorite" width="25%"/>
                                             <ToolbarSpacer />
-                                            <Button icon="sap-icon://globe" />
+                                            <Button icon="sap-icon://globe" width="25%"/>
                                             <ToolbarSpacer />
-                                            <Button icon="sap-icon://share-2" />
+                                            <Button icon="sap-icon://share-2" width="25%"/>
                                         </Toolbar>
                                     </items>
                                 </VBox>
