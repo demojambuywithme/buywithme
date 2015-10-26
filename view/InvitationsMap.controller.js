@@ -138,6 +138,9 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 
 		// current position
 		var iconm = new BMap.Icon('image/myPosition.ico', new BMap.Size(32, 32));
+		var iconmf = new BMap.Icon('image/food.ico', new BMap.Size(32, 32));
+		var iconms = new BMap.Icon('image/sprots.ico', new BMap.Size(32, 32));
+		var iconmc = new BMap.Icon('image/clothes.ico', new BMap.Size(32, 32));
 		var mk = new BMap.Marker(currentPoint);
 		mk.setTitle("My Position");
 		mk.setIcon(iconm);
@@ -163,13 +166,13 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 			var marker = new BMap.Marker(inv.point);
 			marker.setTitle(inv.invitation.title);
 			if (inv.invitation["category.id"] == '0550223232fd488db699a7ea9a9fdde0') {
-				marker.setIcon('image/sports.ico');
+				marker.setIcon(iconms);
 			};
 			if (inv.invitation["category.id"] == 'a8d3fea970754d6fa8a4aeb8bf3dbaed') {
-				marker.setIcon('image/clothes.ico');
+				marker.setIcon(iconmc);
 			};
 			if (inv.invitation["category.id"] == 'cfe2733e8cbd408db39a5371ab6137ce') {
-				marker.setIcon('image/food.ico');
+				marker.setIcon(iconmf;
 			};
 
 			marker.invitationId = inv.invitation.id;

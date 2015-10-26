@@ -1,67 +1,48 @@
-<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:layout="sap.ui.layout" xmlns="sap.m" controllerName="bwm.view.InvitationsMap"
-	xmlns:html="http://www.w3.org/1999/xhtml">
-	<Page id="mapPage" title="Invitations Map" showNavButton="false" enableScrolling="false">
-		<!-- <headerContent>
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:layout="sap.ui.layout" xmlns="sap.m" controllerName="bwm.view.InvitationsMap" xmlns:html="http://www.w3.org/1999/xhtml">
+    <Page id="mapPage" title="Invitations Map" showNavButton="false" enableScrolling="false">
+        <!-- <headerContent>
 			<Button icon="sap-icon://list" press="toInvitations" />
 		</headerContent>  -->
-		<subHeader>
-			<Bar>
-				<contentLeft>
-					<HBox>
-						<!-- <Label text="Distance"> </Label> -->
-						<Select id="dist" change="selChange" autoAdjustWidth="true">
-							<core:Item text="500米" key="500" />
-							<core:Item text="1000米" key="1000" />
-							<core:Item text="1500米" key="1500" />
-							<core:Item text="2000米" key="2000" />
-						</Select>
-					</HBox>
-				</contentLeft>
-				<contentMiddle>
-					<HBox>
-						<!-- <Label text="Category"> </Label> -->
-						<Select id="cate" items="{/Category}" change="selChange"
-							autoAdjustWidth="true">
-							<core:Item text="{description}" key="{id}" />
-						</Select>
-					</HBox>
-				</contentMiddle>
-				<contentRight>
-					<HBox>
-						<!-- <Label text="Discount Type"> </Label> -->
-						<Select id="disc" items="{/DiscountType}" change="selChange"
-							autoAdjustWidth="true">
-							<core:Item text="{description}" key="{id}" />
-						</Select>
-					</HBox>
-				</contentRight>
-			</Bar>
-		</subHeader>
-		<content>
-			<FlexBox id="mapContainer" fitContainer="true">
-
-			</FlexBox>
-		</content>
-		<footer>
-			<Toolbar>
-		                <content>
-		                    <Button width="33%"
-		                            iconFirst="true"
-		                            icon="sap-icon://list" 
-		                            press="toInvitations"/>
-		                    <Button type="Emphasized"
-		                    		width="33%"
-		                            iconFirst="true"
-		                            icon="sap-icon://map"
-		                            press="toInvitationsMap" />
-		                    <Button width="34%"
-		                            iconFirst="true"
-		                            icon="sap-icon://person-placeholder"
-		                            press="toMine" />
-		                </content>
-	            	</Toolbar>
-			<!-- <Bar design="sap.m.BarDesign.Footer">
+        <subHeader>
+            <Toolbar>
+                <content>
+                    <HBox>
+                        <!-- <Label text="Distance"> </Label> -->
+                        <Select id="dist" change="selChange" autoAdjustWidth="false" width="100px">
+                            <core:Item text="500M" key="500" />
+                            <core:Item text="1000M" key="1000" />
+                            <core:Item text="1500M" key="1500" />
+                            <core:Item text="2000M" key="2000" />
+                        </Select>
+                    </HBox>
+                    <HBox>
+                        <!-- <Label text="Category"> </Label> -->
+                        <Select id="cate" items="{/Category}" change="selChange" autoAdjustWidth="false" width="100px">
+                            <core:Item text="{description}" key="{id}" />
+                        </Select>
+                    </HBox>
+                    <HBox>
+                        <!-- <Label text="Discount Type"> </Label> -->
+                        <Select id="disc" items="{/DiscountType}" change="selChange" autoAdjustWidth="false" width="143px">
+                            <core:Item text="{description}" key="{id}" />
+                        </Select>
+                    </HBox>
+                </content>
+            </Toolbar>
+        </subHeader>
+        <content>
+            <FlexBox id="mapContainer" fitContainer="true">
+            </FlexBox>
+        </content>
+        <footer>
+            <Toolbar>
+                <content>
+                    <Button width="33%" iconFirst="true" icon="sap-icon://list" press="toInvitations" />
+                    <Button type="Emphasized" width="33%" iconFirst="true" icon="sap-icon://map" press="toInvitationsMap" />
+                    <Button width="34%" iconFirst="true" icon="sap-icon://person-placeholder" press="toMine" />
+                </content>
+            </Toolbar>
+            <!-- <Bar design="sap.m.BarDesign.Footer">
 				<contentLeft>
 					<Button width="33%" iconFirst="true"
 						icon="sap-icon://list" press="toInvitations" />
@@ -74,6 +55,6 @@
 						icon="sap-icon://person-placeholder" press="toMine" />
 				</contentRight>
 			</Bar>  -->
-		</footer>
-	</Page>
+        </footer>
+    </Page>
 </core:View>
