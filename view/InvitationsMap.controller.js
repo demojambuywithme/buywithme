@@ -1,13 +1,5 @@
 jQuery.sap.declare("bwm.view.InvitationsMap");
 jQuery.sap.require("bwm.view.BaseController");
-var invitation;
-var selDist;
-var selCate;
-var selDisc;
-var circle;
-var markers;
-var creator;
-
 bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 
 	/**
@@ -29,102 +21,11 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 
 	_readInvitations: function () {
 		var dfd = $.Deferred();
-		// this.getComponent().getModel().read('/Invitation', {
-		// 	success: $.proxy(function (data) {
-		// 		dfd.resolve(data.results);
-		// 	}, this)
-		// });
-
-
-		// TO Remove
-		var invitations = [{
-			"id": "34cff2eb2cc54a548539dffbffe2056e",
-			"title": "Come On Nike 70%",
-			"status": 1,
-			"creator.id": "877da535455a47b893b19e9ab8a1f2c2",
-			"category.id": "a8d3fea970754d6fa8a4aeb8bf3dbaed",
-			"discountType.id": "d92d38df966d4d65b37a6bd8c10dcbe8",
-			"total_quantity": 3,
-			"discount": "0.3",
-			"total_money": null,
-			"return_money": null,
-			"create_time": "/Date(1439793120000)/",
-			"valid_in": 2,
-			"end_time": "/Date(1443681120000)/",
-			"longitude": "121.6075",
-			"latitude": "31.2075",
-			"address": "3 Shasta Circle",
-		}, {
-			"id": "602b4dcf5339472b96786217e3955953",
-			"title": "Adidas on Sales 50%",
-			"status": 1,
-			"creator.id": "81794267dc2e4e5e9619e51e37bfb1de",
-			"category.id": "a8d3fea970754d6fa8a4aeb8bf3dbaed",
-			"discountType.id": "d92d38df966d4d65b37a6bd8c10dcbe8",
-			"total_quantity": 5,
-			"discount": "0.5",
-			"total_money": null,
-			"return_money": null,
-			"create_time": "/Date(1439756940000)/",
-			"valid_in": 3,
-			"end_time": "/Date(1428265800000)/",
-			"longitude": "121.606",
-			"latitude": "31.207",
-			"address": "99 Tennyson Park",
-		}, {
-			"id": "b4cdcd5b3eff45faa324d75bffaef1d7",
-			"title": "Buy With Me->GAP 60%",
-			"status": 1,
-			"creator.id": "877da535455a47b893b19e9ab8a1f2c2",
-			"category.id": "a8d3fea970754d6fa8a4aeb8bf3dbaed",
-			"discountType.id": "d92d38df966d4d65b37a6bd8c10dcbe8",
-			"total_quantity": 5,
-			"discount": "0.4",
-			"total_money": null,
-			"return_money": null,
-			"create_time": "/Date(1439239080000)/",
-			"valid_in": 1,
-			"end_time": "/Date(1443727200000)/",
-			"longitude": "121.607",
-			"latitude": "31.207",
-			"address": "515 Continental Trail",
-		}, {
-			"id": "dsads",
-			"title": "Test",
-			"status": 1,
-			"creator.id": "877da535455a47b893b19e9ab8a1f2c2",
-			"category.id": "a8d3fea970754d6fa8a4aeb8bf3dbaed",
-			"discountType.id": "d92d38df966d4d65b37a6bd8c10dcbe8",
-			"total_quantity": 5,
-			"discount": "0.4",
-			"total_money": null,
-			"return_money": null,
-			"create_time": "/Date(1439429858000)/",
-			"valid_in": 5,
-			"end_time": "/Date(1443707206000)/",
-			"longitude": "40.70056",
-			"latitude": "45.95139",
-			"address": "410 Kropf Road",
-		}, {
-			"id": "ff81562b50ad4902a9156e3c6eee5080",
-			"title": "Come with Me buy and Make fun",
-			"status": 1,
-			"creator.id": "81794267dc2e4e5e9619e51e37bfb1de",
-			"category.id": "a8d3fea970754d6fa8a4aeb8bf3dbaed",
-			"discountType.id": "d92d38df966d4d65b37a6bd8c10dcbe8",
-			"total_quantity": 4,
-			"discount": "0.3",
-			"total_money": null,
-			"return_money": null,
-			"create_time": "/Date(1439497620000)/",
-			"valid_in": 4,
-			"end_time": "/Date(1443719100000)/",
-			"longitude": "31.207",
-			"latitude": "121.607",
-			"address": "33323 Glacier Hill Place",
-		}];
-
-		dfd.resolve(invitations);
+		this.getComponent().getModel().read('/Invitation', {
+			success: $.proxy(function (data) {
+				dfd.resolve(data.results);
+			}, this)
+		});
 
 		return dfd.promise();
 	},
@@ -145,17 +46,8 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 
 		var readCreator = function () {
 			var dfd = $.Deferred();
-			// oModel.read("/User('" + invData["creator.id"] + "')", {
-			// 	success: dfd.resolve
-			// });
-
-			// TO Remove
-			dfd.resolve({
-				id: '1',
-				name: "aaron",
-				phone: "13621602102",
-				rate: "5",
-				"pic.id": 'xxx'
+			oModel.read("/User('" + invData["creator.id"] + "')", {
+				success: dfd.resolve
 			});
 			return dfd;
 		}
@@ -163,19 +55,12 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 
 		var readAvatar = function (creator) {
 			var dfd = $.Deferred();
-			// oModel.read("/Avatar('" + creator["pic.id"] + "')", {
-			// 	success: function () {
-			// 		dfd.resolve(creator, avatar)
-			// 	}
-			// });
-
-			// TO Remove
-			dfd.resolve(creator, {
-				id: '1',
-				pic_name: 'aa',
-				pic_path: 'bb',
-				pic_data: 'ccc'
+			oModel.read("/Avatar('" + creator["pic.id"] + "')", {
+				success: function (avatar) {
+					dfd.resolve(creator, avatar)
+				}
 			});
+
 			return dfd;
 		}
 
@@ -191,22 +76,31 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 			};
 
 			var infoWindow = new BMap.InfoWindow(sContent, opts);
-			this.openInfoWindow(infoWindow);
-			// document.getElementById("infoWin").onclick = function () {
-			// 	controller.getRouter().myNavToWithoutHash({
-			// 		currentView: this.getView(),
-			// 		targetViewName: "bwm.view.InvitationDetail",
-			// 		targetViewType: "XML",
-			// 		transition: "slide",
-			// 		data: {
-			// 			invitation: invData.id
-			// 		}
-			// 	});
-			// };
+			infoWindow.addEventListener('open', function () {
+				$('#infoWin').on('click', function () {
 
-			// document.getElementById('userPic').onload = function () {
-			// 	infoWindow.redraw();
-			// };
+					controller.getRouter().myNavToWithoutHash({
+						currentView: controller.getView(),
+						targetViewName: "bwm.view.InvitationDetail",
+						targetViewType: "XML",
+						transition: "slide",
+						data: {
+							invitation: invData.id
+						}
+					});
+				});
+				$("#userPic").load(function () {
+					$("#userPic").off('load');
+					infoWindow.redraw();
+				});
+			});
+			evt.target.openInfoWindow(infoWindow);
+
+			infoWindow.addEventListener('close', function () {
+				$('#infoWin').remove();
+				$("#userPic").remove();
+			});
+
 		}
 
 		readCreator()
@@ -232,11 +126,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 			.done($.proxy(function (invitations, position) {
 				this.invitations = invitations;
 				this.currentPosition = position;
-
 				this.currentPoint = position.point;
-				// TO Remove
-				this.currentPoint = new BMap.Point('121.608265', '31.20729');
-
 				this.reDraw(this.map, this.currentPoint, this.invitations);
 			}, this));
 	},
@@ -256,11 +146,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 
 		var keyDist = this.byId('dist').getSelectedKey();
 		var keyCate = this.byId('cate').getSelectedKey();
-		// TO Remove
-		keyCate = 'a8d3fea970754d6fa8a4aeb8bf3dbaed';
 		var keyDisc = this.byId('disc').getSelectedKey();
-		// TO Remove
-		keyDisc = 'd92d38df966d4d65b37a6bd8c10dcbe8';
 
 		invitations.map(function (inv) {
 			var invPoint = new BMap.Point(inv.longitude, inv.latitude);
@@ -274,8 +160,6 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 			return parseFloat(inv.distance) <= parseFloat(keyDist) && inv.invitation["category.id"] === keyCate && inv.invitation["discountType.id"] === keyDisc;
 		}).map($.proxy(function (inv) {
 			var marker = new BMap.Marker(inv.point);
-			// marker.setLabel(new
-			// BMap.Label(invitation.oData[i].title));
 			marker.setTitle(inv.invitation.title);
 			if (inv.invitation["category.id"] == '0550223232fd488db699a7ea9a9fdde0') {
 				marker.setIcon('image/sports.ico');
