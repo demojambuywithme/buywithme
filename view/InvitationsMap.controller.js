@@ -50,7 +50,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 				success: dfd.resolve
 			});
 			return dfd;
-		}
+		};
 
 
 		var readAvatar = function (creator) {
@@ -62,7 +62,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 			});
 
 			return dfd;
-		}
+		};
 
 		var buildInfoWin = function (creator, avatar) {
 			var picUser = "http://10.58.132.213:8000" + avatar.pic_path + avatar.pic_name;
@@ -101,7 +101,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 				$("#userPic").remove();
 			});
 
-		}
+		};
 
 		readCreator()
 			.then(readAvatar)
@@ -172,7 +172,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 				marker.setIcon(iconmc);
 			};
 			if (inv.invitation["category.id"] == 'cfe2733e8cbd408db39a5371ab6137ce') {
-				marker.setIcon(iconmf;
+				marker.setIcon(iconmf);
 			};
 
 			marker.invitationId = inv.invitation.id;
