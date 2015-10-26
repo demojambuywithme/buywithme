@@ -22,17 +22,21 @@
                                     <Toolbar>
                                         <Button icon="sap-icon://display"
                                                 width="25%"
-                                                press=".onDisplay" />
+                                                press=".onDisplay" 
+                                                type="Emphasized"/>
                                         <!-- <ToolbarSpacer /> -->
                                         <Button icon="sap-icon://favorite"
-                                                width="25%" />
+                                                width="25%" 
+                                                type="Emphasized"/>
                                         <!-- <ToolbarSpacer /> -->
                                         <Button icon="sap-icon://globe"
                                                 width="25%"
-                                                press=".onGlobe" />
+                                                press=".onGlobe" 
+                                                type="Emphasized"/>
                                         <!-- <ToolbarSpacer /> -->
                                         <Button icon="sap-icon://share-2"
-                                                width="25%" />
+                                                width="25%" 
+                                                type="Emphasized"/>
                                     </Toolbar>
                                 </items>
                             </VBox>

@@ -3,7 +3,7 @@
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
     xmlns="sap.m">
-    <HBox binding="{path: 'Creator'}" >
+    <HBox binding="{path: 'Creator'}">
         <items>
             <Image binding = "{path:'MyAvatar'}"
             		src="{
@@ -15,8 +15,10 @@
                 <items>
                     <RatingIndicator value="{rate}" 
                     				maxValue="5"
-                    			 	enabled = "false"	/>
-                    <Label text="{name}"/>
+                    			 	enabled = "false"
+                                    iconSize="20px"	
+                                    />
+                    <Label text="{name}" />
                 </items>
             </VBox>
         </items>

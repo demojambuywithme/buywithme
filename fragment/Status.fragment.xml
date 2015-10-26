@@ -1,14 +1,10 @@
-<core:FragmentDefinition xmlns:l="sap.ui.layout"
-                         xmlns:f="sap.ui.layout.form"
-                         xmlns:core="sap.ui.core"
-                         xmlns="sap.m">
+<core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
     <VBox>
         <items>
-            <HBox>
+            <HBox class="sapUiTinyMarginTop">
                 <items>
-                    <core:Icon src="sap-icon://time-entry-request"
-                               class="sapUiSmallMarginEnd" />
-                    <Label text="{ parts: [
+                    <core:Icon src="sap-icon://time-entry-request" />
+                    <Label class="sapUiTinyMarginBegin" text="{ parts: [
                                            {path: 'create_time'},
                                            {path: 'valid_in'},
                                            {path: 'end_time'}
@@ -17,11 +13,7 @@
                                    } Minutes Left" />
                 </items>
             </HBox>
-            <ProgressIndicator class="sapUiSmallMarginBottom"
-                               percentValue="80"
-                               displayValue="4/5"
-                               showValue="true"
-                               state="None" />
+            <ProgressIndicator class="sapUiNoMarginTop" percentValue="80" height="22px" displayValue="4/5" showValue="true" state="None" width="144px" />
         </items>
     </VBox>
 </core:FragmentDefinition>
