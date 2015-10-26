@@ -5,10 +5,10 @@
     <Page title="{i18n&gt;invitationsTitle}"
           showFooter="true" >
 		<headerContent>
-			<Button icon="sap-icon://add" press=".onAdd"/>
+			<Button icon="sap-icon://add" type="Emphasized" press=".onAdd"/>
 		</headerContent>
         <content>
-            <GrowingList threshold="10"
+            <GrowingList threshold="5"
                          triggerText="more"
                          scrollToLoad="true"
                          items="{ path: '/Invitation' }">

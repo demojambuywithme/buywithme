@@ -3,7 +3,7 @@
         <items>
             <HBox class="sapUiTinyMarginTop">
                 <items>
-                    <core:Icon src="sap-icon://time-entry-request" />
+                    <core:Icon src="sap-icon://history" color="#64E4CE"/>
                     <Label class="sapUiTinyMarginBegin" text="{ parts: [
                                            {path: 'create_time'},
                                            {path: 'valid_in'},
