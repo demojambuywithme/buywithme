@@ -1,7 +1,7 @@
 <core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:layout="sap.ui.layout" xmlns="sap.m" controllerName="bwm.view.InvitationsMap"
 	xmlns:html="http://www.w3.org/1999/xhtml">
-	<Page id="mapPage" title="Invitations Map" showNavButton="false">
+	<Page id="mapPage" title="Invitations Map" showNavButton="false" enableScrolling="false">
 		<!-- <headerContent>
 			<Button icon="sap-icon://list" press="toInvitations" />
 		</headerContent>  -->
@@ -39,7 +39,9 @@
 			</Bar>
 		</subHeader>
 		<content>
+			<FlexBox id="mapContainer" fitContainer="true">
 
+			</FlexBox>
 		</content>
 		<footer>
 			<Toolbar>

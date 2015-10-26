@@ -19,11 +19,11 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 	 * @memberOf bwm.view.home
 	 */
 	onInit: function () {
-		// invitation = new sap.ui.model.json.JSONModel();
-		// invitation.loadData("model/Invitation.json",false,
-		// false);
+
 		this.getView().addEventDelegate({
-			onBeforeShow: $.proxy(this.onBeforeShow, this)
+			onBeforeShow: $.proxy(this.onBeforeShow, this),
+			onAfterShow: $.proxy(this.onAfterShow, this),
+			onAfterHide: $.proxy(this.onAfterHide, this)
 		});
 	},
 
@@ -35,6 +35,8 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 		// 	}, this)
 		// });
 
+
+		// TO Remove
 		var invitations = [{
 			"id": "34cff2eb2cc54a548539dffbffe2056e",
 			"title": "Come On Nike 70%",
@@ -138,42 +140,102 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 		});
 		return dfd.promise();
 	},
+	onMarkerClick: function (controller, invData, evt) {
+		var oModel = controller.getView().getModel();
 
-	/**
-	 * Similar to onAfterRendering, but this hook is invoked
-	 * before the controller's View is re-rendered (NOT before
-	 * the first rendering! onInit() is used for that one!).
-	 * 
-	 * @memberOf bwm.view.home
-	 */
-	// onBeforeRendering: function() {
-	//
-	// },
-	/**
-	 * Called when the View has been rendered (so its HTML is
-	 * part of the document). Post-rendering manipulations of
-	 * the HTML could be done here. This hook is the same one
-	 * that SAPUI5 controls get after being rendered.
-	 * 
-	 * @memberOf bwm.view.home
-	 */
+		var readCreator = function () {
+			var dfd = $.Deferred();
+			// oModel.read("/User('" + invData["creator.id"] + "')", {
+			// 	success: dfd.resolve
+			// });
+
+			// TO Remove
+			dfd.resolve({
+				id: '1',
+				name: "aaron",
+				phone: "13621602102",
+				rate: "5",
+				"pic.id": 'xxx'
+			});
+			return dfd;
+		}
+
+
+		var readAvatar = function (creator) {
+			var dfd = $.Deferred();
+			// oModel.read("/Avatar('" + creator["pic.id"] + "')", {
+			// 	success: function () {
+			// 		dfd.resolve(creator, avatar)
+			// 	}
+			// });
+
+			// TO Remove
+			dfd.resolve(creator, {
+				id: '1',
+				pic_name: 'aa',
+				pic_path: 'bb',
+				pic_data: 'ccc'
+			});
+			return dfd;
+		}
+
+		var buildInfoWin = function (creator, avatar) {
+			var picUser = "http://10.58.132.213:8000" + avatar.pic_path + avatar.pic_name;
+			var sContent = "<div id='infoWin' style='line-height:1.8em;font-size:12px;'>" +
+				"<b>Address: </b>" + invData.address + "</br>" +
+				"<img id='userPic' src='" + picUser + "' width='10%' height='10%'/>" +
+				"<b>    " + creator.name + "</b></br>" + "</div>";
+
+			var opts = {
+				title: '<span id="infoTitle" style="font-size:14px;color:#0A8021">' + invData.title + '</span>'
+			};
+
+			var infoWindow = new BMap.InfoWindow(sContent, opts);
+			this.openInfoWindow(infoWindow);
+			// document.getElementById("infoWin").onclick = function () {
+			// 	controller.getRouter().myNavToWithoutHash({
+			// 		currentView: this.getView(),
+			// 		targetViewName: "bwm.view.InvitationDetail",
+			// 		targetViewType: "XML",
+			// 		transition: "slide",
+			// 		data: {
+			// 			invitation: invData.id
+			// 		}
+			// 	});
+			// };
+
+			// document.getElementById('userPic').onload = function () {
+			// 	infoWindow.redraw();
+			// };
+		}
+
+		readCreator()
+			.then(readAvatar)
+			.then(buildInfoWin)
+	},
+	onAfterHide: function () {
+		// every time when user navigate to other page, clear the map overlays and circle
+		// because next time we need to get invitation again to redraw map
+		this.map.clearOverlays();
+		this.circle.remove();
+	},
 	onAfterRendering: function () {
-
+		// initialize map control
+		var $mapContainer = this.byId('mapContainer').$();
+		this.map = new BMap.Map($mapContainer[0]);
+	},
+	onAfterShow: function () {
 		var invitationsPromise = this._readInvitations();
 		var getPositionPromise = this._getCurrentPosition();
-		var $content = $("#" + this.byId("mapPage").getId() + "-cont");
+
 		$.when(invitationsPromise, getPositionPromise)
 			.done($.proxy(function (invitations, position) {
 				this.invitations = invitations;
 				this.currentPosition = position;
 
 				this.currentPoint = position.point;
+				// TO Remove
 				this.currentPoint = new BMap.Point('121.608265', '31.20729');
-
-				// map initialization
-				if (!this.map) {
-					this.map = new BMap.Map($content[0]);
-				}
 
 				this.reDraw(this.map, this.currentPoint, this.invitations);
 			}, this));
@@ -194,9 +256,12 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 
 		var keyDist = this.byId('dist').getSelectedKey();
 		var keyCate = this.byId('cate').getSelectedKey();
+		// TO Remove
+		keyCate = 'a8d3fea970754d6fa8a4aeb8bf3dbaed';
 		var keyDisc = this.byId('disc').getSelectedKey();
+		// TO Remove
+		keyDisc = 'd92d38df966d4d65b37a6bd8c10dcbe8';
 
-		// var invPoints = 
 		invitations.map(function (inv) {
 			var invPoint = new BMap.Point(inv.longitude, inv.latitude);
 			var distance = map.getDistance(currentPoint, invPoint).toFixed(2);
@@ -207,7 +272,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 			};
 		}).filter(function (inv) {
 			return parseFloat(inv.distance) <= parseFloat(keyDist) && inv.invitation["category.id"] === keyCate && inv.invitation["discountType.id"] === keyDisc;
-		}).map(function (inv) {
+		}).map($.proxy(function (inv) {
 			var marker = new BMap.Marker(inv.point);
 			// marker.setLabel(new
 			// BMap.Label(invitation.oData[i].title));
@@ -221,204 +286,27 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 			if (inv.invitation["category.id"] == 'cfe2733e8cbd408db39a5371ab6137ce') {
 				marker.setIcon('image/food.ico');
 			};
+
+			marker.invitationId = inv.invitation.id;
+
+			// marker add event listener on click
+			marker.addEventListener("click", $.proxy(this.onMarkerClick, null, this, inv.invitation));
+
 			return marker;
-		}).map($.proxy(function (marker) {
+		}, this)).map($.proxy(function (marker) {
 			map.addOverlay(marker);
 		}, this));
 
 		this.circle = new BMap.Circle(currentPoint, keyDist);
 		map.addOverlay(this.circle);
 		this.circle.show();
-
-	},
-
-	onBeforeShow: function () {
-
 	},
 
 	selChange: function (e) {
 		this.map.clearOverlays();
 		this.circle.remove();
-
 		this.reDraw(this.map, this.currentPoint, this.invitations);
-
-		// var mk = new BMap.Marker(this.currentPoint);
-		// mk.setTitle("My Position");
-		// var iconm = new BMap.Icon('image/myPosition.ico', new BMap.Size(32, 32));
-		// mk.setIcon(iconm);
-		// map.addOverlay(mk);
-
-		// var keyDist = selDist.getSelectedKey();
-		// var keyCate = selCate.getSelectedKey();
-		// var keyDisc = selDisc.getSelectedKey();
-		// for (i = 0; i < invitation.oData.d.results.length; i++) {
-		// 	var cate;
-		// 	var disc;
-		// 	for (j in invitation.oData.d.results[i]) {
-		// 		if (j == "category.id") {
-		// 			cate = invitation.oData.d.results[i][j];
-		// 		};
-		// 		if (j == "discountType.id") {
-		// 			disc = invitation.oData.d.results[i][j];
-		// 		}
-		// 	}
-		// 	var invData = invitation.oData.d.results[i];
-		// 	var invPoint = new BMap.Point(
-		// 		invitation.oData.d.results[i].longitude,
-		// 		invitation.oData.d.results[i].latitude);
-		// 	var dist = map.getDistance(currentPoint, invPoint)
-		// 		.toFixed(2);
-		// 	if (parseFloat(dist) <= parseFloat(keyDist) & cate == keyCate & disc == keyDisc) {
-		// 		// var invPoint = new
-		// 		// BMap.Point(invitation.oData[i].latitude,invitation.oData[i].longtitude);
-		// 		// var walking = new BMap.WalkingRoute(map,
-		// 		// {renderOptions:{map: map, autoViewport:
-		// 		// false}});
-		// 		// walking.search(currentPoint, invPoint);
-		// 		var marker = new BMap.Marker(invPoint);
-		// 		// marker.setLabel(new
-		// 		// BMap.Label(invitation.oData[i].title));
-		// 		marker.setTitle(invitation.oData.d.results[i].title);
-		// 		if (keyCate == '0550223232fd488db699a7ea9a9fdde0') {
-		// 			var icons = new BMap.Icon(
-		// 				'http://localhost:8080/bwm/image/sports.ico',
-		// 				new BMap.Size(32, 32));
-		// 			marker.setIcon(icons);
-		// 		};
-		// 		if (keyCate == 'a8d3fea970754d6fa8a4aeb8bf3dbaed') {
-		// 			var iconc = new BMap.Icon(
-		// 				'http://localhost:8080/bwm/image/clothes.ico',
-		// 				new BMap.Size(32, 32));
-		// 			marker.setIcon(iconc);
-		// 		};
-		// 		if (keyCate == 'cfe2733e8cbd408db39a5371ab6137ce') {
-		// 			var iconf = new BMap.Icon(
-		// 				'http://localhost:8080/bwm/image/food.ico',
-		// 				new BMap.Size(32, 32));
-		// 			marker.setIcon(iconf);
-		// 		};
-
-		// 		marker.addEventListener(
-		// 			"click",
-		// 			$.proxy(function (controller, evt) {
-		// 				// var walking = new
-		// 				// BMap.WalkingRoute(map,
-		// 				// {renderOptions:{map: map,
-		// 				// autoViewport: false}});
-		// 				// walking.search(currentPoint,
-		// 				// evt.target.getPosition());
-		// 				// var infoPage = new
-		// 				// sap.ui.view({viewName:"bwm.view.InfoWindow",
-		// 				// type:sap.ui.core.mvc.ViewType.XML});
-		// 				var title = evt.target
-		// 					.getTitle();
-		// 				var invData = null;
-		// 				for (k = 0; k < invitation.oData.d.results.length; k++) {
-		// 					if (title == invitation.oData.d.results[k].title) {
-		// 						// infoPage.setHeight(300);
-		// 						invData = invitation.oData.d.results[k];
-		// 						break;
-		// 						// infoPage.setModel(new
-		// 						// sap.ui.model.json.JSONModel());
-		// 						// break;
-		// 					}
-		// 				}
-
-		// 				for (j in invData) {
-		// 					if (j == "creator.id") {
-		// 						creator = invData[j];
-		// 					};
-		// 				}
-		// 				// infoPage.getController();
-		// 				// infoPage.placeAt('infoWin');
-		// 				var user = null;
-		// 				var pic_id = null;
-		// 				jQuery.ajax({
-		// 					url: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/User('" + creator + "')",
-		// 					dataType: "json",
-		// 					async: false,
-		// 					success: function (
-		// 						data,
-		// 						textStatus,
-		// 						jqXHR) {
-		// 						user = data.d;
-		// 						for (j in data.d) {
-		// 							if (j == "pic.id") {
-		// 								pic_id = data.d[j];
-		// 							};
-		// 						}
-		// 						//invitation = new sap.ui.model.json.JSONModel();
-		// 						//invitation.setData(data.d.results);
-		// 						// sap.ui.getCore().setModel(invitation);
-		// 					},
-		// 					error: function (
-		// 						jqXHR,
-		// 						textStatus,
-		// 						errorThrown) {
-
-		// 					}
-		// 				});
-		// 				jQuery.ajax({
-		// 					url: "http://10.58.132.213:8000/BWM/services/bwm.xsodata/Avatar('" + pic_id + "')",
-		// 					dataType: "json",
-		// 					async: false,
-		// 					success: function (
-		// 						data,
-		// 						textStatus,
-		// 						jqXHR) {
-		// 						picUser = "http://10.58.132.213:8000" + data.d.pic_path + data.d.pic_name;
-		// 						// sap.ui.getCore().setModel(invitation);
-		// 					},
-		// 					error: function (
-		// 						jqXHR,
-		// 						textStatus,
-		// 						errorThrown) {
-
-		// 					}
-		// 				});
-		// 				var sContent = "<div id='infoWin' style='line-height:1.8em;font-size:12px;'>" + "<b>Address: </b>" + invData.address + "</br>" + "<img id='userPic' src='" + picUser + "' width='10%' height='10%'/>" + "<b>    " + user.name + "</b></br>" + "</div>"
-		// 				var opts = {
-		// 					title: '<span id="infoTitle" style="font-size:14px;color:#0A8021">' + invData.title + '</span>'
-		// 				};
-		// 				var infoWindow = new BMap.InfoWindow(
-		// 					sContent, opts);
-		// 				this.openInfoWindow(infoWindow);
-		// 				document.getElementById("infoWin").onclick = function () {
-		// 					controller.getRouter().myNavToWithoutHash({
-		// 						currentView: this.getView(),
-		// 						targetViewName: "bwm.view.InvitationDetail",
-		// 						targetViewType: "XML",
-		// 						transition: "slide",
-		// 						data: {
-		// 							invitation: invData.id
-		// 						}
-		// 					});
-		// 					// controller.getRouter().navTo("invitationDetail", {
-		// 					// 	invitation: invData.id
-		// 					// });
-		// 				};
-		// 				//infoWindow.setHeight(300);
-		// 				// infoWindow.redraw();
-		// 				document.getElementById('userPic').onload = function () {
-		// 					infoWindow.redraw();
-		// 				};
-		// 			}, null, this));
-		// 		map.addOverlay(marker);
-		// 	}
-		// };
-		// circle = new BMap.Circle(currentPoint, keyDist);
-		// map.addOverlay(circle);
-		// circle.show();
 	},
-	/**
-	 * Called when the Controller is destroyed. Use this one to
-	 * free resources and finalize activities.
-	 * 
-	 * @memberOf bwm.view.home
-	 */
-	// onExit: function() {
-	//
-	// }
 	toInvitations: function () {
 		this.getRouter().myNavToWithoutHash({
 			currentView: this.getView(),

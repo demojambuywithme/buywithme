@@ -9,8 +9,6 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
 	 * @memberOf bwm.view.home
 	 */
 	onInit: function () {
-		// var oRouter = this.getRouter();
-		// oRouter.getRoute("chat").attachMatched(this.onRouteMatched, this);
 
 		//init model
 		this.initModel();
@@ -20,7 +18,7 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
 		this.aUser = this.getComponent().getModel('users').getData();
 
 		//socket connection
-		// this.socket = io('http://10.58.91.184:8090/chat');
+		this.socket = io('http://10.58.91.184:8090/chat');
 
 		// init chats
 		this.chats = [];
@@ -37,25 +35,25 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
 		}), 'msg');
 	},
 	onBeforeShow: function (oEvt) {
-		// this.conversationId = oEvt.data.invitation;
-		// this.socket.emit('join', {
-		// 	conversationId: this.conversationId
-		// });
-		// //on chat history
-		// this.onChatHistory();
+		this.conversationId = oEvt.data.invitation;
+		this.socket.emit('join', {
+			conversationId: this.conversationId
+		});
+		//on chat history
+		this.onChatHistory();
 
-		// //on new msg
-		// this.onNewMsg();
+		//on new msg
+		this.onNewMsg();
 
 	},
 	onAfterHide: function () {
-		// this.socket.emit('leave', {
-		// 	conversationId: this.conversationId
-		// });
-		// this.socket.removeAllListeners('chatHistory');
-		// this.socket.removeAllListeners('newMessage');
-		// this.chats = [];
-		// this.clearChats();
+		this.socket.emit('leave', {
+			conversationId: this.conversationId
+		});
+		this.socket.removeAllListeners('chatHistory');
+		this.socket.removeAllListeners('newMessage');
+		this.chats = [];
+		this.clearChats();
 	},
 	onChatHistory: function () {
 		this.socket.on('chatHistory', $.proxy(function (chats) {
@@ -117,15 +115,15 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
 		return $chats[0];
 	},
 	onSend: function () {
-		// var msg = this.getView().getModel('msg').getData().text;
-		// this.getView().getModel('msg').setData({
-		// 	text: ''
-		// });
-		// this.socket.emit('chat', {
-		// 	conversationId: this.conversationId,
-		// 	// usrid: this.getView().getModel('user').getData().id,
-		// 	usrid: this.oUser.id,
-		// 	msg: msg
-		// });
+		var msg = this.getView().getModel('msg').getData().text;
+		this.getView().getModel('msg').setData({
+			text: ''
+		});
+		this.socket.emit('chat', {
+			conversationId: this.conversationId,
+			// usrid: this.getView().getModel('user').getData().id,
+			usrid: this.oUser.id,
+			msg: msg
+		});
 	}
 });
