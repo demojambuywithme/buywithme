@@ -127,6 +127,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 				this.invitations = invitations;
 				this.currentPosition = position;
 				this.currentPoint = position.point;
+				this.currentPoint = new BMap.Point('121.608265', '31.20729'); // hard code position at sap labs
 				this.reDraw(this.map, this.currentPoint, this.invitations);
 			}, this));
 	},
