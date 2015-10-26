@@ -264,6 +264,8 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         var myToTime = myFromTime + valid_period;
         //var toTime  = new Date(myToTime);
         
+        valid_period = valid_period / 1000 / 60;
+
         var discNew = 0.00;
         if (mNewInvitation.discount == "10%") {
             discNew = 0.90;

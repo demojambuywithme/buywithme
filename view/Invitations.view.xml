@@ -3,7 +3,7 @@
           xmlns:core="sap.ui.core"
           xmlns="sap.m">
     <Page title="{i18n&gt;invitationsTitle}"
-          showFooter="true" >
+          showFooter="true">
 		<headerContent>
 			<Button icon="sap-icon://add" type="Emphasized" press=".onAdd"/>
 		</headerContent>
@@ -11,11 +11,11 @@
             <GrowingList threshold="5"
                          triggerText="more"
                          scrollToLoad="true"
-                         items="{ path: '/Invitation' }">
+                         items="{ path: '/Invitation', sorter: { path: 'create_time', descending: 'true'}}">
                 <items>
-                    <CustomListItem class="sapUiTinyMarginBottom">
+                    <CustomListItem class="sapUiSmallMarginBottom">
                         <content>
-                            <VBox>
+                            <VBox class="sapUiTinyMarginBeginEnd">
                                 <items>
                                     <core:Fragment fragmentName="bwm.fragment.InvitationOverview"
                                                    type="XML" />
