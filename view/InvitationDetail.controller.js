@@ -15,20 +15,6 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 	 * 
 	 * @memberOf bwm.view.home
 	 */
-	// onInit: function() {
-	//
-	// },
-	/*
-	 * onInit: function(){ invDetView = this.getView(); var oInvation = new
-	 * sap.ui.model.json.JSONModel(); jQuery.ajax({ url:
-	 * "http://10.58.132.213:8000/BWM/services/bwm.xsodata/Invitation('2319409ba6ff4f2dbb903225d689301a')",
-	 * dataType: "json", async: false, success: function(data, textStatus,
-	 * jqXHR) { oInvation = new sap.ui.model.json.JSONModel();
-	 * oInvation.setData(data.d); }, error: function(jqXHR, textStatus,
-	 * errorThrown) { //alert("Oh no, an error occurred"); } });
-	 * invDetView.setModel(oInvation,"invation"); }
-	 */
-
 	onInit: function () {
 		//		var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 		//		oRouter.getRoute("invitation").attachPatternMatched(
@@ -251,56 +237,52 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 	if(this.getView().getModel("user").getData().uuid == this.invitation_data["creator.id"]){
 		var batchChanges = [];
 		var oModel = this.getView().getModel();
-		// var oInvitation = this.getView().getModel().getData().invitation;
-		// item data
-		var invitation = {
-				id: this.invitation_data["id"],
-	            title: this.invitation_data["title"],
-	            status: 2,
-	            //"creator.id": "877da535455a47b893b19e9ab8a1f2c2",
-	            "creator.id": this.invitation_data["creator.id"],
-	            "category.id": this.invitation_data["category.id"],
-	            "discountType.id": this.invitation_data["discountType.id"],
-	            total_quantity: this.invitation_data["total_quantity"],
-	            discount: this.invitation_data["discount"],
-	            total_money: this.invitation_data["total_money"],
-	            return_money: this.invitation_data["return_money"],
-	            create_time: this.invitation_data["create_time"],
-	            valid_in: this.invitation_data["valid_in"],
-	            end_time: Date.parse(new Date()),
-	            longitude: this.invitation_data["longitude"],
-	            latitude: this.invitation_data["latitude"],
-	            address: this.invitation_data["address"]
-		};
-
-		batchChanges.push(oModel.createBatchOperation("",
-			"PUT", invitation));
-
-		oModel.addBatchChangeOperations(batchChanges);
-		oModel.setUseBatch(true);
-		oModel.submitBatch(
-			jQuery.proxy(function (data) {
-				//invitation_item_id = invitationItem.inv_id;
-				oModel.refresh();
-				this.onInit();
-				//this.onNavButtonPressed();
-				//jQuery.sap.require("sap.m.MessageToast");
+		var errorFlag = false;
+		this.getView().getModel().read("/Invitation('" + this.invitation_id + "')/InvitationItems", {
+			success: jQuery.proxy(function (data) {
+				console.log(data);
+				var invitationItems = data;
+				//var hasJoined = false;
+				for (var i = 0; i < data.results.length; i++) {
+						invitation_item_id = data.results[i]["inv_id"];
+					var invitation_item_path = "/InvitationItem(inv_id='" + invitation_item_id + "',inv_head.id='" + this.invitation_id + "')";
+					oModel.remove(invitation_item_path, {
+						success: jQuery.proxy(function (mResponse) {
+						}, this),
+						error: jQuery.proxy(function () {
+							errorFlag = true;
+							this.showErrorAlert("Problem when cancel item");
+						}, this)
+					});
+					if (errorFlag){
+					break;
+					}
+				}
+			}, this)
+		});
+		
+		if(!errorFlag){
+		var invitation_path = "/Invitation('" + this.invitation_id + "')";
+		oModel.remove(invitation_path, {
+			success: jQuery.proxy(function (mResponse) {
+				//oModel.refresh();
+				//this.onInit();
+				//this.setJoinButtonVisible(true);
+				//this.setCancelButtonVisible(false);
+				jQuery.sap.require("sap.m.MessageToast");
 				// ID of newly inserted product is available in mResponse.ID
-				//this.oBusyDialog.close();
-				sap.m.MessageToast.show("Invitation is closed.");
+			    //this.oBusyDialog.close();
+				sap.m.MessageToast.show("Invitation is closed");
 				this.toInvitationList();
-				//this.setCancelButtonVisible(true);
-				//this.setJoinButtonVisible(false);
-				//this.setCloseButtonVisible(false);
-				//hasJoined = true;
+				
 			}, this),
-
-			jQuery.proxy(function (err) {
-				console.log(err);
-				this.oBusyDialog.close();
-				this.showErrorAlert("Problem occurs when close this invitation");
-				//hasJoined = false;
-			}, this));
+			error: jQuery.proxy(function () {
+				//this.oBusyDialog.close();
+				this.showErrorAlert("Problem when close invitation");
+			}, this)
+		});
+		
+		}
 	}
 	},
 	
@@ -350,33 +332,5 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 			transition: "slide",
 		});
 	},
-	/**
-	 * Similar to onAfterRendering, but this hook is invoked before the controller's
-	 * View is re-rendered (NOT before the first rendering! onInit() is used for
-	 * that one!).
-	 * 
-	 * @memberOf bwm.view.home
-	 */
-	// onBeforeRendering: function() {
-	//
-	// },
-	/**
-	 * Called when the View has been rendered (so its HTML is part of the document).
-	 * Post-rendering manipulations of the HTML could be done here. This hook is the
-	 * same one that SAPUI5 controls get after being rendered.
-	 * 
-	 * @memberOf bwm.view.home
-	 */
-	// onAfterRendering: function () {
-	// 		console.log("after rendering");
-	// 	}
-	/*
-	 * Called when the Controller is destroyed. Use this one to free resources and
-	 * finalize activities.
-	 * 
-	 * @memberOf bwm.view.home
-	 */
-	// onExit: function() {
-	//
-	// }
+	
 });
