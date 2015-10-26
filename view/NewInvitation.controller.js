@@ -311,9 +311,9 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
             create_time: fromDateTS,
             valid_in: valid_period,
             end_time: toDateTS,
-            longitude: curLongitude,
-            latitude: curLatitude,
-            address: mNewInvitation.address
+            longitude: curLongitude + "",
+            latitude: curLatitude + "",
+            address: this.getView().byId("link01").getText()
         };
 
         if (mNewInv.valid_in) {
@@ -347,7 +347,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                 var image = {
                     id: bwm.util.UtilMethod.guid(),
                     "inv_head.id":invGUID,
-                    pic_data: imageData
+                    pic_data: imageData 
                 };
                 invPics.push(image);
                 batchChanges.push(oModel.createBatchOperation("/InvitationPicture", "POST", image));
