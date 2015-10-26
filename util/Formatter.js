@@ -5,7 +5,7 @@ bwm.util.Formatter = {
 		return "data:image/png;base64," + imageData;
 	},
 
-	discountInforFormatter : function(total_quantity,discountType,discount,total_money,return_money) {
+	/*discountInforFormatter : function(total_quantity,discountType,discount,total_money,return_money) {
 		
 		var returnText = '';
 		
@@ -33,5 +33,36 @@ bwm.util.Formatter = {
 				return 0;
 			   }
 		   }
-		}
+		},
+		
+		percentValueFormatter: function (invId,totalQuantity) {
+			this.getView().getModel().read("/Invitation('" + invId + "')/InvitationItems", {
+				success: jQuery.proxy(function (data) {
+					console.log(data);
+					var invitationItems = data;
+					var joinedQuantity=0;
+					//var hasJoined = false;
+					for (var i = 0; i < data.results.length; i++) {
+						joinedQuantity = joinedQuantity + data.results[i]["quantity"];
+					}
+                    return (Math.trunc(joinedQuantity/totalQuantity*100));
+				}, this)
+			});
+		},
+		
+		displayValueFormatter: function (invId,totalQuantity) {
+			this.getView().getModel().read("/Invitation('" + invId + "')/InvitationItems", {
+				success: jQuery.proxy(function (data) {
+					console.log(data);
+					var invitationItems = data;
+					var joinedQuantity=0;
+					//var hasJoined = false;
+					for (var i = 0; i < data.results.length; i++) {
+						joinedQuantity = joinedQuantity + data.results[i]["quantity"];
+					}
+                    return (joinedQuantity + '/' + totalQuantity);
+				}, this)
+			});
+		},*/
+		
 };
