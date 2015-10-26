@@ -8,7 +8,13 @@
                 <items>
                     <core:Icon src="sap-icon://time-entry-request"
                                class="sapUiSmallMarginEnd" />
-                    <Label text="{valid_in} Minutes Left" />
+                    <Label text="{ parts: [
+                                           {path: 'create_time'},
+                                           {path: 'valid_in'},
+                                           {path: 'end_time'}
+                                           ],
+                                   formatter:'bwm.util.Formatter.validInFormatter'
+                                   } Minutes Left" />
                 </items>
             </HBox>
             <ProgressIndicator class="sapUiSmallMarginBottom"

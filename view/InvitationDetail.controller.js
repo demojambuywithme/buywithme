@@ -245,7 +245,65 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 			}
 		}
 	},
+    
+	//close invitation
+	onCloseInvitation: function(oEvent){
+	if(this.getView().getModel("user").getData().uuid == this.invitation_data["creator.id"]){
+		var batchChanges = [];
+		var oModel = this.getView().getModel();
+		// var oInvitation = this.getView().getModel().getData().invitation;
+		// item data
+		var invitation = {
+				id: this.invitation_data["id"],
+	            title: this.invitation_data["title"],
+	            status: 2,
+	            //"creator.id": "877da535455a47b893b19e9ab8a1f2c2",
+	            "creator.id": this.invitation_data["creator.id"],
+	            "category.id": this.invitation_data["category.id"],
+	            "discountType.id": this.invitation_data["discountType.id"],
+	            total_quantity: this.invitation_data["total_quantity"],
+	            discount: this.invitation_data["discount"],
+	            total_money: this.invitation_data["total_money"],
+	            return_money: this.invitation_data["return_money"],
+	            create_time: this.invitation_data["create_time"],
+	            valid_in: this.invitation_data["valid_in"],
+	            end_time: Date.parse(new Date()),
+	            longitude: this.invitation_data["longitude"],
+	            latitude: this.invitation_data["latitude"],
+	            address: this.invitation_data["address"]
+		};
 
+		batchChanges.push(oModel.createBatchOperation("",
+			"PUT", invitation));
+
+		oModel.addBatchChangeOperations(batchChanges);
+		oModel.setUseBatch(true);
+		oModel.submitBatch(
+			jQuery.proxy(function (data) {
+				//invitation_item_id = invitationItem.inv_id;
+				oModel.refresh();
+				this.onInit();
+				//this.onNavButtonPressed();
+				//jQuery.sap.require("sap.m.MessageToast");
+				// ID of newly inserted product is available in mResponse.ID
+				//this.oBusyDialog.close();
+				sap.m.MessageToast.show("Invitation is closed.");
+				this.toInvitationList();
+				//this.setCancelButtonVisible(true);
+				//this.setJoinButtonVisible(false);
+				//this.setCloseButtonVisible(false);
+				//hasJoined = true;
+			}, this),
+
+			jQuery.proxy(function (err) {
+				console.log(err);
+				this.oBusyDialog.close();
+				this.showErrorAlert("Problem occurs when close this invitation");
+				//hasJoined = false;
+			}, this));
+	}
+	},
+	
 	setCancelButtonVisible: function (bVisible) {
 		this.getView().byId("quitInv").setVisible(bVisible);
 	},
@@ -256,8 +314,42 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 	
 	setCloseButtonVisible: function (bVisible){
 		this.getView().byId("closeInv").setVisible(bVisible);
-	}
+	},
+	
+	   //Value help for "I want to buy ? PC"
+    handlePCValueHelp: function(oEvent) {
+        var oView = this;
+        oView.inputId = oEvent.getSource().getId();
+        // create value help dialog
+        if (!oView.oPCDialog) {
+            //Initialization for PC value help
+            var oModelPC = new sap.ui.model.json.JSONModel("./model/Pieces.json");
+            oView.oPCDialog = sap.ui.xmlfragment("bwm.fragment.PCDialog", oView);
+            oView.oPCDialog.setModel(oModelPC, "PCValueHelpDialog");
+            oView.getView().addDependent(oView.oPCDialog);
+        }
+        // open value help dialog filtered by the input value
+        oView.oPCDialog.open();
+    },
 
+    _handlePCValueHelpClose: function(evt) {
+        var oSelectedItem = evt.getParameter("selectedItem");
+        if (oSelectedItem) {
+            var PCInput = this.getView().byId("itemQuantity");
+            PCInput.setValue(oSelectedItem.getTitle());
+        }
+
+    },
+
+    //navigate to invitation list
+    toInvitationList: function () {
+		this.getRouter().myNavToWithoutHash({
+			currentView: this.getView(),
+			targetViewName: "bwm.view.Invitations",
+			targetViewType: "XML",
+			transition: "slide",
+		});
+	},
 	/**
 	 * Similar to onAfterRendering, but this hook is invoked before the controller's
 	 * View is re-rendered (NOT before the first rendering! onInit() is used for
