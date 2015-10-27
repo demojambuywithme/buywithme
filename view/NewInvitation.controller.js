@@ -397,8 +397,8 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
            this.saveInvitation(this.getView().getModel("newInvitation").getProperty("/Invitation/id"));
             //this.saveInvitation();
             //@TODO: Later on this should navigate to invitation list
-            this.onNavButtonPressed();
-            sap.m.MessageToast.show("Invitation Published!");
+            // this.onNavButtonPressed();
+            // sap.m.MessageToast.show("Invitation Published!");
         }
     },
     //For discount details, to maintain value X and Y
