@@ -61,13 +61,13 @@
                 cordova plugin! alignItems="Stretch"-->
             <HBox alignItems="Stretch" class="sapUiExploredNoMarginInfo">
                 <!--                 <Carousel id="picturesCarousel" class="sapUiContentPadding" width="180px" id="myImage"> -->
-                <Carousel id="myImage" class="sapUiNoContentPadding sapUiTinyMarginEnd">
+                <Image id="addPicture" class="sapUiNoMargin" src="./pictures_cy/plus.png" densityAware="true" width="105px" color="#64E4CE" press="onPhotoDialogPress">
+                </Image>
+                <Carousel id="myImage" class="sapUiNoContentPadding sapUiSmallMarginBegin" width="201px">
                     <!--   width="0px">  -->
                     <pages>
                     </pages>
                 </Carousel>
-                <Image id="addPicture" class="sapUiNoMargin" src="./pictures_cy/plus.png" densityAware="true" width="95px" color="#64E4CE" press="onPhotoDialogPress">
-                </Image>
                 <!--<core:Icon src="sap-icon://sys-add" size="100px" color="#64E4CE" press="onPhotoDialogPress">
                 <core:Icon src="/pictures_cy/plus.ico" size="100px" color="#64E4CE" press="onPhotoDialogPress">
                     <core:layoutData>
