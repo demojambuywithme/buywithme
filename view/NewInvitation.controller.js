@@ -145,10 +145,10 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
     //There will be two options: <1>Taking a photo <2>Picking from gallery
     onPhotoDataSuccess: function(imageData) {
         var myCarousel = oView.byId("myImage");
-        var carouselWidth = myCarousel.getWidth();
+/*        var carouselWidth = myCarousel.getWidth();
         if (carouselWidth == "0px") {
             myCarousel.setWidth("180px");
-        }
+        }*/
         var newImage = new sap.m.Image();
         var layoutData = new sap.m.FlexItemData();
         layoutData.setAlignSelf(sap.m.FlexAlignSelf.Stretch);
@@ -161,10 +161,10 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
 
     onPhotoURISuccess: function(imageURI) {
         var myCarousel = oView.byId("myImage");
-        var carouselWidth = myCarousel.getWidth();
+/*        var carouselWidth = myCarousel.getWidth();
         if (carouselWidth == "0px") {
             myCarousel.setWidth("180px");
-        }
+        }*/
         var newImage = new sap.m.Image();
         var layoutData = new sap.m.FlexItemData();
         layoutData.setAlignSelf(sap.m.FlexAlignSelf.Stretch);
