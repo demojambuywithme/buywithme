@@ -350,10 +350,10 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                 var imageData = '';
                 if (images[i].getSrc().search('image/png')) {
                     imageData = images[i].getSrc().replace("data:image/png;base64,", "");
-                } else if (images[i].getSrc().search('image/jpeg')) {
-                    imageData = images[i].getSrc().replace("data:image/jpeg;base64,", "");
+               /* } else if (images[i].getSrc().search('image/jpeg')) {
+                    imageData = images[i].getSrc().replace("data:image/jpeg;base64,", "");*/
                 }else{
-                	imageData = images[i].getSrc().replace("data:image/png;base64,", "");
+                	imageData = images[i].getSrc().substr(23);
                 }
 
                 var image = {
