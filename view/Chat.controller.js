@@ -96,7 +96,7 @@ bwm.view.BaseController.extend("bwm.view.Chat", {
 				var $msg = $('<div>').addClass('bubble').text(chat.msg);
 				if (chat.usrid === this.oUser.id) {
 					$msg.addClass('bubble--right');
-					$name.text("我");
+					$name.text("Myself");
 					$name.css('float', 'right');
 				} else {
 					$msg.addClass('bubble--left');

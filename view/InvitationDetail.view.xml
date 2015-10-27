@@ -55,10 +55,10 @@
         <VBox>
 		<Toolbar>
 			<Text text="I Want"></Text>
-			<Input id="itemQuantity" value="10" width="75px" textAlign="Center"
+			<Input id="itemQuantity" value="0" width="75px" textAlign="Center"
 				fieldWidth="60%" showValueHelp="true" valueHelpRequest="handlePCValueHelp" valueHelpOnly="true" />
 			<Text text="PC"></Text>
-			<Input id="itemCost" value="100.00" width="75px" textAlign="Center"
+			<Input id="itemCost" value="0.00" width="75px" textAlign="Center"
 				fieldWidth="60%" liveChange="onChangeValue" />
 			<Text text="RMB"></Text>
 		</Toolbar>
