@@ -5,6 +5,8 @@ jQuery.sap.require("bwm.util.UtilMethod");
 
 var invitation_item_id = "";
 var hasJoined = false;
+var invitationItems;
+var invitation_item;
 bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 
 	/**
@@ -25,7 +27,6 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 		this.getView().addEventDelegate({
 			onBeforeShow: $.proxy(this.onBeforeShow, this)
 		});
-
 		//	    if(this.getView().getModel("user").getData().id == invitation_data.creator.id){
 		//	    	this.getView().byId("joinInv").setVisible("false");
 		//	    }else{
@@ -61,12 +62,13 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 		this.getView().getModel().read("/Invitation('" + this.invitation_id + "')/InvitationItems", {
 			success: jQuery.proxy(function (data) {
 				console.log(data);
-				var invitationItems = data;
+			    invitationItems = data;
 				//var hasJoined = false;
 				for (var i = 0; i < data.results.length; i++) {
 					if (data.results[i]["joiner.id"] == logonUserGUID) {
 						hasJoined = true;
 						invitation_item_id = data.results[i]["inv_id"];
+						invitation_item = data.results[i];
 						break;
 					}
 				}
@@ -104,10 +106,41 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 			quantity: this.getView().byId("itemQuantity").getValue(),
 			money: this.getView().byId("itemCost").getValue()
 		};
-
+		
+        var joinedQuantity = this.calJoinedQuantity();
+        var percentageValue = Math.trunc((parseInt(joinedQuantity)+parseInt(this.getView().byId("itemQuantity").getValue()))/this.invitation_data["total_quantity"]*100);
+        if (parseInt(percentageValue) > 100){
+        	percentageValue = 100;
+        }
+        var invitation = {
+        		id: this.invitation_data["id"],
+                title: this.invitation_data["title"],
+                status: this.invitation_data["status"],
+                "creator.id": this.invitation_data["creator.id"],
+                "category.id": this.invitation_data["category.id"],
+                "discountType.id": this.invitation_data["discountType.id"],
+                total_quantity: this.invitation_data["total_quantity"],
+                discount: this.invitation_data["discount"],
+                total_money: this.invitation_data["total_money"],
+                return_money: this.invitation_data["return_money"],
+                create_time: this.invitation_data["create_time"],
+                valid_in: this.invitation_data["valid_in"],
+                end_time: this.invitation_data["end_time"],
+                longitude: this.invitation_data["longitude"],
+                latitude: this.invitation_data["latitude"],
+                address: this.invitation_data["address"],
+                percentage: percentageValue,
+                progress_value: (parseInt(joinedQuantity)+parseInt(this.getView().byId("itemQuantity").getValue())) + '/' + this.invitation_data["total_quantity"]
+        }
+        
 		batchChanges.push(oModel.createBatchOperation("/InvitationItem",
 			"POST", invitationItem));
-
+		var invitationPath = "/Invitation('" + invitation.id+"')";
+		batchChanges.push(oModel.createBatchOperation(invitationPath,
+				"PUT", invitation));
+		this.invitation_data.percentage = invitation.percentage;
+		this.invitation_data.progress_value = invitation.progress_value;
+		//invitation_item = invitationItem;
 		oModel.addBatchChangeOperations(batchChanges);
 		oModel.setUseBatch(true);
 		oModel.submitBatch(
@@ -132,6 +165,15 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 				this.showErrorAlert("Problem join this invitation");
 				hasJoined = false;
 			}, this));
+	},
+	
+	//calculate current joined quantity
+	calJoinedQuantity: function () {
+		var joinedQuantity=0;
+				for (var i = 0; i < invitationItems.results.length; i++) {
+					joinedQuantity = parseInt(joinedQuantity) + parseInt(invitationItems.results[i]["quantity"]);
+				}
+		return  parseInt(joinedQuantity);
 	},
 
 	onJoinInvitation: function () {
@@ -217,6 +259,8 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 						//this.onInit();
 						this.setJoinButtonVisible(true);
 						this.setCancelButtonVisible(false);
+						this.setCloseButtonVisible(false);
+						hasJoined = false;
 						jQuery.sap.require("sap.m.MessageToast");
 						// ID of newly inserted product is available in mResponse.ID
 						this.oBusyDialog.close();
@@ -227,7 +271,63 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 						this.showErrorAlert("Problem when cancel item");
 					}, this)
 				});
-
+				
+				var invitation = {
+		        		id: this.invitation_data["id"],
+		                title: this.invitation_data["title"],
+		                status: this.invitation_data["status"],
+		                "creator.id": this.invitation_data["creator.id"],
+		                "category.id": this.invitation_data["category.id"],
+		                "discountType.id": this.invitation_data["discountType.id"],
+		                total_quantity: this.invitation_data["total_quantity"],
+		                discount: this.invitation_data["discount"],
+		                total_money: this.invitation_data["total_money"],
+		                return_money: this.invitation_data["return_money"],
+		                create_time: this.invitation_data["create_time"],
+		                valid_in: this.invitation_data["valid_in"],
+		                end_time: this.invitation_data["end_time"],
+		                longitude: this.invitation_data["longitude"],
+		                latitude: this.invitation_data["latitude"],
+		                address: this.invitation_data["address"],
+		                percentage: this.invitation_data["percentage"],
+		                progress_value: this.invitation_data["progress_value"]
+		        }
+				var joinedQuantity = this.calJoinedQuantity();
+				var percentageValue = 0;
+				if (invitation_item){
+				 percentageValue = Math.trunc((parseInt(joinedQuantity)-parseInt(invitation_item.quantity))/this.invitation_data["total_quantity"]*100);
+				}else{
+					percentageValue = Math.trunc(parseInt(joinedQuantity)/this.invitation_data["total_quantity"]*100);
+				}
+				if (parseInt(percentageValue) > 100){
+		        	percentageValue = 100;
+		        }
+				invitation.percentage = percentageValue;
+				if (invitation_item){
+				invitation.progress_value= (parseInt(joinedQuantity)-parseInt(invitation_item.quantity)) + '/' + this.invitation_data["total_quantity"];
+				}else{
+				invitation.progress_value= parseInt(joinedQuantity) + '/' + this.invitation_data["total_quantity"];
+				}
+				this.invitation_data.percentage = invitation.percentage;
+				this.invitation_data.progress_value = invitation.progress_value;
+				var invitationPath = "/Invitation('" + invitation.id+"')";
+				oModel.update(invitationPath, invitation,{
+					success: jQuery.proxy(function (mResponse) {
+						oModel.refresh();
+						//this.onInit();
+						this.setJoinButtonVisible(true);
+						this.setCancelButtonVisible(false);
+						this.setCloseButtonVisible(false);
+						jQuery.sap.require("sap.m.MessageToast");
+						// ID of newly inserted product is available in mResponse.ID
+						this.oBusyDialog.close();
+						sap.m.MessageToast.show("Item has been canceled");
+					}, this),
+					error: jQuery.proxy(function () {
+						this.oBusyDialog.close();
+						sap.m.MessageToast.show("Problem when cancel item");
+					}, this)
+				});
 			}
 		}
 	},

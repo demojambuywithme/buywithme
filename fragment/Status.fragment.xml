@@ -15,7 +15,7 @@
                 </items>
             </HBox>
             <!--<ProgressIndicator class="sapUiNoMarginTop" percentValue="{ parts: [{path:'id'}, {path:'total_quantity'}], formatter:'bwm.util.Formatter.percentValueFormatter'}" height="22px" displayValue="{parts: [{path:'id'}, {path:'total_quantity'}], formatter:'bwm.util.Formatter.displayValueFormatter'}" showValue="true" state="None" width="144px" />-->
-            <ProgressIndicator class="sapUiNoMarginTop" percentValue="80" height="22px" displayValue="4/5" showValue="true" state="None" width="144px" />
+            <ProgressIndicator class="sapUiNoMarginTop" percentValue="{percentage}" height="22px" displayValue="{progress_value}" showValue="true" state="None" width="144px" />
         </items>
     </VBox>
 </core:FragmentDefinition>
