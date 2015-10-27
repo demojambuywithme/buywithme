@@ -322,7 +322,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
             latitude: curLatitude + "",
             address: this.getView().byId("link01").getText(),
             //@BWM
-            percentage: percentage,
+            percentage: percentage +"",
             progress_value: progress_value + "",
         };
 
@@ -359,7 +359,9 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                 var image = {
                     id: bwm.util.UtilMethod.guid(),
                     "inv_head.id":invGUID,
-                    pic_data: imageData + ""
+                    pic_name: null,
+                    pic_path: null,
+                    pic_data: imageData
                 };
                 invPics.push(image);
                 batchChanges.push(oModel.createBatchOperation("/InvitationPicture", "POST", image));
