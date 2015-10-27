@@ -95,7 +95,7 @@
 										<Label text=" {quantity} PCs {money} RMB" 
 											class="sapUiTinyMarginTop"
 											textAlign="Left" />
-										<Label text=" Disc. Pri. {money} RMB" 
+										<Label text=" Disc.Pri. {money} RMB" 
 											class="sapUiTinyMarginTop"
 											textAlign="Left" />
 									</items>
