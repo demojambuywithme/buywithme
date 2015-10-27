@@ -20,7 +20,7 @@
                     <pages>
                         <Image src="{
                         path: 'pic_data',
-              formatter: 'bwm.util.Formatter.getImageSrc'}" densityAware="true" height="20em" width="100%">
+              formatter: 'bwm.util.Formatter.getImageSrc'}" densityAware="true" height="23em" width="18em">
                             <layoutData>
                                 <FlexItemData growFactor="1" />
                             </layoutData>
