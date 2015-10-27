@@ -5,8 +5,8 @@ jQuery.sap.require("bwm.util.UtilMethod");
 
 var invitation_item_id = "";
 var hasJoined = false;
-var invitationItems;
-var invitation_item;
+var invitationItems = "";
+var invitation_item = "";
 bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 
 	/**
@@ -432,5 +432,13 @@ bwm.view.BaseController.extend("bwm.view.InvitationDetail", {
 			transition: "slide",
 		});
 	},
+	
+    onNavButtonPressed: function () {
+        this.getRouter().backWithoutHash(this.getView());
+        invitation_item_id = "";
+        hasJoined = false;
+        invitationItems = "";
+        invitation_item = "";
+    },
 	
 });
