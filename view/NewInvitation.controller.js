@@ -344,12 +344,14 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
                     imageData = images[i].getSrc().replace("data:image/png;base64,", "");
                 } else if (images[i].getSrc().search('image/jpeg')) {
                     imageData = images[i].getSrc().replace("data:image/jpeg;base64,", "");
+                }else{
+                	imageData = images[i].getSrc().replace("data:image/png;base64,", "");
                 }
 
                 var image = {
                     id: bwm.util.UtilMethod.guid(),
                     "inv_head.id":invGUID,
-                    pic_data: imageData 
+                    pic_data: imageData + ""
                 };
                 invPics.push(image);
                 batchChanges.push(oModel.createBatchOperation("/InvitationPicture", "POST", image));
