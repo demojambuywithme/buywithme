@@ -152,9 +152,9 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         var newImage = new sap.m.Image();
         var layoutData = new sap.m.FlexItemData();
         layoutData.setAlignSelf(sap.m.FlexAlignSelf.Stretch);
-        newImage.setWidth("110px");
-        newImage.setHeight("110px");
-        newImage.setSrc("data:image/jpeg;base64," + imageData);
+        newImage.setWidth("200px");
+        newImage.setHeight("200px");
+        newImage.setSrc("data:image/png;base64," + imageData);
         newImage.setLayoutData(layoutData);
         myCarousel.addPage(newImage);
     },
@@ -168,8 +168,8 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         var newImage = new sap.m.Image();
         var layoutData = new sap.m.FlexItemData();
         layoutData.setAlignSelf(sap.m.FlexAlignSelf.Stretch);
-        newImage.setWidth("110px");
-        newImage.setHeight("110px");
+        newImage.setWidth("200px");
+        newImage.setHeight("200px");
         newImage.setSrc(imageURI);
         newImage.setLayoutData(layoutData);
         myCarousel.addPage(newImage);
