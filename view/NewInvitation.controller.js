@@ -109,7 +109,7 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
             }
         }, {
             enableHighAccuracy: true,
-        })
+        });
     },
 
     //
@@ -255,6 +255,11 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         var oModel = this.getView().getModel();
         var mNewInvitation = this.getView().getModel("newInvitation").getData().Invitation;
         var discountTypeId = this.getView().byId("discountType_select").getSelectedKey();
+        //@BWM
+        var curPC = this.getView().byId("piece01").getValue();
+        var progress_value = curPC + "/" + parseInt(mNewInvitation.total_quantity); 
+        var percentage = parseInt(curPC / parseInt(mNewInvitation.total_quantity) * 100);
+        //
         var categortid = this.getView().byId("catrogry_select").getSelectedKey();
         // Basic payload data
         //Time
@@ -315,7 +320,10 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
             end_time: toDateTS,
             longitude: curLongitude + "",
             latitude: curLatitude + "",
-            address: this.getView().byId("link01").getText()
+            address: this.getView().byId("link01").getText(),
+            //@BWM
+            percentage: percentage,
+            progress_value: progress_value + "",
         };
 
         if (mNewInv.valid_in) {

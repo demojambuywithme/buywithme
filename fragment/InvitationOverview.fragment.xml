@@ -16,7 +16,7 @@
         </HBox>
         <FlexBox alignItems="Start" justifyContent="Center">
             <items>
-                <Carousel loop="true" width="100%" height="23em" pages="{path: 'InvitationPictures'}">
+                <Carousel loop="true" width="18em" height="23em" pages="{path: 'InvitationPictures'}">
                     <pages>
                         <Image src="{
                         path: 'pic_data',
