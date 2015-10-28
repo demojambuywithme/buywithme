@@ -139,7 +139,7 @@ bwm.view.BaseController.extend("bwm.view.InvitationsMap", {
 		// current position
 		var iconm = new BMap.Icon('image/myPosition.ico', new BMap.Size(32, 32));
 		var iconmf = new BMap.Icon('image/food.ico', new BMap.Size(32, 32));
-		var iconms = new BMap.Icon('image/sprots.ico', new BMap.Size(32, 32));
+		var iconms = new BMap.Icon('image/sports.ico', new BMap.Size(32, 32));
 		var iconmc = new BMap.Icon('image/clothes.ico', new BMap.Size(32, 32));
 		var mk = new BMap.Marker(currentPoint);
 		mk.setTitle("My Position");
