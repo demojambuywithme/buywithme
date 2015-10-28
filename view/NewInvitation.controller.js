@@ -348,10 +348,10 @@ bwm.view.BaseController.extend("bwm.view.NewInvitation", {
         for (var i = 0; i < images.length; i++) {
             if (images[i] instanceof sap.m.Image) {
                 var imageData = '';
-                if (images[i].getSrc().search('image/png')) {
-                    imageData = images[i].getSrc().replace("data:image/png;base64,", "");
-               /* } else if (images[i].getSrc().search('image/jpeg')) {
-                    imageData = images[i].getSrc().replace("data:image/jpeg;base64,", "");*/
+                if (images[i].getSrc().search('png') == 11 ) {
+                    imageData = images[i].getSrc().substr(22);
+                } else if (images[i].getSrc().search('jpeg') == 11 ) {
+                	imageData = images[i].getSrc().substr(23);
                 }else{
                 	imageData = images[i].getSrc().substr(23);
                 }
