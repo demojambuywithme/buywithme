@@ -48,7 +48,7 @@
 				    text="{ parts: [ 'total_quantity', 'DiscountType/dis_category', 'discount', 'total_money','return_money'], formatter: 'bwm.util.Formatter.discountInforFormatter' }"
 					width="250px" textAlign="Center"/> -->
 				<Select maxWidth="300%" width="230px" autoAdjustWidth="false" enabled="false" textAlign="Center" >
-                    <core:Item text="{=${DiscountType/dis_category} === '01' ? ('Buy ' + ${total_money} + ' Return '+ ${return_money} ): ('Buy ' +${total_quantity} + ' PCs '+ (${discount}*100)+'%'+' Off')}" />
+                    <core:Item text="{=${DiscountType/dis_category} === '01' ? ('Buy ' + ${total_money} + ' Return '+ ${return_money} ): ('Buy ' +${total_quantity} + ' PCs '+ (parseInt((1-${discount})*100))+'%'+' Off')}" />
                 </Select>
 		</HBox>
         </VBox>
